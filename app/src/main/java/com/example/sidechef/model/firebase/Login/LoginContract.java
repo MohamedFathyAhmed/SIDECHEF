@@ -1,4 +1,4 @@
-package com.example.sidechef.model.Login;
+package com.example.sidechef.model.firebase.Login;
 
 import android.app.Activity;
 

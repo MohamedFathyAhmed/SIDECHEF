@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.sidechef.SignUp.View.SignUp;
 import com.example.sidechef.SingIn.View.SignIn;
+
 
 public class MainActivity extends AppCompatActivity {
 Button btn ;
@@ -20,7 +22,7 @@ Button btn ;
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SignIn.class));
+                startActivity(new Intent(MainActivity.this, SignUp.class));
             }
         });
     }

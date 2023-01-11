@@ -14,6 +14,9 @@
         android:theme="@style/Theme.SIDECHEF"
         tools:targetApi="31">
         <activity
+            android:name=".SignUp.View.SignUp"
+            android:exported="false" />
+        <activity
             android:name=".SingIn.View.SignIn"
             android:exported="false" />
         <activity

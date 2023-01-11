@@ -13,10 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sidechef.R;
-import com.example.sidechef.model.Login.LoginContract;
-import com.example.sidechef.model.Login.LoginPresenter;
-
-import org.w3c.dom.Text;
+import com.example.sidechef.model.firebase.Login.LoginContract;
+import com.example.sidechef.model.firebase.Login.LoginPresenter;
 
 
 public class SignIn extends AppCompatActivity implements View.OnClickListener, LoginContract.View {
@@ -48,17 +46,17 @@ EditText tv_name;
     }
 
 
-//    private void checkLoginDetails() {
-//        if(!TextUtils.isEmpty(tv_name.getText().toString()) && !TextUtils.isEmpty(tv_pass.getText().toString())){
-//            initLogin(tv_name.getText().toString(), tv_pass.getText().toString());
-//        }else{
-//            if(TextUtils.isEmpty(tv_name.getText().toString())){
-//               // tv_name.setError("Please enter a valid email");
-//            }if(TextUtils.isEmpty(tv_pass.getText().toString())){
-//              //  tv_pass.setError("Please enter password");
-//            }
-//        }
-//    }
+    private void checkLoginDetails() {
+        if(!TextUtils.isEmpty(tv_name.getText().toString()) && !TextUtils.isEmpty(tv_pass.getText().toString())){
+            initLogin(tv_name.getText().toString(), tv_pass.getText().toString());
+        }else{
+            if(TextUtils.isEmpty(tv_name.getText().toString())){
+                tv_name.setError("Please enter a valid email");
+            }if(TextUtils.isEmpty(tv_pass.getText().toString())){
+               tv_pass.setError("Please enter password");
+            }
+        }
+    }
     private void initLogin(String email, String password) {
         mProgressDialog.show();
         mLoginPresenter.login(this, email, password);
@@ -69,8 +67,8 @@ EditText tv_name;
         switch (view.getId()){
             case R.id.btn_login:
                 Log.i("hellplab", "btn_login: ");
-                initLogin(tv_name.getText().toString(),tv_pass.getText().toString());
-             //   checkLoginDetails();
+              //  initLogin(tv_name.getText().toString(),tv_pass.getText().toString());
+                checkLoginDetails();
                 break;
         }
     }

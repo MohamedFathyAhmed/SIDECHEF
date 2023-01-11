@@ -1,4 +1,4 @@
-package com.example.sidechef.model.Registration;
+package com.example.sidechef.model.firebase.Registration;
 
 import android.app.Activity;
 
