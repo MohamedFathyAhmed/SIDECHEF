@@ -2,9 +2,6 @@ package com.example.sidechef.model.firebase.Login;
 
 import android.app.Activity;
 
-/**
- * Created by Ashish on 27-09-2017.
- */
 
 public class LoginPresenter implements LoginContract.Presenter, LoginContract.onLoginListener {
     private LoginContract.View mLoginView;

@@ -1,4 +1,4 @@
-package com.example.sidechef.SingIn.View;
+package com.example.sidechef.SingInActivity.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 

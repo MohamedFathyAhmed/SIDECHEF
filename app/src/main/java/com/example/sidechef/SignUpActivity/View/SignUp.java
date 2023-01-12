@@ -1,4 +1,4 @@
-package com.example.sidechef.SignUp.View;
+package com.example.sidechef.SignUpActivity.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sidechef.R;
-import com.example.sidechef.SingIn.View.SignIn;
+import com.example.sidechef.SingInActivity.View.SignIn;
 import com.example.sidechef.model.firebase.Registration.RegistrationContract;
 import com.example.sidechef.model.firebase.Registration.RegistrationPresenter;
 import com.google.firebase.auth.FirebaseUser;

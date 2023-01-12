@@ -9,9 +9,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-/**
- * Created by Ashish on 27-09-2017.
- */
+
 
 public class RegistrationInteractor implements RegistrationContract.Intractor {
 

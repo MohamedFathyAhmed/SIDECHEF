@@ -7,8 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.sidechef.SignUp.View.SignUp;
-import com.example.sidechef.SingIn.View.SignIn;
+import com.example.sidechef.SignUpActivity.View.SignUp;
 
 
 public class MainActivity extends AppCompatActivity {

@@ -14,9 +14,9 @@ public class Meal implements Parcelable {
 
 
     @PrimaryKey(autoGenerate = true)
-    private String idMeal;
+    private Long idMeal;
 
-    public String getIdMeal() {
+    public Long getIdMeal() {
         return idMeal;
     }
 
@@ -24,7 +24,7 @@ public class Meal implements Parcelable {
         return strMeal;
     }
 
-    public Object getStrDrinkAlternate() {
+    public String getStrDrinkAlternate() {
         return strDrinkAlternate;
     }
 
@@ -216,20 +216,22 @@ public class Meal implements Parcelable {
         return strSource;
     }
 
-    public Object getStrImageSource() {
+    public String getStrImageSource() {
         return strImageSource;
     }
 
-    public Object getStrCreativeCommonsConfirmed() {
+    public String getStrCreativeCommonsConfirmed() {
         return strCreativeCommonsConfirmed;
     }
 
-    public Object getDateModified() {
+    public String getDateModified() {
         return dateModified;
     }
 
+
+
     private String strMeal;
-    private Object strDrinkAlternate;
+    private String strDrinkAlternate;
     private String strCategory;
     private String strArea;
     private String strInstructions;
@@ -274,7 +276,7 @@ public class Meal implements Parcelable {
     private String strMeasure16;
     private String strMeasure17;
 
-    public void setIdMeal(String idMeal) {
+    public void setIdMeal(Long idMeal) {
         this.idMeal = idMeal;
     }
 
@@ -282,7 +284,7 @@ public class Meal implements Parcelable {
         this.strMeal = strMeal;
     }
 
-    public void setStrDrinkAlternate(Object strDrinkAlternate) {
+    public void setStrDrinkAlternate(String strDrinkAlternate) {
         this.strDrinkAlternate = strDrinkAlternate;
     }
 
@@ -474,15 +476,15 @@ public class Meal implements Parcelable {
         this.strSource = strSource;
     }
 
-    public void setStrImageSource(Object strImageSource) {
+    public void setStrImageSource(String strImageSource) {
         this.strImageSource = strImageSource;
     }
 
-    public void setStrCreativeCommonsConfirmed(Object strCreativeCommonsConfirmed) {
+    public void setStrCreativeCommonsConfirmed(String strCreativeCommonsConfirmed) {
         this.strCreativeCommonsConfirmed = strCreativeCommonsConfirmed;
     }
 
-    public void setDateModified(Object dateModified) {
+    public void setDateModified(String dateModified) {
         this.dateModified = dateModified;
     }
 
@@ -490,16 +492,16 @@ public class Meal implements Parcelable {
     private String strMeasure19;
     private String strMeasure20;
     private String strSource;
-    private Object strImageSource;
-    private Object strCreativeCommonsConfirmed;
-    private Object dateModified;
+    private String strImageSource;
+    private String strCreativeCommonsConfirmed;
+    private String dateModified;
 
     public Meal() {
     }
 
 
     protected Meal(Parcel in) {
-        idMeal = in.readString();
+        idMeal = in.readLong();
         strMeal = in.readString();
         strCategory = in.readString();
         strArea = in.readString();
@@ -569,7 +571,7 @@ public class Meal implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(idMeal);
+        parcel.writeLong(idMeal);
         parcel.writeString(strMeal);
         parcel.writeString(strCategory);
         parcel.writeString(strArea);
