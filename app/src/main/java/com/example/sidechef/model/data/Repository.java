@@ -36,7 +36,7 @@ public class Repository {
     }
 
     public void getAllProducts(ApiResponse apiResponse) {
-        Call<Meals> request = api.getAllMeals();
+        Call<Meals> request = api.getMeal();
         request.enqueue(new Callback<Meals>() {
             @Override
             public void onResponse(Call<Meals> call, Response<Meals> response) {
