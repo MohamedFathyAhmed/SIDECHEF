@@ -28,7 +28,8 @@ public class LoginInteractor implements LoginContract.Intractor {
                             mOnLoginListener.onSuccess(task.getResult().toString());
                         }
                         else {
-                            mOnLoginListener.onFailure(task.getException().toString());
+                            mOnLoginListener.onFailure(
+                                    task.getException().getMessage().toString());
                         }
                     }
                 });

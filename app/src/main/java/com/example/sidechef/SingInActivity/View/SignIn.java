@@ -3,6 +3,7 @@ package com.example.sidechef.SingInActivity.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +13,9 @@ import android.widget.EditText;
 
 import android.widget.Toast;
 
+import com.example.sidechef.HomeActivity.View.HomeActivity;
+import com.example.sidechef.HomeActivity.View.ui.home.HomeFragment;
+import com.example.sidechef.MainActivity;
 import com.example.sidechef.R;
 import com.example.sidechef.model.firebase.Login.LoginContract;
 import com.example.sidechef.model.firebase.Login.LoginPresenter;
@@ -67,8 +71,7 @@ EditText tv_name;
         switch (view.getId()){
             case R.id.btn_login:
                 Log.i("hellplab", "btn_login: ");
-              //  initLogin(tv_name.getText().toString(),tv_pass.getText().toString());
-                checkLoginDetails();
+               checkLoginDetails();
                 break;
         }
     }
@@ -83,6 +86,7 @@ EditText tv_name;
         mProgressDialog.dismiss();
         Log.i("hellplab", "onLoginSuccess: ");
         Toast.makeText(getApplicationContext(), "Successfully Logged in" , Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, HomeActivity.class));
     }
 
     @Override

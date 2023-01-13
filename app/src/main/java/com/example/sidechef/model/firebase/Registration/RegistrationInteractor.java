@@ -27,9 +27,11 @@ public class RegistrationInteractor implements RegistrationContract.Intractor {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(!task.isSuccessful()){
-                            mOnRegistrationListener.onFailure(task.getException().getMessage());
+                            mOnRegistrationListener.onFailure(
+                                    task.getException().getMessage());
                         }else{
-                            mOnRegistrationListener.onSuccess(task.getResult().getUser());
+                            mOnRegistrationListener.onSuccess(
+                                    task.getResult().getUser());
                         }
                     }
                 });
