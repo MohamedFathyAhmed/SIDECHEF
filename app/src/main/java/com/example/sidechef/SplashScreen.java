@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.HandlerThread;
-import android.view.WindowManager;
 
-import com.example.sidechef.SingIn.View.SignIn;
+
+import com.example.sidechef.SingInActivity.View.SignIn;
+
 
 public class SplashScreen extends AppCompatActivity {
 
