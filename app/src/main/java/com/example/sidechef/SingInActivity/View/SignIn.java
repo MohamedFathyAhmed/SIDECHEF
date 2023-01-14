@@ -14,8 +14,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sidechef.HomeActivity.View.HomeActivity;
-import com.example.sidechef.HomeActivity.View.ui.home.HomeFragment;
-import com.example.sidechef.MainActivity;
 import com.example.sidechef.R;
 import com.example.sidechef.model.firebase.Login.LoginContract;
 import com.example.sidechef.model.firebase.Login.LoginPresenter;
@@ -32,9 +30,9 @@ EditText tv_name;
 
 
     private void initUI() {
-        btn_login = findViewById(R.id.btn_login);
-        tv_name = findViewById(R.id.tx_Name);
-        tv_pass = findViewById(R.id.tx_pass);
+        btn_login = findViewById(R.id.btn_register);
+        tv_name = findViewById(R.id.email_register);
+        tv_pass = findViewById(R.id.password_register);
         mLoginPresenter = new LoginPresenter(this);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Please wait, Logging in..");
@@ -69,7 +67,7 @@ EditText tv_name;
     @Override
     public void onClick(android.view.View view) {
         switch (view.getId()){
-            case R.id.btn_login:
+            case R.id.btn_register:
                 Log.i("hellplab", "btn_login: ");
                checkLoginDetails();
                 break;
