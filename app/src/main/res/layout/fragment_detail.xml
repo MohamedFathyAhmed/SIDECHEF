@@ -133,7 +133,6 @@ tools:context=".HomeActivity.View.ui.DetailFragment">
             android:layout_marginTop="20dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="5dp"
-            android:drawableEnd="@drawable/ic_info"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
             android:text="@string/instructions"
@@ -218,16 +217,23 @@ tools:context=".HomeActivity.View.ui.DetailFragment">
                 app:cardCornerRadius="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"/>
-            <androidx.cardview.widget.CardView
-                android:layout_weight="1"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="#D0FFDB"
-                app:cardElevation="0dp"
-                app:cardCornerRadius="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:id="@+id/favorite"
+                    android:layout_width="381dp"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_favorite"
+                    android:drawablePadding="10dp"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:padding="14dp"
+                    android:text="@string/favorite"
+                    android:textColor="#EC2D2D"
+                    android:textSize="16sp" />
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
         <LinearLayout
