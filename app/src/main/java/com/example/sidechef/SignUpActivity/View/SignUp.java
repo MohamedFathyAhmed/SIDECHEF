@@ -1,7 +1,9 @@
 package com.example.sidechef.SignUpActivity.View;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +20,8 @@ import com.example.sidechef.model.firebase.Registration.RegistrationContract;
 import com.example.sidechef.model.firebase.Registration.RegistrationPresenter;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 public class SignUp extends AppCompatActivity implements View.OnClickListener, RegistrationContract.View{
     TextView tvLogin;
     Button btnRegistration;
@@ -25,10 +29,13 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, R
     private RegistrationPresenter mRegisterPresenter;
     ProgressDialog mPrgressDialog;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         initViews();
     }
 
@@ -40,9 +47,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, R
         tvLogin.setOnClickListener(this);
         edtEmail = findViewById(R.id.email_register);
         edtPassword = findViewById(R.id.password_register);
-
         mRegisterPresenter = new RegistrationPresenter(this);
-
         mPrgressDialog = new ProgressDialog(this);
         mPrgressDialog.setMessage("Please wait, Adding profile to database.");
     }

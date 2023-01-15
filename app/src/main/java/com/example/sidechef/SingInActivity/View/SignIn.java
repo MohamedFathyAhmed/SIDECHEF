@@ -18,6 +18,8 @@ import com.example.sidechef.R;
 import com.example.sidechef.model.firebase.Login.LoginContract;
 import com.example.sidechef.model.firebase.Login.LoginPresenter;
 
+import java.util.Objects;
+
 
 public class SignIn extends AppCompatActivity implements View.OnClickListener, LoginContract.View {
 Button btn_login;
@@ -43,7 +45,9 @@ EditText tv_name;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         initUI();
+
 
     }
 

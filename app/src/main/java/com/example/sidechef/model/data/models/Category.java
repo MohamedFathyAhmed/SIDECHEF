@@ -5,7 +5,11 @@ public class Category {
     private String strCategory;
     private String strCategoryThumb;
     private String strCategoryDescription;
-
+    //constructor to test RecVeiw
+    public Category(String strCategoryThumb,String strCategory){
+        this.strCategory=strCategory;
+        this.strCategoryThumb=strCategoryThumb;
+    }
     public String getIDCategory() { return idCategory; }
     public void setIDCategory(String value) { this.idCategory = value; }
 
