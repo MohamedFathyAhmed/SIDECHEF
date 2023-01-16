@@ -9,6 +9,11 @@ public class Category {
     public String getIDCategory() { return idCategory; }
     public void setIDCategory(String value) { this.idCategory = value; }
 
+    public Category(String strCategory, String strCategoryThumb) {
+        this.strCategory = strCategory;
+        this.strCategoryThumb = strCategoryThumb;
+    }
+
     public String getStrCategory() { return strCategory; }
     public void setStrCategory(String value) { this.strCategory = value; }
 
