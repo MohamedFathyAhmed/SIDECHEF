@@ -14,9 +14,88 @@ public class Meal implements Parcelable {
 
 
     @PrimaryKey(autoGenerate = true)
-    private Long idMeal;
+    private int id;
 
-    public Long getIdMeal() {
+    protected Meal(Parcel in) {
+        id = in.readInt();
+        idMeal = in.readString();
+        strMeal = in.readString();
+        strDrinkAlternate = in.readString();
+        strCategory = in.readString();
+        strArea = in.readString();
+        strInstructions = in.readString();
+        strMealThumb = in.readString();
+        strTags = in.readString();
+        strYoutube = in.readString();
+        strIngredient1 = in.readString();
+        strIngredient2 = in.readString();
+        strIngredient3 = in.readString();
+        strIngredient4 = in.readString();
+        strIngredient5 = in.readString();
+        strIngredient6 = in.readString();
+        strIngredient7 = in.readString();
+        strIngredient8 = in.readString();
+        strIngredient9 = in.readString();
+        strIngredient10 = in.readString();
+        strIngredient11 = in.readString();
+        strIngredient12 = in.readString();
+        strIngredient13 = in.readString();
+        strIngredient14 = in.readString();
+        strIngredient15 = in.readString();
+        strIngredient16 = in.readString();
+        strIngredient17 = in.readString();
+        strIngredient18 = in.readString();
+        strIngredient19 = in.readString();
+        strIngredient20 = in.readString();
+        strMeasure1 = in.readString();
+        strMeasure2 = in.readString();
+        strMeasure3 = in.readString();
+        strMeasure4 = in.readString();
+        strMeasure5 = in.readString();
+        strMeasure6 = in.readString();
+        strMeasure7 = in.readString();
+        strMeasure8 = in.readString();
+        strMeasure9 = in.readString();
+        strMeasure10 = in.readString();
+        strMeasure11 = in.readString();
+        strMeasure12 = in.readString();
+        strMeasure13 = in.readString();
+        strMeasure14 = in.readString();
+        strMeasure15 = in.readString();
+        strMeasure16 = in.readString();
+        strMeasure17 = in.readString();
+        strMeasure18 = in.readString();
+        strMeasure19 = in.readString();
+        strMeasure20 = in.readString();
+        strSource = in.readString();
+        strImageSource = in.readString();
+        strCreativeCommonsConfirmed = in.readString();
+        dateModified = in.readString();
+    }
+
+    public static final Creator<Meal> CREATOR = new Creator<Meal>() {
+        @Override
+        public Meal createFromParcel(Parcel in) {
+            return new Meal(in);
+        }
+
+        @Override
+        public Meal[] newArray(int size) {
+            return new Meal[size];
+        }
+    };
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private String idMeal;
+
+    public String getIdMeal() {
         return idMeal;
     }
 
@@ -273,10 +352,67 @@ public class Meal implements Parcelable {
     private String strMeasure13;
     private String strMeasure14;
     private String strMeasure15;
+
+    public Meal(String idMeal, String strMeal, String strDrinkAlternate, String strCategory, String strArea, String strInstructions, String strMealThumb, String strTags, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18, String strIngredient19, String strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strMeasure16, String strMeasure17, String strMeasure18, String strMeasure19, String strMeasure20, String strSource, String strImageSource, String strCreativeCommonsConfirmed, String dateModified) {
+        this.idMeal = idMeal;
+        this.strMeal = strMeal;
+        this.strDrinkAlternate = strDrinkAlternate;
+        this.strCategory = strCategory;
+        this.strArea = strArea;
+        this.strInstructions = strInstructions;
+        this.strMealThumb = strMealThumb;
+        this.strTags = strTags;
+        this.strYoutube = strYoutube;
+        this.strIngredient1 = strIngredient1;
+        this.strIngredient2 = strIngredient2;
+        this.strIngredient3 = strIngredient3;
+        this.strIngredient4 = strIngredient4;
+        this.strIngredient5 = strIngredient5;
+        this.strIngredient6 = strIngredient6;
+        this.strIngredient7 = strIngredient7;
+        this.strIngredient8 = strIngredient8;
+        this.strIngredient9 = strIngredient9;
+        this.strIngredient10 = strIngredient10;
+        this.strIngredient11 = strIngredient11;
+        this.strIngredient12 = strIngredient12;
+        this.strIngredient13 = strIngredient13;
+        this.strIngredient14 = strIngredient14;
+        this.strIngredient15 = strIngredient15;
+        this.strIngredient16 = strIngredient16;
+        this.strIngredient17 = strIngredient17;
+        this.strIngredient18 = strIngredient18;
+        this.strIngredient19 = strIngredient19;
+        this.strIngredient20 = strIngredient20;
+        this.strMeasure1 = strMeasure1;
+        this.strMeasure2 = strMeasure2;
+        this.strMeasure3 = strMeasure3;
+        this.strMeasure4 = strMeasure4;
+        this.strMeasure5 = strMeasure5;
+        this.strMeasure6 = strMeasure6;
+        this.strMeasure7 = strMeasure7;
+        this.strMeasure8 = strMeasure8;
+        this.strMeasure9 = strMeasure9;
+        this.strMeasure10 = strMeasure10;
+        this.strMeasure11 = strMeasure11;
+        this.strMeasure12 = strMeasure12;
+        this.strMeasure13 = strMeasure13;
+        this.strMeasure14 = strMeasure14;
+        this.strMeasure15 = strMeasure15;
+        this.strMeasure16 = strMeasure16;
+        this.strMeasure17 = strMeasure17;
+        this.strMeasure18 = strMeasure18;
+        this.strMeasure19 = strMeasure19;
+        this.strMeasure20 = strMeasure20;
+        this.strSource = strSource;
+        this.strImageSource = strImageSource;
+        this.strCreativeCommonsConfirmed = strCreativeCommonsConfirmed;
+        this.dateModified = dateModified;
+    }
+
     private String strMeasure16;
     private String strMeasure17;
 
-    public void setIdMeal(Long idMeal) {
+    public void setIdMeal(String idMeal) {
         this.idMeal = idMeal;
     }
 
@@ -500,70 +636,6 @@ public class Meal implements Parcelable {
     }
 
 
-    protected Meal(Parcel in) {
-        idMeal = in.readLong();
-        strMeal = in.readString();
-        strCategory = in.readString();
-        strArea = in.readString();
-        strInstructions = in.readString();
-        strMealThumb = in.readString();
-        strTags = in.readString();
-        strYoutube = in.readString();
-        strIngredient1 = in.readString();
-        strIngredient2 = in.readString();
-        strIngredient3 = in.readString();
-        strIngredient4 = in.readString();
-        strIngredient5 = in.readString();
-        strIngredient6 = in.readString();
-        strIngredient7 = in.readString();
-        strIngredient8 = in.readString();
-        strIngredient9 = in.readString();
-        strIngredient10 = in.readString();
-        strIngredient11 = in.readString();
-        strIngredient12 = in.readString();
-        strIngredient13 = in.readString();
-        strIngredient14 = in.readString();
-        strIngredient15 = in.readString();
-        strIngredient16 = in.readString();
-        strIngredient17 = in.readString();
-        strIngredient18 = in.readString();
-        strIngredient19 = in.readString();
-        strIngredient20 = in.readString();
-        strMeasure1 = in.readString();
-        strMeasure2 = in.readString();
-        strMeasure3 = in.readString();
-        strMeasure4 = in.readString();
-        strMeasure5 = in.readString();
-        strMeasure6 = in.readString();
-        strMeasure7 = in.readString();
-        strMeasure8 = in.readString();
-        strMeasure9 = in.readString();
-        strMeasure10 = in.readString();
-        strMeasure11 = in.readString();
-        strMeasure12 = in.readString();
-        strMeasure13 = in.readString();
-        strMeasure14 = in.readString();
-        strMeasure15 = in.readString();
-        strMeasure16 = in.readString();
-        strMeasure17 = in.readString();
-        strMeasure18 = in.readString();
-        strMeasure19 = in.readString();
-        strMeasure20 = in.readString();
-        strSource = in.readString();
-    }
-
-    public static final Creator<Meal> CREATOR = new Creator<Meal>() {
-        @Override
-        public Meal createFromParcel(Parcel in) {
-            return new Meal(in);
-        }
-
-        @Override
-        public Meal[] newArray(int size) {
-            return new Meal[size];
-        }
-    };
-
     @Override
     public int describeContents() {
         return 0;
@@ -571,8 +643,10 @@ public class Meal implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeLong(idMeal);
+        parcel.writeInt(id);
+        parcel.writeString(idMeal);
         parcel.writeString(strMeal);
+        parcel.writeString(strDrinkAlternate);
         parcel.writeString(strCategory);
         parcel.writeString(strArea);
         parcel.writeString(strInstructions);
@@ -620,6 +694,9 @@ public class Meal implements Parcelable {
         parcel.writeString(strMeasure19);
         parcel.writeString(strMeasure20);
         parcel.writeString(strSource);
+        parcel.writeString(strImageSource);
+        parcel.writeString(strCreativeCommonsConfirmed);
+        parcel.writeString(dateModified);
     }
 }
 

@@ -15,4 +15,6 @@
     <color name="colorAccent">#D8211B</color>
     <color name="colorIcons">#7C7F81</color>
     <color name="colorPrimaryText">#1e1e1e</color>
+    <color name="transparent">#80000000</color>
+    transparent
 </resources>

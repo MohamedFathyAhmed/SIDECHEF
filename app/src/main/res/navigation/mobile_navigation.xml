@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.example.sidechef.HomeActivity.View.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailFragment"
+            app:destination="@id/navigation_des" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -18,8 +22,19 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.sidechef.HomeActivity.View.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_favorite"
+        android:name="com.example.sidechef.HomeActivity.View.ui.favorit.FavoritFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/navigation_des"
+        android:name="com.example.sidechef.HomeActivity.View.ui.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="dataMeal"
+            app:argType="com.example.sidechef.model.data.models.Meal"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>
