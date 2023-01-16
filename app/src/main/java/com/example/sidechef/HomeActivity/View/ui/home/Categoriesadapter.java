@@ -19,7 +19,7 @@ import com.example.sidechef.model.data.models.Category;
 
 import java.util.List;
 
-public class Categoriesadapter  extends RecyclerView.Adapter<MyViewHolder> {
+public class Categoriesadapter  extends RecyclerView.Adapter<CategoriesViewHolder> {
     private List<Category> data;
     private final Context context;
     private static final String TAG = "RECYCLER_VIEW_TAG";
@@ -32,16 +32,16 @@ public class Categoriesadapter  extends RecyclerView.Adapter<MyViewHolder> {
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CategoriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View v = layoutInflater.inflate(R.layout.categories_card_view, parent, false);
-        MyViewHolder myViewHolder = new MyViewHolder(v);
+        CategoriesViewHolder myViewHolder = new CategoriesViewHolder(v);
         Log.i(TAG, "onCreateViewHolder");
         return myViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoriesViewHolder holder, int position) {
         holder.categoryTextView.setText(data.get(position).getStrCategory());
         Glide.with(context).load(data.get(position).getStrCategoryThumb()).into(holder.categoryImageView);
         holder.categoryCardView.setOnClickListener(new View.OnClickListener() {
@@ -61,11 +61,11 @@ public class Categoriesadapter  extends RecyclerView.Adapter<MyViewHolder> {
     }
 }
 
-class MyViewHolder extends RecyclerView.ViewHolder {
+class CategoriesViewHolder extends RecyclerView.ViewHolder {
     public ImageView categoryImageView;
     public TextView categoryTextView;
     public CardView categoryCardView;
-    public MyViewHolder(View view) {
+    public CategoriesViewHolder(View view) {
         super(view);
         this.categoryImageView = (ImageView) view.findViewById(R.id.category_image);
         this.categoryTextView = (TextView) view.findViewById(R.id.category_text);
