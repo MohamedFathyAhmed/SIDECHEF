@@ -35,7 +35,7 @@ public class Repository {
         return instance;
     }
 
-    public void getAllProducts(ApiResponse apiResponse) {
+    public void getAllMeals(ApiResponse apiResponse) {
         Call<Meals> request = api.getMeal();
         request.enqueue(new Callback<Meals>() {
             @Override
