@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "385207505657-uat33f10cvg7dga56ad4pn1kp11b7152.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sidechef",
+            "certificate_hash": "a169c0e07cdebaf5073b578db34f6413ac20e8bd"
+          }
+        },
+        {
           "client_id": "385207505657-ku77mueu8h53fdjthsie2reuds7kiatn.apps.googleusercontent.com",
           "client_type": 3
         }

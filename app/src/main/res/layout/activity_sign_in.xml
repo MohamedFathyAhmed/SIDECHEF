@@ -8,6 +8,7 @@
 
 
   <LinearLayout
+      android:id="@+id/linear1"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical">
@@ -148,6 +149,7 @@
         android:orientation="horizontal">
 
       <TextView
+          android:id="@+id/forgetPassword"
           android:layout_width="150dp"
           android:layout_height="46dp"
           android:layout_gravity="center"
@@ -157,11 +159,22 @@
           android:text="forget password ?"
           android:textColor="#1566e0"
           android:textSize="10.5sp" />
+
     </LinearLayout>
 
 
   </LinearLayout>
 
+
+  <com.google.android.gms.common.SignInButton
+      android:id="@+id/btn_signInWithGoogle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/linear1"
+      android:layout_alignParentEnd="true"
+
+      android:layout_marginTop="50dp"
+      app:layout_constraintVertical_bias="0.28" />
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -174,7 +187,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="13.7dp"
         android:gravity="center"
-        android:orientation="horizontal"/>
+        android:orientation="horizontal" />
 
     <LinearLayout
         android:layout_width="match_parent"
