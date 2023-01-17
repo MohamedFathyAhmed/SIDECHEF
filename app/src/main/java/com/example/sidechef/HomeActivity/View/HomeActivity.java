@@ -1,6 +1,7 @@
 package com.example.sidechef.HomeActivity.View;
 
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 
 import com.example.sidechef.R;
 import com.example.sidechef.databinding.ActivityHomeBinding;
@@ -20,8 +21,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        binding =  ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);

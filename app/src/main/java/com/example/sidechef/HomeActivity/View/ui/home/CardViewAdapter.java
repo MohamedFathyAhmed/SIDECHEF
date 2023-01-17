@@ -35,7 +35,7 @@ public class CardViewAdapter  extends RecyclerView.Adapter<MyViewHolder> {
     }
 
     CardViewAdapter(ArrayList<Meal> dataset, Context context,CardViewAdapter.AdapterConnector adapterConnector) {
-        context = context;
+        this.context = context;
         this.data = dataset;
         this.adapterConnector = adapterConnector;
 
