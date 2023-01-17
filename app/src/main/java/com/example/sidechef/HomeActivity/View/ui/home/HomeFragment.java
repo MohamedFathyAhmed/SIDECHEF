@@ -11,10 +11,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,8 +47,8 @@ public class HomeFragment extends Fragment implements NetworkInterface {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
         super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
         initrandommealRecView(view);
         initCategoryRecView(view);
         networkPresenter = new NetworkPresenter(requireContext(),this);
@@ -72,8 +74,9 @@ public class HomeFragment extends Fragment implements NetworkInterface {
     void initrandommealRecView(View view) {
         randomrecyclerView = (RecyclerView) view.findViewById(R.id.meal_rv);
         randomrecyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
-        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+       // LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+        LinearLayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
         randomrecyclerView.setLayoutManager(layoutManager);
     }
 

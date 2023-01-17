@@ -95,7 +95,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         this.tvRecipeName = itemView.findViewById(R.id.tvRecipeName);
         this.tvRecipePreparationTime = itemView.findViewById(R.id.tvRecipePreparationTime);
         this.tvRecipeYield = itemView.findViewById(R.id.tvRecipeYield);
-        this.tvRecipeId = itemView.findViewById(R.id.tvRecipeId);
+        //this.tvRecipeId = itemView.findViewById(R.id.tvRecipeId);
         this.ivRecipePhoto = itemView.findViewById(R.id.ivRecipePhoto);
         this.viewHolder = itemView.findViewById(R.id.viewHolder);
 
