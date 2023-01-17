@@ -10,6 +10,9 @@ import retrofit2.http.Query;
 public interface ApiCalls {
     @GET("random.php")
     Call<Meals> getMeal();
+//"filter.php?i=chicken_breast"
+//random.php
+
 
     @GET("categories.php")
     Call<Categorys> getCategories();

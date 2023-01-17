@@ -50,9 +50,9 @@ Meal meal;
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //get data from frag
-       // meal = DetailFragmentArgs.fromBundle(getArguments()).getDataMeal();
+        meal = DetailFragmentArgs.fromBundle(getArguments()).getDataMeal();
 
-       // ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
         collapsingToolbarLayout=view.findViewById(R.id.collapsing_toolbar);
         mealThumb=view.findViewById(R.id.mealThumb);
         category=view.findViewById(R.id.category);

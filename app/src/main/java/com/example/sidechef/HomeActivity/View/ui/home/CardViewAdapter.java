@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,7 +52,12 @@ public class CardViewAdapter  extends RecyclerView.Adapter<MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.tvRecipeName.setText(data.get(position).getStrMeal());
         holder.tvRecipePreparationTime.setText(data.get(position).getStrCategory());
+        holder.viewHolder.setOnClickListener(view ->
+                adapterConnector.sendData(data.get(position)));
         Glide.with(context).load(data.get(position).getStrMealThumb()).into(holder.ivRecipePhoto);
+//        holder.mealButton.setOnClickListener(
+//                view -> {adapterConnector.callRepo(data.get(position),position);}
+//        );
 //        holder.mealButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -81,6 +87,8 @@ class MyViewHolder extends RecyclerView.ViewHolder {
     TextView tvRecipeYield;
     TextView tvRecipeId;
     ImageView ivRecipePhoto;
+    public LinearLayout viewHolder;
+
 
     public MyViewHolder(View itemView) {
         super(itemView);
@@ -89,6 +97,8 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         this.tvRecipeYield = itemView.findViewById(R.id.tvRecipeYield);
         this.tvRecipeId = itemView.findViewById(R.id.tvRecipeId);
         this.ivRecipePhoto = itemView.findViewById(R.id.ivRecipePhoto);
+        this.viewHolder = itemView.findViewById(R.id.viewHolder);
+
     }
 
 }
