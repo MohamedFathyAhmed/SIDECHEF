@@ -5,19 +5,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.sidechef.R;
-import com.example.sidechef.model.data.models.Category;
-import com.example.sidechef.model.data.models.Meal;
+import com.example.sidechef.model.models.Meal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +31,7 @@ public class CardViewAdapter  extends RecyclerView.Adapter<MyViewHolder> {
 
     }
 
-    CardViewAdapter(ArrayList<Meal> dataset, Context context,CardViewAdapter.AdapterConnector adapterConnector) {
+    CardViewAdapter(ArrayList<Meal> dataset, Context context, CardViewAdapter.AdapterConnector adapterConnector) {
         this.context = context;
         this.data = dataset;
         this.adapterConnector = adapterConnector;
@@ -62,7 +59,7 @@ public class CardViewAdapter  extends RecyclerView.Adapter<MyViewHolder> {
 //
 //            }
 //        });
-        Log.i(TAG, "onBindViewHolder");
+        Log.i(TAG, "onBindViewHolder 2");
 
     }
 

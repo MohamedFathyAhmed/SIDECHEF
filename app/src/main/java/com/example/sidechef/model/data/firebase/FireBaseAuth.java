@@ -1,6 +1,4 @@
-package com.example.sidechef.model.firebase.Registration;
-
-import android.app.Activity;
+package com.example.sidechef.model.data.firebase;
 
 import androidx.annotation.NonNull;
 
@@ -9,18 +7,28 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+public class FireBaseAuth {
 
+    public FireBaseAuth() {}
 
-public class RegistrationInteractor implements RegistrationContract.Intractor {
+    public void  login(String email,String password,LoginListener mOnLoginListener){
+    FirebaseAuth.getInstance()
+            .signInWithEmailAndPassword(email,password)
+            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        mOnLoginListener.onSuccess(task.getResult().toString());
+                    }
+                    else {
+                        mOnLoginListener.onFailure(
+                                task.getException().getMessage().toString());
+                    }
+                }
+            });
 
-    private static final String TAG = RegistrationInteractor.class.getSimpleName();
-    private RegistrationContract.onRegistrationListener mOnRegistrationListener;
-
-    public RegistrationInteractor(RegistrationContract.onRegistrationListener onRegistrationListener){
-        this.mOnRegistrationListener = onRegistrationListener;
-    }
-    @Override
-    public void performFirebaseRegistration(Activity activity, String email, String password) {
+}
+    public void Registration(String email, String password, RegistrationListener mOnRegistrationListener) {
         FirebaseAuth.getInstance()
                 .createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -36,4 +44,5 @@ public class RegistrationInteractor implements RegistrationContract.Intractor {
                     }
                 });
     }
+
 }

@@ -1,4 +1,5 @@
-package com.example.sidechef.model.data.models;
+package com.example.sidechef.model.models;
+
 
 import java.util.ArrayList;
 

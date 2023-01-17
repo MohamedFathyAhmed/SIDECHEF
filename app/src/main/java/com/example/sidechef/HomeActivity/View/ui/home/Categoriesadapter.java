@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.sidechef.R;
-import com.example.sidechef.model.data.models.Category;
+import com.example.sidechef.model.models.Category;
 
 import java.util.List;
 
@@ -50,7 +50,7 @@ public class Categoriesadapter  extends RecyclerView.Adapter<CategoriesViewHolde
 
             }
         });
-        Log.i(TAG, "onBindViewHolder");
+        Log.i(TAG, "onBindViewHolder2");
 
     }
 

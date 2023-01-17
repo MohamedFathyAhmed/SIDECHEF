@@ -18,11 +18,10 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sidechef.HomeActivity.View.ui.DetailViewinterface;
 import com.example.sidechef.R;
-import com.example.sidechef.databinding.FragmentHomeBinding;
-import com.example.sidechef.model.data.models.Category;
-import com.example.sidechef.model.data.models.Meal;
+
+import com.example.sidechef.model.models.Category;
+import com.example.sidechef.model.models.Meal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,11 +45,12 @@ public class HomeFragment extends Fragment implements NetworkInterface {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        networkPresenter = new NetworkPresenter(requireContext(),this);
-         networkPresenter.fetchData();
+
         super.onViewCreated(view, savedInstanceState);
         initrandommealRecView(view);
         initCategoryRecView(view);
+        networkPresenter = new NetworkPresenter(requireContext(),this);
+        networkPresenter.fetchData();
 
     }
 

@@ -3,8 +3,7 @@ package com.example.sidechef.HomeActivity.View.ui.home;
 import android.content.Context;
 
 import com.example.sidechef.model.data.Repository;
-import com.example.sidechef.model.data.models.Meal;
-
+import com.example.sidechef.model.models.Meal;
 
 
 public class NetworkPresenter {

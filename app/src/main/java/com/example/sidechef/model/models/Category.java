@@ -1,4 +1,4 @@
-package com.example.sidechef.model.data.models;
+package com.example.sidechef.model.models;
 
 public class Category {
     private String idCategory;

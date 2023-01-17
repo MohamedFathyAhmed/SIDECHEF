@@ -1,7 +1,7 @@
 package com.example.sidechef.model.data.api;
 
-import com.example.sidechef.model.data.models.Categorys;
-import com.example.sidechef.model.data.models.Meals;
+import com.example.sidechef.model.models.Categorys;
+import com.example.sidechef.model.models.Meals;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

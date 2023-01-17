@@ -6,8 +6,9 @@ import com.example.sidechef.model.data.api.ApiCalls;
 import com.example.sidechef.model.data.api.Network;
 import com.example.sidechef.model.data.database.MealsDatabase;
 import com.example.sidechef.model.data.database.MealsDAO;
-import com.example.sidechef.model.data.models.Meal;
-import com.example.sidechef.model.data.models.Meals;
+import com.example.sidechef.model.models.Meal;
+import com.example.sidechef.model.models.Meals;
+
 
 import java.util.ArrayList;
 import java.util.List;

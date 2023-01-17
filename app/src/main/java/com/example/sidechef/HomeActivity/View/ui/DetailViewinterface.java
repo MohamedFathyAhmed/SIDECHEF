@@ -1,6 +1,7 @@
 package com.example.sidechef.HomeActivity.View.ui;
 
-import com.example.sidechef.model.data.models.Meal;
+
+import com.example.sidechef.model.models.Meal;
 
 public interface DetailViewinterface {
 

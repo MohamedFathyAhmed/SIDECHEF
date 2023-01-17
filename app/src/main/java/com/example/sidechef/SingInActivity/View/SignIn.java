@@ -15,8 +15,7 @@ import android.widget.Toast;
 
 import com.example.sidechef.HomeActivity.View.HomeActivity;
 import com.example.sidechef.R;
-import com.example.sidechef.model.firebase.Login.LoginContract;
-import com.example.sidechef.model.firebase.Login.LoginPresenter;
+import com.example.sidechef.presenter.LoginPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -28,7 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 
-public class SignIn extends AppCompatActivity implements View.OnClickListener, LoginContract.View {
+public class SignIn extends AppCompatActivity implements View.OnClickListener, LoginViewinterface {
 Button btn_login;
 EditText tv_name;
     EditText tv_pass;
@@ -86,11 +85,11 @@ EditText tv_name;
     }
     private void initLogin(String email, String password) {
         mProgressDialog.show();
-        mLoginPresenter.login(this, email, password);
+        mLoginPresenter.login(email, password);
     }
 
     @Override
-    public void onClick(android.view.View view) {
+    public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_register:
                 Log.i("hellplab", "btn_login: ");

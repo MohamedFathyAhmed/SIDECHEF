@@ -1,33 +1,24 @@
 package com.example.sidechef.HomeActivity.View.ui;
 
-import android.content.ActivityNotFoundException;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
+
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
-
 import com.bumptech.glide.Glide;
 import com.example.sidechef.R;
-import com.example.sidechef.model.data.models.Meal;
+import com.example.sidechef.model.models.Meal;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
-import java.util.Objects;
 
 
 public class DetailFragment extends Fragment {

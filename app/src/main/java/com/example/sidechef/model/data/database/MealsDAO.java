@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.sidechef.model.data.models.Meal;
+import com.example.sidechef.model.models.Meal;
 
 import java.util.ArrayList;
 import java.util.List;

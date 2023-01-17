@@ -5,7 +5,8 @@ import android.content.Context;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.sidechef.model.data.models.Meal;
+import com.example.sidechef.model.models.Meal;
+
 
 @androidx.room.Database(entities = {Meal.class}, version = 5)
 public abstract class MealsDatabase extends RoomDatabase{

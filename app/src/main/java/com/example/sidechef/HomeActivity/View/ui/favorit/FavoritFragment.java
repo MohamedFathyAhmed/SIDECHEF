@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sidechef.R;
-import com.example.sidechef.model.data.models.Meal;
 
 import java.util.ArrayList;
 import java.util.List;

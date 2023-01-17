@@ -14,11 +14,10 @@ import android.widget.Toast;
 
 import com.example.sidechef.R;
 import com.example.sidechef.SingInActivity.View.SignIn;
-import com.example.sidechef.model.firebase.Registration.RegistrationContract;
-import com.example.sidechef.model.firebase.Registration.RegistrationPresenter;
+import com.example.sidechef.presenter.RegistrationPresenter;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignUp extends AppCompatActivity implements View.OnClickListener, RegistrationContract.View{
+public class SignUp extends AppCompatActivity implements View.OnClickListener, RegisterViewInterface{
     TextView tvLogin;
     Button btnRegistration;
     EditText edtEmail, edtPassword;
@@ -78,7 +77,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, R
 
     private void initLogin(String email, String password) {
         mPrgressDialog.show();
-        mRegisterPresenter.register(this, email, password);
+        mRegisterPresenter.register(email, password);
     }
 
     @Override

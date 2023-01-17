@@ -33,8 +33,7 @@
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="dataMeal"
-            app:argType="com.example.sidechef.model.data.models.Meal"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:argType="com.example.sidechef.model.models.Meal"
+            app:nullable="true" />
     </fragment>
 </navigation>
