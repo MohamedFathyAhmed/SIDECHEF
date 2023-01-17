@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment implements NetworkInterface {
 
     @Override
     public void sendData(Meal meal) {
-        HomeFragmentDirections.ActionNavigationHomeToDetailFragment action =  HomeFragmentDirections.actionNavigationHomeToDetailFragment();
+        HomeFragmentDirections.ActionNavigationHomeToDetailFragment action =  HomeFragmentDirections.actionNavigationHomeToDetailFragment(meal);
         action.setDataMeal(meal);
         Log.i("TAG", "onCreateView: "+meal.getStrArea());
         Navigation.findNavController(getView()).navigate(action);
