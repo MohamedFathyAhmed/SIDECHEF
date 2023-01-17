@@ -10,80 +10,78 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".OnBoarding.Home_Fragment" >
+        android:background="@color/grey_300"
+        tools:context=".OnBoarding.Home_Fragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/meal_rec"
-            android:layout_width="299dp"
-            android:layout_height="372dp"
-            android:layout_marginBottom="8464dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.392"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:id="@+id/meal_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/grey_300"
+            app:layout_constraintEnd_toEndOf="@+id/ct_rv"
+            app:layout_constraintStart_toStartOf="@+id/inspiration_tv4"
+            app:layout_constraintTop_toBottomOf="@+id/inspiration_tv4" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cat_rv"
-            android:layout_width="345dp"
-            android:layout_height="376dp"
-            android:layout_marginTop="28dp"
+            android:id="@+id/ct_rv"
+            android:layout_width="377dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/grey_300"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.525"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/category_tv"
             app:layout_constraintTop_toBottomOf="@+id/category_tv" />
 
         <TextView
             android:id="@+id/inspiration_tv4"
             android:layout_width="wrap_content"
-            android:layout_height="34dp"
-            android:layout_marginTop="128dp"
-            android:text="category_Meals"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="random meals"
+
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="23sp"
 
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/meal_rec"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.426"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cat_rv"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintStart_toStartOf="@+id/ct_rv"
+            app:layout_constraintTop_toBottomOf="@+id/ct_rv" />
 
         <TextView
             android:id="@+id/category_tv"
             android:layout_width="wrap_content"
-            android:layout_height="34dp"
-            android:layout_marginTop="99dp"
-            android:text="inspiration"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+
+            android:text="category_Meals"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="23sp"
             android:textStyle="bold"
-
-            app:layout_constraintBottom_toTopOf="@+id/meal_rec"
-            app:layout_constraintEnd_toEndOf="parent"
-
-            app:layout_constraintHorizontal_bias="0.449"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.179" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="328dp"
-            android:layout_height="188dp"
-            android:layout_marginTop="4dp"
-            android:background="@color/white"
-            android:src="@drawable/ic_arrow_forward_black_24dp"
-            app:layout_constraintBottom_toTopOf="@+id/meal_rec"
+            android:layout_width="382dp"
+            android:layout_height="215dp"
+            android:src="@drawable/brooke_lark_1rm9glhv0ua_unsplash"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="409dp"
+            android:layout_height="131dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meal_rv"></LinearLayout>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </ScrollView>

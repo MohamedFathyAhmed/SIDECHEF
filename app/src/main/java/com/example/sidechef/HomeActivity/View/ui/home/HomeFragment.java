@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,14 +24,16 @@ import com.example.sidechef.databinding.FragmentHomeBinding;
 import com.example.sidechef.model.data.models.Category;
 import com.example.sidechef.model.data.models.Meal;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements NetworkInterface {
     RecyclerView categoryrecyclerView;
     RecyclerView randomrecyclerView;
-
-    Button btn;
+    CardViewAdapter adapter;
+    NetworkPresenter networkPresenter;
+    
     Meal meal;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +46,8 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        //networkPresenter = new NetworkPresenter(requireContext(),this);
+//        networkPresenter.fetchData();
         super.onViewCreated(view, savedInstanceState);
         initrandommealRecView(view);
         initCategoryRecView(view);
@@ -50,7 +55,7 @@ public class HomeFragment extends Fragment {
     }
 
     void initCategoryRecView(View view) {
-        categoryrecyclerView = (RecyclerView) view.findViewById(R.id.cat_rv);
+        categoryrecyclerView = (RecyclerView) view.findViewById(R.id.ct_rv);
         categoryrecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
@@ -65,7 +70,7 @@ public class HomeFragment extends Fragment {
     }
 
     void initrandommealRecView(View view) {
-        randomrecyclerView = (RecyclerView) view.findViewById(R.id.meal_rec);
+        randomrecyclerView = (RecyclerView) view.findViewById(R.id.meal_rv);
         randomrecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
@@ -101,7 +106,30 @@ public class HomeFragment extends Fragment {
                         "https://www.bbcgoodfood.com/recipes/1940679/broccoli-and-stilton-soup",
                         null, null, null));
         CardViewAdapter mAdapter = new CardViewAdapter(arrayList, view.getContext());
-        randomrecyclerView.setAdapter(mAdapter);
+      randomrecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void sendData(Meal meal) {
+
+    }
+
+    @Override
+    public void callRepo(Meal meal, int position) {
+       // networkPresenter.insertItem(meal);
+       // adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onSuccessResponse(ArrayList<Meal> meals) {
+      //  adapter = new CardViewAdapter(meals,requireContext(),this);
+       // randomrecyclerView.setAdapter(adapter);
+
+    }
+
+    @Override
+    public void onErrorResponse(String errorMessage) {
+        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show();
     }
 }
 

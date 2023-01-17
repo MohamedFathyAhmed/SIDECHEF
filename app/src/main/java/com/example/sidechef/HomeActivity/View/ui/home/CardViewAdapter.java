@@ -19,12 +19,14 @@ import com.example.sidechef.R;
 import com.example.sidechef.model.data.models.Category;
 import com.example.sidechef.model.data.models.Meal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CardViewAdapter  extends RecyclerView.Adapter<MyViewHolder> {
     private List<Meal> data;
-    private final Context context;
+    private  Context context;
     private static final String TAG = "RECYCLER_VIEW_TAG";
+    AdapterConnector adapterConnector;
 
     CardViewAdapter(List<Meal> dataset, Context con) {
         context = con;
@@ -32,6 +34,12 @@ public class CardViewAdapter  extends RecyclerView.Adapter<MyViewHolder> {
 
     }
 
+    CardViewAdapter(ArrayList<Meal> dataset, Context context,CardViewAdapter.AdapterConnector adapterConnector) {
+        context = context;
+        this.data = dataset;
+        this.adapterConnector = adapterConnector;
+
+    }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -62,6 +70,12 @@ public class CardViewAdapter  extends RecyclerView.Adapter<MyViewHolder> {
     public int getItemCount() {
         return data.size();
     }
+
+
+    public interface AdapterConnector {
+        public void sendData(Meal meal);
+        public void callRepo(Meal meal,int position);
+    }
 }
 
 class MyViewHolder extends RecyclerView.ViewHolder {
@@ -79,5 +93,6 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         this.tvRecipeId = itemView.findViewById(R.id.tvRecipeId);
         this.ivRecipePhoto = itemView.findViewById(R.id.ivRecipePhoto);
     }
+
 }
 
