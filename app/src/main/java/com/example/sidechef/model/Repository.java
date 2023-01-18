@@ -6,6 +6,7 @@ import com.example.sidechef.model.data.api.ApiCalls;
 import com.example.sidechef.model.data.api.Network;
 import com.example.sidechef.model.data.database.MealsDatabase;
 import com.example.sidechef.model.data.database.MealsDAO;
+import com.example.sidechef.model.models.Categories;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Meals;
 
@@ -44,7 +45,7 @@ public class Repository {
         return instance;
     }
 
-    public void getAllMeals(ApiResponse apiResponse) {
+    public void getAllMeals(RandomMealResponseDelegate randomMealResponseDelegate) {
         ArrayList<Observable<Meals>> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             list.add(api.getMeal());
@@ -70,30 +71,7 @@ public class Repository {
                     }
                 }).observeOn(AndroidSchedulers.mainThread());
 
-        //.toList();//DownStream operation
-//        Observer<MealsList> observer =new Observer<MealsList>() {
-//            @Override
-//            public void onSubscribe(@NonNull Disposable d) {
-//
-//            }
-//
-//            @Override
-//            public void onNext(@NonNull MealsList mealsList) {
-//
-//                homeInterface.showRandomMeals(mealsList.getMeals(),count);
-//
-//            }
-//
-//            @Override
-//            public void onError(@NonNull Throwable e) {
-//
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//
-//            }
-//        };
+
         SingleObserver<List<Meals>> singleMealObserver = new SingleObserver<List<Meals>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
@@ -102,7 +80,7 @@ public class Repository {
 
             @Override
             public void onSuccess(@NonNull List<Meals> mealsLists) {
-                apiResponse.onSuccessResponse(mealsLists);
+                randomMealResponseDelegate.onSuccessResponse(mealsLists);
             }
 
             @Override
@@ -111,6 +89,30 @@ public class Repository {
             }
         };
         observable.subscribe(singleMealObserver);
+    }
+    public void getAllCategories(onGetCategoriesResponseDelegate getCategoriesResponse){
+       Single<Categories> observable= api.getCategories().
+               subscribeOn(Schedulers.io())
+               .observeOn(AndroidSchedulers.mainThread());
+        SingleObserver<Categories> categorysSingleObserver = new SingleObserver<Categories>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(@NonNull Categories categorys) {
+                System.out.println("DDDDDDDDDDDDDDddd");
+                getCategoriesResponse.onGetCategoriesSuccessResponse(categorys);
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                System.out.println(e.getMessage());
+            }
+        };
+        observable.subscribe(categorysSingleObserver);
     }
 
 
@@ -129,8 +131,12 @@ public class Repository {
         new Thread(() -> db.delete(meal)).start();
     };
 
-    public interface ApiResponse{
+    public interface RandomMealResponseDelegate {
         void onSuccessResponse(List<Meals> meals);
+        void onErrorResponse(String errorMessage);
+    }
+    public interface onGetCategoriesResponseDelegate{
+        void onGetCategoriesSuccessResponse(Categories categories);
         void onErrorResponse(String errorMessage);
     }
 

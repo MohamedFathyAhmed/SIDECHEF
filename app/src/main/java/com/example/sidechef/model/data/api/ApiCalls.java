@@ -1,10 +1,10 @@
 package com.example.sidechef.model.data.api;
 
-import com.example.sidechef.model.models.Categorys;
+import com.example.sidechef.model.models.Categories;
 import com.example.sidechef.model.models.Meals;
 
 import io.reactivex.rxjava3.core.Observable;
-import retrofit2.Call;
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -16,7 +16,7 @@ public interface ApiCalls {
 
 
     @GET("categories.php")
-    Observable<Categorys> getCategories();
+    Single<Categories> getCategories();
 
     @GET("filter.php")
     Observable<Meals> getMealByCategory(@Query("c")String category);

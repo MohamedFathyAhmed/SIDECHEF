@@ -5,27 +5,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sidechef.R;
 
-import com.example.sidechef.model.models.Category;
+import com.example.sidechef.model.models.Categories;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Meals;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements NetworkInterface {
@@ -33,6 +27,7 @@ public class HomeFragment extends Fragment implements NetworkInterface {
     RecyclerView randomrecyclerView;
     CardViewAdapter adapter;
     NetworkPresenter networkPresenter;
+    Categoriesadapter mAdapter;
 
     Meal meal;
     @Override
@@ -51,7 +46,8 @@ public class HomeFragment extends Fragment implements NetworkInterface {
         initrandommealRecView(view);
         initCategoryRecView(view);
         networkPresenter = new NetworkPresenter(requireContext(),this);
-        networkPresenter.fetchData();
+        networkPresenter.getMeals();
+        networkPresenter.getCategories();
 
     }
 
@@ -61,13 +57,6 @@ public class HomeFragment extends Fragment implements NetworkInterface {
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         categoryrecyclerView.setLayoutManager(layoutManager);
-        List arrayList = Arrays.asList(new Category("Cake1 Desc",
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Female_house_sparrow_at_Kodai.jpg/280px-Female_house_sparrow_at_Kodai.jpg"
-                        ),
-                new Category("cacke","https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Female_house_sparrow_at_Kodai.jpg/280px-Female_house_sparrow_at_Kodai.jpg"
-                        ));
-        Categoriesadapter mAdapter = new Categoriesadapter(arrayList, view.getContext());
-        categoryrecyclerView.setAdapter(mAdapter);
     }
 
     void initrandommealRecView(View view) {
@@ -97,6 +86,13 @@ public class HomeFragment extends Fragment implements NetworkInterface {
        adapter = new CardViewAdapter(mealsLists,requireContext(),this);
        randomrecyclerView.setAdapter(adapter);
 
+    }
+
+    @Override
+    public void onGetCategoriesSuccessResponse(Categories categories) {
+
+        mAdapter = new Categoriesadapter(categories.getCategorys(), requireContext());
+        categoryrecyclerView.setAdapter(mAdapter);
     }
 
     @Override
