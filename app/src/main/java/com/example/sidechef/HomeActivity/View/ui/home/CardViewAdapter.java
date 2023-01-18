@@ -53,12 +53,11 @@ public class CardViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        holder.tvRecipeName.setText(data.get(position).getStrMeal());
-        holder.tvCountry.setText(data.get(position).getStrArea());
-        holder.tvCat.setText(data.get(position).getStrCategory());
-
         holder.tvRecipeName.setText(data.get(position).getmeals().get(0).getStrMeal());
-        holder.tvRecipePreparationTime.setText(data.get(position).getmeals().get(0).getStrCategory());
+        holder.tvCountry.setText(data.get(position).getmeals().get(0).getStrArea());
+        holder.tvCat.setText(data.get(position).getmeals().get(0).getStrCategory());
+        holder.tvRecipeName.setText(data.get(position).getmeals().get(0).getStrMeal());
+       // holder.tvRecipePreparationTime.setText(data.get(position).getmeals().get(0).getStrCategory());
 
         holder.viewHolder.setOnClickListener(view -> adapterConnector.sendData(data.get(position).getmeals().get(0)));
         Glide.with(context).load(data.get(position).getmeals().get(0).getStrMealThumb()).into(holder.ivRecipePhoto);

@@ -69,13 +69,12 @@
             android:textSize="23sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/stack_view" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="382dp"
-            android:layout_height="215dp"
-            android:src="@drawable/brooke_lark_1rm9glhv0ua_unsplash"
+        <StackView
+            android:id="@+id/stack_view"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

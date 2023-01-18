@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.StackView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ public class HomeFragment extends Fragment implements NetworkInterface {
     CardViewAdapter adapter;
     NetworkPresenter networkPresenter;
     Categoriesadapter mAdapter;
+    StackView stackView;
 
     Meal meal;
 
@@ -50,6 +52,7 @@ public class HomeFragment extends Fragment implements NetworkInterface {
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         initrandommealRecView(view);
         initCategoryRecView(view);
+        stackView=(StackView)view.findViewById(R.id.stack_view);
         networkPresenter = new NetworkPresenter(requireContext(), this);
         networkPresenter.getMeals();
         networkPresenter.getCategories();
@@ -93,6 +96,8 @@ public class HomeFragment extends Fragment implements NetworkInterface {
     public void onSuccessResponse(List<Meals> mealsLists) {
         adapter = new CardViewAdapter(mealsLists, requireContext(), this);
         randomrecyclerView.setAdapter(adapter);
+        slideAdapter slidadapter = new slideAdapter(mealsLists, R.layout.slide_iteam, getContext());
+        stackView.setAdapter(slidadapter);
 
     }
 
