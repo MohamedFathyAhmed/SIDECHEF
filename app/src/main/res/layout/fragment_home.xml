@@ -18,7 +18,7 @@
             app:spanCount="2"
             tools:itemCount="6"
             tools:listitem="@layout/home_card_view"
-            android:id="@+id/meal_rv"
+            android:id="@+id/meal_rv_fav"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -85,7 +85,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/meal_rv" />
+            app:layout_constraintTop_toBottomOf="@+id/meal_rv_fav" />
 
 
 

@@ -19,12 +19,13 @@ import android.widget.TextView;
 import android.widget.VideoView;
 import com.bumptech.glide.Glide;
 import com.example.sidechef.R;
+import com.example.sidechef.model.Repository;
 import com.example.sidechef.model.models.Meal;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 public class DetailFragment extends Fragment {
     Meal meal;
-
+Repository repository;
     CollapsingToolbarLayout collapsingToolbarLayout;
     ImageView mealThumb;
     TextView category;
@@ -47,7 +48,7 @@ public class DetailFragment extends Fragment {
         // get data from frag
         meal = DetailFragmentArgs.fromBundle(getArguments()).getDataMeal();
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-
+        repository = Repository.getInstance(requireContext());
         collapsingToolbarLayout = view.findViewById(R.id.collapsing_toolbar);
         mealThumb = view.findViewById(R.id.mealThumb);
         category = view.findViewById(R.id.category);
@@ -64,11 +65,20 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail, container, false);
     }
 
     public void setMeal(Meal meal) {
+
+        fav.setOnClickListener(v->{
+
+            repository.insert(meal);
+
+        });
+
         collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.transparent));
         collapsingToolbarLayout.setCollapsedTitleTextColor(
                 getResources().getColor(com.shashank.sony.fancywalkthroughlib.R.color.grey_600));

@@ -1,4 +1,5 @@
-package com.example.sidechef.HomeActivity.View.ui.home;
+package com.example.sidechef.HomeActivity.View.ui.favorit;
+
 
 import android.content.Context;
 import android.util.Log;
@@ -10,30 +11,28 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.sidechef.R;
 import com.example.sidechef.model.models.Meal;
-import com.example.sidechef.model.models.Meals;
+import com.example.sidechef.model.models.Meal;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class CardViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
-    private List<Meals> data;
+public class CardViewAdapterFav extends RecyclerView.Adapter<MyViewHolder> {
+    private List<Meal> data;
     private Context context;
     private static final String TAG = "RECYCLER_VIEW_TAG";
     AdapterConnector adapterConnector;
 
-    CardViewAdapter(List<Meals> dataset, Context con) {
+    CardViewAdapterFav(List<Meal> dataset, Context con) {
         context = con;
         this.data = dataset;
 
     }
 
-    CardViewAdapter(List<Meals> dataset, Context context, CardViewAdapter.AdapterConnector adapterConnector) {
+    CardViewAdapterFav(List<Meal> dataset, Context context, AdapterConnector adapterConnector) {
         this.context = context;
         this.data = dataset;
         this.adapterConnector = adapterConnector;
@@ -53,15 +52,11 @@ public class CardViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        holder.tvRecipeName.setText(data.get(position).getmeals().get(0).getStrMeal());
-        holder.tvCountry.setText(data.get(position).getmeals().get(0).getStrArea());
-        holder.tvCat.setText(data.get(position).getmeals().get(0).getStrCategory());
-
-        holder.tvRecipeName.setText(data.get(position).getmeals().get(0).getStrMeal());
-        // holder.tvRecipePreparationTime.setText(data.get(position).getmeals().get(0).getStrCategory());
-
-        holder.viewHolder.setOnClickListener(view -> adapterConnector.sendData(data.get(position).getmeals().get(0)));
-        Glide.with(context).load(data.get(position).getmeals().get(0).getStrMealThumb()).into(holder.ivRecipePhoto);
+        holder.tvRecipeName.setText(data.get(position).getStrMeal());
+        holder.tvCountry.setText(data.get(position).getStrArea());
+        holder.tvCat.setText(data.get(position).getStrCategory());
+        holder.viewHolder.setOnClickListener(view -> adapterConnector.sendData(data.get(position)));
+        Glide.with(context).load(data.get(position).getStrMealThumb()).into(holder.ivRecipePhoto);
         // holder.mealButton.setOnClickListener(
         // view -> {adapterConnector.callRepo(data.get(position),position);}
         // );

@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 import com.example.sidechef.model.models.Meal;
 
 
-@androidx.room.Database(entities = {Meal.class}, version = 5)
+@androidx.room.Database(entities = {Meal.class}, version = 1)
 public abstract class MealsDatabase extends RoomDatabase{
     public static final String MEAL_TABLE_NAME = "Meals";
 
