@@ -22,6 +22,7 @@ import com.example.sidechef.R;
 
 import com.example.sidechef.model.models.Category;
 import com.example.sidechef.model.models.Meal;
+import com.example.sidechef.model.models.Meals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,7 +80,7 @@ public class HomeFragment extends Fragment implements NetworkInterface {
 
     @Override
     public void sendData(Meal meal) {
-        HomeFragmentDirections.ActionNavigationHomeToDetailFragment action =  HomeFragmentDirections.actionNavigationHomeToDetailFragment();
+        HomeFragmentDirections.ActionNavigationHomeToDetailFragment action =  HomeFragmentDirections.actionNavigationHomeToDetailFragment(meal);
         action.setDataMeal(meal);
         Log.i("TAG", "onCreateView: "+meal.getStrArea());
         Navigation.findNavController(getView()).navigate(action);
@@ -92,8 +93,8 @@ public class HomeFragment extends Fragment implements NetworkInterface {
     }
 
     @Override
-    public void onSuccessResponse(ArrayList<Meal> meals) {
-       adapter = new CardViewAdapter(meals,requireContext(),this);
+    public void onSuccessResponse(List<Meals> mealsLists) {
+       adapter = new CardViewAdapter(mealsLists,requireContext(),this);
        randomrecyclerView.setAdapter(adapter);
 
     }

@@ -13,9 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableSource;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.BiConsumer;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.functions.Supplier;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 import retrofit2.Retrofit;
 
 public class Repository {
@@ -36,21 +45,72 @@ public class Repository {
     }
 
     public void getAllMeals(ApiResponse apiResponse) {
-        Call<Meals> request = api.getMeal();
-        request.enqueue(new Callback<Meals>() {
+        ArrayList<Observable<Meals>> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            list.add(api.getMeal());
+
+        }
+        Single<List<Meals>> observable = Observable.fromIterable(list)
+                .subscribeOn(Schedulers.io())//UpStream operation
+                .flatMap(new Function<Observable<Meals>, ObservableSource<? extends Meals>>() {
+                    @Override
+                    public ObservableSource<? extends Meals> apply(Observable<Meals> mealsListObservable) throws Throwable {
+                        return mealsListObservable;
+                    }
+                })
+                .collect(new Supplier<List<Meals>>() {
+                    @Override
+                    public List<Meals> get() throws Throwable {
+                        return new ArrayList<>();
+                    }
+                }, new BiConsumer<List<Meals>, Meals>() {
+                    @Override
+                    public void accept(List<Meals> mealsLists, Meals mealsList) throws Throwable {
+                        mealsLists.add(mealsList);
+                    }
+                }).observeOn(AndroidSchedulers.mainThread());
+
+        //.toList();//DownStream operation
+//        Observer<MealsList> observer =new Observer<MealsList>() {
+//            @Override
+//            public void onSubscribe(@NonNull Disposable d) {
+//
+//            }
+//
+//            @Override
+//            public void onNext(@NonNull MealsList mealsList) {
+//
+//                homeInterface.showRandomMeals(mealsList.getMeals(),count);
+//
+//            }
+//
+//            @Override
+//            public void onError(@NonNull Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//
+//            }
+//        };
+        SingleObserver<List<Meals>> singleMealObserver = new SingleObserver<List<Meals>>() {
             @Override
-            public void onResponse(Call<Meals> call, Response<Meals> response) {
-                if (response.isSuccessful()) {
-                    ArrayList<Meal> meals = response.body().getmeals();
-                    apiResponse.onSuccessResponse(meals);
-                }
+            public void onSubscribe(@NonNull Disposable d) {
+
             }
 
             @Override
-            public void onFailure(Call<Meals> call, Throwable t) {
-                apiResponse.onErrorResponse(t.getMessage());
+            public void onSuccess(@NonNull List<Meals> mealsLists) {
+                apiResponse.onSuccessResponse(mealsLists);
             }
-        });
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+        };
+        observable.subscribe(singleMealObserver);
     }
 
 
@@ -70,7 +130,7 @@ public class Repository {
     };
 
     public interface ApiResponse{
-        void onSuccessResponse(ArrayList<Meal> meals);
+        void onSuccessResponse(List<Meals> meals);
         void onErrorResponse(String errorMessage);
     }
 
