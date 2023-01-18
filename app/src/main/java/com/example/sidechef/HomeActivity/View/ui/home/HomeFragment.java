@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment implements NetworkInterface {
     @Override
     public void onGetCategoriesSuccessResponse(Categories categories) {
 
-        mAdapter = new Categoriesadapter(categories.getCategorys(), requireContext());
+        mAdapter = new Categoriesadapter(categories.getCategories(), requireContext());
         categoryrecyclerView.setAdapter(mAdapter);
     }
 
