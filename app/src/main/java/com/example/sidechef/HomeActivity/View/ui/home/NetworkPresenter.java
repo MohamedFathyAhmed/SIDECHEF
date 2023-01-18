@@ -2,7 +2,7 @@ package com.example.sidechef.HomeActivity.View.ui.home;
 
 import android.content.Context;
 
-import com.example.sidechef.model.data.Repository;
+import com.example.sidechef.model.Repository;
 import com.example.sidechef.model.models.Meal;
 
 
@@ -19,7 +19,8 @@ public class NetworkPresenter {
         repository.insert(meal);
     }
 
-    public void fetchData() {
+    public void getMeals() {
         repository.getAllMeals(networkInterface);
     }
+    public void getCategories(){repository.getAllCategories(networkInterface);}
 }

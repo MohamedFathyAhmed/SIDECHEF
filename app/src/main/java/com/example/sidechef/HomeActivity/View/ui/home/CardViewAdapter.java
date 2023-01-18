@@ -16,28 +16,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.sidechef.R;
 import com.example.sidechef.model.models.Meal;
+import com.example.sidechef.model.models.Meals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardViewAdapter  extends RecyclerView.Adapter<MyViewHolder> {
-    private List<Meal> data;
-    private  Context context;
+public class CardViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
+    private List<Meals> data;
+    private Context context;
     private static final String TAG = "RECYCLER_VIEW_TAG";
     AdapterConnector adapterConnector;
 
-    CardViewAdapter(List<Meal> dataset, Context con) {
+    CardViewAdapter(List<Meals> dataset, Context con) {
         context = con;
         this.data = dataset;
 
     }
 
-    CardViewAdapter(ArrayList<Meal> dataset, Context context, CardViewAdapter.AdapterConnector adapterConnector) {
+    CardViewAdapter(List<Meals> dataset, Context context, CardViewAdapter.AdapterConnector adapterConnector) {
         this.context = context;
         this.data = dataset;
         this.adapterConnector = adapterConnector;
 
     }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,22 +52,27 @@ public class CardViewAdapter  extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
         holder.tvRecipeName.setText(data.get(position).getStrMeal());
         holder.tvCountry.setText(data.get(position).getStrArea());
         holder.tvCat.setText(data.get(position).getStrCategory());
-        holder.viewHolder.setOnClickListener(view ->
-                adapterConnector.sendData(data.get(position)));
-        Glide.with(context).load(data.get(position).getStrMealThumb()).into(holder.ivRecipePhoto);
-//        holder.mealButton.setOnClickListener(
-//                view -> {adapterConnector.callRepo(data.get(position),position);}
-//        );
-//        holder.mealButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // Toast.makeText(context, data.get(position).description, Toast.LENGTH_SHORT);
-//
-//            }
-//        });
+
+        holder.tvRecipeName.setText(data.get(position).getmeals().get(0).getStrMeal());
+        holder.tvRecipePreparationTime.setText(data.get(position).getmeals().get(0).getStrCategory());
+
+        holder.viewHolder.setOnClickListener(view -> adapterConnector.sendData(data.get(position).getmeals().get(0)));
+        Glide.with(context).load(data.get(position).getmeals().get(0).getStrMealThumb()).into(holder.ivRecipePhoto);
+        // holder.mealButton.setOnClickListener(
+        // view -> {adapterConnector.callRepo(data.get(position),position);}
+        // );
+        // holder.mealButton.setOnClickListener(new View.OnClickListener() {
+        // @Override
+        // public void onClick(View view) {
+        // // Toast.makeText(context, data.get(position).description,
+        // Toast.LENGTH_SHORT);
+        //
+        // }
+        // });
         Log.i(TAG, "onBindViewHolder 2");
 
     }
@@ -75,10 +82,10 @@ public class CardViewAdapter  extends RecyclerView.Adapter<MyViewHolder> {
         return data.size();
     }
 
-
     public interface AdapterConnector {
         public void sendData(Meal meal);
-        public void callRepo(Meal meal,int position);
+
+        public void callRepo(Meal meal, int position);
     }
 }
 
@@ -90,11 +97,10 @@ class MyViewHolder extends RecyclerView.ViewHolder {
     ImageView ivRecipePhoto;
     public LinearLayout viewHolder;
 
-
     public MyViewHolder(View itemView) {
         super(itemView);
         this.tvRecipeName = itemView.findViewById(R.id.tvRecipeName);
-       this.tvCountry = itemView.findViewById(R.id.txCountry);
+        this.tvCountry = itemView.findViewById(R.id.txCountry);
         this.tvRecipeYield = itemView.findViewById(R.id.tvCategory);
         this.tvCat = itemView.findViewById(R.id.tvCategory);
         this.ivRecipePhoto = itemView.findViewById(R.id.ivRecipePhoto);
@@ -103,4 +109,3 @@ class MyViewHolder extends RecyclerView.ViewHolder {
     }
 
 }
-
