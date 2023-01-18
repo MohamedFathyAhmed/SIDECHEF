@@ -10,10 +10,10 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/category_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/grey_600"
-        app:cardCornerRadius="12dp"
+        android:layout_width="195dp"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/black_transparent"
+        app:cardCornerRadius="10dp"
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true">
 
@@ -27,7 +27,7 @@
                 android:id="@+id/category_image"
                 android:layout_width="70dp"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="2dp"
+                android:layout_marginEnd="7dp"
                 android:padding="1dp"
                 android:src="@drawable/brooke_lark_1rm9glhv0ua_unsplash"
                 app:civ_border_color="#FF000000"

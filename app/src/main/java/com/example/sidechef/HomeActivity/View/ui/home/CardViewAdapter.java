@@ -51,7 +51,8 @@ public class CardViewAdapter  extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.tvRecipeName.setText(data.get(position).getStrMeal());
-        holder.tvRecipePreparationTime.setText(data.get(position).getStrCategory());
+        holder.tvCountry.setText(data.get(position).getStrArea());
+        holder.tvCat.setText(data.get(position).getStrCategory());
         holder.viewHolder.setOnClickListener(view ->
                 adapterConnector.sendData(data.get(position)));
         Glide.with(context).load(data.get(position).getStrMealThumb()).into(holder.ivRecipePhoto);
@@ -83,9 +84,9 @@ public class CardViewAdapter  extends RecyclerView.Adapter<MyViewHolder> {
 
 class MyViewHolder extends RecyclerView.ViewHolder {
     TextView tvRecipeName;
-    TextView tvRecipePreparationTime;
+    TextView tvCountry;
     TextView tvRecipeYield;
-    TextView tvRecipeId;
+    TextView tvCat;
     ImageView ivRecipePhoto;
     public LinearLayout viewHolder;
 
@@ -93,9 +94,9 @@ class MyViewHolder extends RecyclerView.ViewHolder {
     public MyViewHolder(View itemView) {
         super(itemView);
         this.tvRecipeName = itemView.findViewById(R.id.tvRecipeName);
-        this.tvRecipePreparationTime = itemView.findViewById(R.id.tvRecipePreparationTime);
-        this.tvRecipeYield = itemView.findViewById(R.id.tvRecipeYield);
-        //this.tvRecipeId = itemView.findViewById(R.id.tvRecipeId);
+       this.tvCountry = itemView.findViewById(R.id.txCountry);
+        this.tvRecipeYield = itemView.findViewById(R.id.tvCategory);
+        this.tvCat = itemView.findViewById(R.id.tvCategory);
         this.ivRecipePhoto = itemView.findViewById(R.id.ivRecipePhoto);
         this.viewHolder = itemView.findViewById(R.id.viewHolder);
 

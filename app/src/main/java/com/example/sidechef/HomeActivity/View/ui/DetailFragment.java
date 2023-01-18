@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -33,18 +34,13 @@ Meal meal;
     TextView ingredients;
     TextView fav;
     VideoView videoView;
-
+    Toolbar toolbar;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         meal=new Meal( "52842", "Broccoli & Stilton soup",
-                null, "Starter", "British", "Heat the rapeseed oil in a large saucepan and then add the onions. Cook on a medium heat until soft. Add a splash of water if the onions start to catch. Add the celery, leek, potato and a knob of butter. Stir until melted, then cover with a lid. Allow to sweat for 5 minutes. Remove the lid. Pour in the stock and add any chunky bits of broccoli stalk. Cook for 10 – 15 minutes until all the vegetables are soft. Add the rest of the broccoli and cook for a further 5 minutes. Carefully transfer to a blender and blitz until smooth. Stir in the stilton, allowing a few lumps to remain. Season with black pepper and serve.", "https://www.themealdb.com/images/media/meals/tvvxpv1511191952.jpg", "null", "https://www.youtube.com/watch?v=_HgVLpmNxTY", "Rapeseed Oil", "Onion", "Celery", "Leek", "Potatoes", "Butter", "Vegetable Stock", "Broccoli",
-                "Stilton Cheese", "", "", "", "", "", "", "", "", "", "", "", "2 tblsp ", "1 finely chopped ", "1", "1 sliced", "1 medium", "1 knob", "1 litre hot", "1 Head chopped", "140g", "", "", "",
-                "", "", "", "", "", "", "", "",
-                "https://media.geeksforgeeks.org/wp-content/uploads/20201217192146/Screenrecorder-2020-12-17-19-17-36-828.mp4?_=1"
-                , "null", "null","null");
+
    }
 
     @Override
@@ -52,8 +48,8 @@ Meal meal;
         super.onViewCreated(view, savedInstanceState);
         //get data from frag
         meal = DetailFragmentArgs.fromBundle(getArguments()).getDataMeal();
-
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+
         collapsingToolbarLayout=view.findViewById(R.id.collapsing_toolbar);
         mealThumb=view.findViewById(R.id.mealThumb);
         category=view.findViewById(R.id.category);
@@ -61,8 +57,8 @@ Meal meal;
         instructions=view.findViewById(R.id.instructions);
         ingredients=view.findViewById(R.id.ingredient);
         fav=view.findViewById(R.id.favorite);
-         videoView = view.findViewById(R.id.videoView);
-
+       //  videoView = view.findViewById(R.id.videoView);
+toolbar=view.findViewById(R.id.toolbar);
       setMeal(meal);
 
     }
@@ -76,9 +72,11 @@ Meal meal;
 
 
     public void setMeal(Meal meal) {
-        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.transparent));
-        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.colorPrimary));
-        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.colorPrimary));
+    collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.transparent));
+        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(com.shashank.sony.fancywalkthroughlib.R.color.grey_600));
+        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.black));
+
+
 
         Glide.with(mealThumb.getContext()).load(meal.getStrMealThumb()).into(mealThumb);
 

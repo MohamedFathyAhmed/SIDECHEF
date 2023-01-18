@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface ApiCalls {
-    @GET("filter.php?i=chicken_breast")
+    @GET("random.php")
     Call<Meals> getMeal();
 //"filter.php?i=chicken_breast"
 //random.php

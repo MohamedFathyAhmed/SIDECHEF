@@ -1,6 +1,8 @@
 package com.example.sidechef.SingInActivity.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,16 +17,22 @@ import android.widget.Toast;
 
 import com.example.sidechef.HomeActivity.View.HomeActivity;
 import com.example.sidechef.R;
+import com.example.sidechef.SignUpActivity.View.SignUp;
 import com.example.sidechef.presenter.LoginPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class SignIn extends AppCompatActivity implements View.OnClickListener, LoginViewinterface {
@@ -58,7 +66,7 @@ EditText tv_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getSupportActionBar().hide();
         //For google sign in
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -71,14 +79,37 @@ EditText tv_name;
 
     }
 
+    public static boolean isValidEmail(CharSequence target) {
+        Pattern pattern;
+        Matcher matcher;
+        pattern = Pattern.compile("^[a-zA-Z0-9_+&-]+(?:\\.[a-zA-Z0-9_+&-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
+        matcher = pattern.matcher(target);
+        return (!TextUtils.isEmpty(target) && matcher.matches());
+    }
+
+    public static boolean isValidPassword(CharSequence password) {
+
+        Pattern pattern;
+        Matcher matcher;
+
+        final String PASSWORD_PATTERN = "^(?=.[0-9])(?=.[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
+    }
 
     private void checkLoginDetails() {
-        if(!TextUtils.isEmpty(tv_name.getText().toString()) && !TextUtils.isEmpty(tv_pass.getText().toString())){
+
+
+        if(!TextUtils.isEmpty(tv_name.getText().toString()) &&isValidEmail(tv_name.getText().toString()) && isValidPassword(tv_pass.getText().toString()) && !TextUtils.isEmpty(tv_pass.getText().toString())){
             initLogin(tv_name.getText().toString(), tv_pass.getText().toString());
         }else{
-            if(TextUtils.isEmpty(tv_name.getText().toString())){
+            if(TextUtils.isEmpty(tv_name.getText().toString()) || !isValidEmail(tv_name.getText().toString()) ){
                 tv_name.setError("Please enter a valid email");
-            }if(TextUtils.isEmpty(tv_pass.getText().toString())){
+            }if(TextUtils.isEmpty(tv_pass.getText().toString()) || !isValidPassword(tv_pass.getText().toString())){
                tv_pass.setError("Please enter password");
             }
         }
@@ -134,28 +165,27 @@ EditText tv_name;
     }
 
 
-    //callback of sign in with google request (for google sign in)
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            if (task.isSuccessful()) {
-                Toast.makeText(getApplicationContext(), "Sign in was successful", Toast.LENGTH_SHORT).show();
 
-                //Next 2 lines were used to link google sign in with firebase
-                AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(task.getResult().getIdToken(), null);
-                firebaseAuth.signInWithCredential(firebaseCredential);
-
-//                Intent intent = new Intent(requireContext(), MainActivity.class);
-//                startActivity(intent);
-            }
-            else{
-                Toast.makeText(getApplicationContext(), "Sign in failed", Toast.LENGTH_SHORT).show();
-                //Toast.makeText(requireContext(), "Sign in failed", Toast.LENGTH_SHORT).show();
-            }
+            firebaseAuth.signInWithCredential(GoogleAuthProvider.getCredential(task.getResult().getIdToken(), null)).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "Sign in was successful", Toast.LENGTH_SHORT).show();
+                   //     Navigation.findNavController(v).navigate(R.id.action_navSignIn_to_nav_home);
+                        startActivity(new Intent(getBaseContext(), HomeActivity.class));
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Sign in failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
         }
     }
-
 }
+
