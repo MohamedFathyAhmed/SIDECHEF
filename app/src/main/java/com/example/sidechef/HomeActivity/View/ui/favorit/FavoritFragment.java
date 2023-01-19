@@ -10,10 +10,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sidechef.HomeActivity.View.ui.home.CardViewAdapter;
+import com.example.sidechef.HomeActivity.View.ui.home.HomeFragmentDirections;
 import com.example.sidechef.R;
 import com.example.sidechef.model.models.Meal;
 
@@ -42,13 +45,16 @@ public class FavoritFragment extends Fragment implements FavoritInterface {
         recyclerView = view.findViewById(R.id.meal_rv_fav);
         favoritPresenter = new FavoritPresenter(requireContext(),this);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView.setLayoutManager(new  GridLayoutManager(requireContext(), 2));
         favoritPresenter.fetchData();
     }
 
 
     @Override
     public void sendData(Meal meal) {
+ FavoritFragmentDirections.ActionNavigationFavoriteToNavigationDes action = FavoritFragmentDirections.actionNavigationFavoriteToNavigationDes(meal);
+        Log.i("TAG", "onCreateView: " + meal.getStrArea());
+        Navigation.findNavController(getView()).navigate(action);
 
     }
 

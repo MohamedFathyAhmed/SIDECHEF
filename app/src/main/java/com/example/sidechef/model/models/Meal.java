@@ -3,6 +3,7 @@ package com.example.sidechef.model.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -12,12 +13,11 @@ import com.example.sidechef.model.data.database.MealsDatabase;
 @Entity(tableName = MealsDatabase.MEAL_TABLE_NAME)
 public class Meal implements Parcelable {
 
-
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+@NonNull
+    @PrimaryKey()
+    private String idMeal;
 
     protected Meal(Parcel in) {
-        id = in.readInt();
         idMeal = in.readString();
         strMeal = in.readString();
         strDrinkAlternate = in.readString();
@@ -85,15 +85,9 @@ public class Meal implements Parcelable {
         }
     };
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
-    private String idMeal;
+
 
     public String getIdMeal() {
         return idMeal;
@@ -643,7 +637,6 @@ public class Meal implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(id);
         parcel.writeString(idMeal);
         parcel.writeString(strMeal);
         parcel.writeString(strDrinkAlternate);
