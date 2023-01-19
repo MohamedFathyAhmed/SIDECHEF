@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleObserver;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,9 @@ import com.example.sidechef.R;
 import com.example.sidechef.model.Repository;
 import com.example.sidechef.model.models.Meal;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 public class DetailFragment extends Fragment {
     Meal meal;
@@ -29,11 +33,12 @@ Repository repository;
     CollapsingToolbarLayout collapsingToolbarLayout;
     ImageView mealThumb;
     TextView category;
+    YouTubePlayerView videoView;
     TextView country;
     TextView instructions;
     TextView ingredients;
     TextView fav;
-    VideoView videoView;
+//    VideoView videoView;
     Toolbar toolbar;
 
     @Override
@@ -56,6 +61,8 @@ Repository repository;
         instructions = view.findViewById(R.id.instructions);
         ingredients = view.findViewById(R.id.ingredient);
         fav = view.findViewById(R.id.favorite);
+            videoView = view.findViewById(R.id.video);
+
         // videoView = view.findViewById(R.id.videoView);
         toolbar = view.findViewById(R.id.toolbar);
         setMeal(meal);
@@ -92,6 +99,16 @@ Repository repository;
         country.setText(meal.getStrArea());
         instructions.setText(meal.getStrInstructions());
 
+        getLifecycle().addObserver((LifecycleObserver) videoView);
+        String[] split = meal.getStrYoutube().split("=");
+
+        videoView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                String videoId = split[1];
+                youTubePlayer.loadVideo(videoId, 0);
+            }
+        });
         if (!meal.getStrIngredient1().isEmpty()) {
             ingredients.append("\n " + meal.getStrIngredient1() + " : " + meal.getStrMeasure1());
         }
@@ -155,6 +172,19 @@ Repository repository;
 
     }
 
+//
+//    videoView = view.findViewById(R.id.video);
+//    getLifecycle().addObserver((LifecycleObserver) videoView);
+//    String[] split = mealsItem.getStrYoutube().split("=");
+//
+//        videoView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+//        @Override
+//        public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+//            String videoId = split[1];
+//            youTubePlayer.loadVideo(videoId, 0);
+//        }
+//    });
+//
     // public void setvedio(String videoUrl, Context context) {
     // //
     // videoView.setVideoPath(meal.getStrYoutube());
