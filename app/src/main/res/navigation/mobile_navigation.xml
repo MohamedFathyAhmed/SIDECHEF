@@ -40,4 +40,9 @@
             app:argType="com.example.sidechef.model.models.Meal"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.sidechef.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
 </navigation>

@@ -16,7 +16,6 @@ import com.example.sidechef.databinding.FragmentDashboardBinding;
 
 public class DashboardFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,9 +25,5 @@ public class DashboardFragment extends Fragment {
     }
 
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+
 }

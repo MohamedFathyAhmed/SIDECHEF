@@ -23,6 +23,6 @@ public interface ApiCalls {
 
 
     @GET("search.php")
-    Observable<Meals> getMealByName(@Query("s")String mealName);
+    Single<Meals> getMealByName(@Query("s")String mealName);
 
 }

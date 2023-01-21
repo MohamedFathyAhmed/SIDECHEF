@@ -114,6 +114,28 @@ public class Repository {
         };
         observable.subscribe(categorysSingleObserver);
     }
+    public  void getMealByName(String mealName,OnGetMealByName onGetMealByName){
+        Single<Meals> observable= api.getMealByName(mealName).
+                subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+   SingleObserver<Meals> mealsSingleObserver=new SingleObserver<Meals>() {
+       @Override
+       public void onSubscribe(@NonNull Disposable d) {
+
+       }
+
+       @Override
+       public void onSuccess(@NonNull Meals meals) {
+            onGetMealByName.OnGetMealByNameSuccess(meals);
+       }
+
+       @Override
+       public void onError(@NonNull Throwable e) {
+        onGetMealByName.OnGetMealByNameFailure(e.getMessage());
+       }
+   };
+        observable.subscribe(mealsSingleObserver);
+    }
 
 
     public void getAll(DBResponse dbResponse){
@@ -139,6 +161,11 @@ public class Repository {
         void onGetCategoriesSuccessResponse(Categories categories);
         void onErrorResponse(String errorMessage);
     }
+    public interface OnGetMealByName{
+        void OnGetMealByNameSuccess(Meals meals);
+        void OnGetMealByNameFailure(String errorMessage);
+    }
+
 
     public interface DBResponse{
         void onSuccessResponse(List<Meal> meals);
