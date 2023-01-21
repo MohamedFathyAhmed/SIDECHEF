@@ -28,7 +28,4 @@ public interface MealsDAO {
     void delete(Meal meal);
 
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertForWeek(WeekMeals weekMeals);
-
 }

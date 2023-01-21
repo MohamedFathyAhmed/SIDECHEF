@@ -6,9 +6,11 @@ import com.example.sidechef.model.data.api.ApiCalls;
 import com.example.sidechef.model.data.api.Network;
 import com.example.sidechef.model.data.database.MealsDatabase;
 import com.example.sidechef.model.data.database.MealsDAO;
+import com.example.sidechef.model.data.database.PlaneDAO;
 import com.example.sidechef.model.models.Categories;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Meals;
+import com.example.sidechef.model.models.WeekMeals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +33,14 @@ import retrofit2.Retrofit;
 public class Repository {
     ApiCalls api;
     MealsDAO db;
+    PlaneDAO pDB;
     private static Repository instance = null;
     private Repository(Context context) {
         Retrofit network = Network.getInstance(context);
         api = network.create(ApiCalls.class);
         MealsDatabase productDatabase = MealsDatabase.getInstance(context);
-        db = productDatabase.productsDAO();
+        db = productDatabase.mealsDAO();
+        pDB = productDatabase.planeDAO();
     }
 
     public static synchronized Repository getInstance(Context context){
@@ -125,6 +129,12 @@ public class Repository {
     public void insert(Meal meal){
         new Thread(() -> db.insert(meal)).start();
     };
+
+
+    public void insertdaily(WeekMeals meal){
+        new Thread(() -> pDB.insert(meal)).start();
+    };
+
 
 
     public void delete(Meal meal){
