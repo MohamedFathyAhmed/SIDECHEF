@@ -72,8 +72,7 @@ public class FavoritFragment extends Fragment implements FavoritInterface {
 
     @Override
     public void onSuccessResponse(List<Meal> meal) {
-        mealsList = meal;
-        adapter = new CardViewAdapterFav((ArrayList<Meal>) mealsList,requireContext() ,this);
+      adapter = new CardViewAdapterFav(meal,requireContext() ,this);
         recyclerView.setAdapter(adapter);
         Log.i("TAGfav", "onSuccessResponse: "+meal.get(0).getStrArea());
 

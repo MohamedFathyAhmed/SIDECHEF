@@ -12,11 +12,13 @@ import com.example.sidechef.model.models.WeekMeals;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
+
 
 @Dao
 public interface MealsDAO {
     @Query("SELECT * FROM "+ MealsDatabase.MEAL_TABLE_NAME)
-    List<Meal> getAll();
+    Flowable<List<Meal>> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Meal meal);

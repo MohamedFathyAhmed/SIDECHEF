@@ -18,6 +18,7 @@ import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.Single;
@@ -121,10 +122,18 @@ public class Repository {
 
 
     public void getAll(DBResponse dbResponse){
-        new Thread(() ->
-                dbResponse.onSuccessResponse(db.getAll())
-        ).start();
+
+            Flowable<List<Meal>> list=db.getAll();
+            list.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(item->{
+                dbResponse.onSuccessResponse(item);
+            },error->{error.getMessage();});
+
+
     };
+
+
+
+
 
     public void insert(Meal meal){
         new Thread(() -> db.insert(meal)).start();

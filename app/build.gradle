@@ -9,7 +9,7 @@ plugins {
 
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.sidechef"
@@ -62,10 +62,6 @@ dependencies {
 
     //slider
     implementation 'com.github.Shashank02051997:FancyWalkthrough-Android:2.3'
-    // ROOM
-    def room_version = "2.4.3"
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
 
     //lottie
     implementation 'com.airbnb.android:lottie:3.4.0'
@@ -78,10 +74,16 @@ dependencies {
     //circleimageview
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
-    //Rx android
+    //rxjava3
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
     implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
 //vedio
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
-
+    //room
+    def room_version = "2.5.0"
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-rxjava3:$room_version")
+    implementation 'androidx.sqlite:sqlite:2.3.0'
+    testImplementation("androidx.room:room-testing:$room_version")
 }
