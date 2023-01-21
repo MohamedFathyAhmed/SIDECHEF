@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.sidechef.model.models.Meal;
+import com.example.sidechef.model.models.WeekMeals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,4 +26,9 @@ public interface MealsDAO {
 
     @Delete
     void delete(Meal meal);
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertForWeek(WeekMeals weekMeals);
+
 }

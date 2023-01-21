@@ -1,5 +1,6 @@
 package com.example.sidechef.HomeActivity.View.ui.dashboard;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class ParentItemAdapter extends RecyclerView
         .Adapter<ParentItemAdapter.ParentViewHolder> {
-
+Context context;
     // An object of RecyclerView.RecycledViewPool
     // is created to share the Views
     // between the child and
@@ -26,8 +27,9 @@ public class ParentItemAdapter extends RecyclerView
             .RecycledViewPool();
     private List<ParentItem> itemList;
 
-    ParentItemAdapter(List<ParentItem> itemList)
+    ParentItemAdapter(List<ParentItem> itemList,Context contex)
     {
+        context =contex;
         this.itemList = itemList;
     }
 
@@ -99,7 +101,7 @@ public class ParentItemAdapter extends RecyclerView
         ChildItemAdapter childItemAdapter
                 = new ChildItemAdapter(
                 parentItem
-                        .getChildItemList());
+                        .getChildItemList(),context);
         parentViewHolder
                 .ChildRecyclerView
                 .setLayoutManager(layoutManager);
