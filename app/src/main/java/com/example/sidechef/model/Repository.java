@@ -131,6 +131,16 @@ public class Repository {
 
     };
 
+    public List<WeekMeals> getweek(String day){
+        final List<WeekMeals>[] meals = new List[]{null};
+        Flowable<List<WeekMeals>> list=pDB.getForDay(day);
+        list.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(item->{
+            meals[0] = item;
+        },error->{error.getMessage();});
+
+return meals[0];
+    }
+
 
 
 
@@ -154,6 +164,10 @@ public class Repository {
         void onSuccessResponse(List<Meals> meals);
         void onErrorResponse(String errorMessage);
     }
+    public interface WeelMealResponseDelegate {
+        void onSuccessResponse(List<WeekMeals> meals);
+        void onErrorResponse(String errorMessage);
+    }
     public interface onGetCategoriesResponseDelegate{
         void onGetCategoriesSuccessResponse(Categories categories);
         void onErrorResponse(String errorMessage);
@@ -162,6 +176,8 @@ public class Repository {
     public interface DBResponse{
         void onSuccessResponse(List<Meal> meals);
     }
-
+    public interface DBResponseWeek{
+        void onSuccessResponse(List<WeekMeals> meals);
+    }
 
 }

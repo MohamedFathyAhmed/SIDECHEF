@@ -6,10 +6,13 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.WeekMeals;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.core.Flowable;
 
 @Dao
 public interface PlaneDAO {
@@ -19,7 +22,7 @@ public interface PlaneDAO {
 
 
     @Query("SELECT * FROM Week WHERE day = :selectday" )
-    List<WeekMeals> getForDay(String selectday);
+    Flowable<List<WeekMeals>> getForDay(String selectday);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(WeekMeals meal);

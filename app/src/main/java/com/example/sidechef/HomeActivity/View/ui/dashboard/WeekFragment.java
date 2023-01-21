@@ -11,15 +11,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sidechef.HomeActivity.View.ui.favorit.CardViewAdapterFav;
 import com.example.sidechef.R;
+import com.example.sidechef.model.Repository;
 import com.example.sidechef.model.models.Meal;
+import com.example.sidechef.model.models.Week;
+import com.example.sidechef.model.models.WeekMeals;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class WeekFragment extends Fragment {
-
+public class WeekFragment extends Fragment implements WeekInterface {
+Repository repository;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,7 +37,7 @@ public class WeekFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        repository = Repository.getInstance(requireContext());
         RecyclerView
                 ParentRecyclerViewItem
                 = view.findViewById(
@@ -64,76 +68,78 @@ public class WeekFragment extends Fragment {
 
     }
     ///////////////////////////////////////////
-    List<ParentItem> itemList
-            = new ArrayList<>();
 
-
-    List<Meal> ChildItemList
-            = new ArrayList<>();
 
     ///////////////////////////////////////////////
     private List<ParentItem> ParentItemList()
     {
+        List<ParentItem> itemList
+                = new ArrayList<>();
+
 
         ParentItem item
                 = new ParentItem(
                 "Saturday",
-                ChildItemList());
+                ChildItemList(Week.Sunday.toString()));
         itemList.add(item);
-
-
-
-        ParentItem item1
-                = new ParentItem(
-                "sunday",
-                ChildItemList());
-        itemList.add(item1);
-        ParentItem item2
-                = new ParentItem(
-                "monday",
-                ChildItemList());
-        itemList.add(item2);
-        ParentItem item3
-                = new ParentItem(
-                "tuesday",
-                ChildItemList());
-        itemList.add(item3);
-        ParentItem item4
-                = new ParentItem(
-                "wednesday",
-                ChildItemList());
-        itemList.add(item4);
-        ParentItem item5
-                = new ParentItem(
-                "thursday",
-                ChildItemList());
-        itemList.add(item5);
-        ParentItem item6
-                = new ParentItem(
-                "friday",
-                ChildItemList());
-        itemList.add(item6);
+//        ParentItem item1
+//                = new ParentItem(
+//                "sunday",
+//                ChildItemList(Week.Sunday.toString()));
+//        itemList.add(item1);
+//        ParentItem item2
+//                = new ParentItem(
+//                "monday",
+//                ChildItemList(Week.Sunday.toString()));
+//        itemList.add(item2);
+//        ParentItem item3
+//                = new ParentItem(
+//                "tuesday",
+//                ChildItemList(Week.Sunday.toString()));
+//        itemList.add(item3);
+//        ParentItem item4
+//                = new ParentItem(
+//                "wednesday",
+//                ChildItemList(Week.Sunday.toString()));
+//        itemList.add(item4);
+//        ParentItem item5
+//                = new ParentItem(
+//                "thursday",
+//                ChildItemList(Week.Sunday.toString()));
+//        itemList.add(item5);
+//        ParentItem item6
+//                = new ParentItem(
+//                "friday",
+//                ChildItemList(Week.Sunday.toString()));
+//        itemList.add(item6);
         return itemList;
     }
 
-    private List<Meal> ChildItemList()
+    private List<WeekMeals> ChildItemList(String day)
     {
-       Meal  meal =new Meal( "52842", "Broccoli & Stilton soup",
-                null, "Starter", "British", "Heat the rapeseed oil in a large saucepan and then add the onions. Cook on a medium heat until soft. Add a splash of water if the onions start to catch. Add the celery, leek, potato and a knob of butter. Stir until melted, then cover with a lid. Allow to sweat for 5 minutes. Remove the lid. Pour in the stock and add any chunky bits of broccoli stalk. Cook for 10 – 15 minutes until all the vegetables are soft. Add the rest of the broccoli and cook for a further 5 minutes. Carefully transfer to a blender and blitz until smooth. Stir in the stilton, allowing a few lumps to remain. Season with black pepper and serve.", "https://www.themealdb.com/images/media/meals/tvvxpv1511191952.jpg", null, "https://www.youtube.com/watch?v=_HgVLpmNxTY", "Rapeseed Oil", "Onion", "Celery", "Leek", "Potatoes", "Butter", "Vegetable Stock", "Broccoli",
-                "Stilton Cheese", "", "", "", "", "", "", "", "", "", "", "", "2 tblsp ", "1 finely chopped ", "1", "1 sliced", "1 medium", "1 knob", "1 litre hot", "1 Head chopped", "140g", "", "", "",
-                "", "", "", "", "", "", "", "",
-                "https://www.bbcgoodfood.com/recipes/1940679/broccoli-and-stilton-soup", null, null,null);
-        ChildItemList.add(meal);
-        ChildItemList.add(meal);
-        ChildItemList.add(meal);
-        ChildItemList.add(meal);
+        List<WeekMeals> ChildItemList
+                = new ArrayList<>();
 
+       // ChildItemList = repository.getweek(day);
+        ChildItemList.add(new WeekMeals());
         return ChildItemList;
     }
 
 
-
+    @Override
+    public void sendData(Meal meal) {
 
     }
+
+    @Override
+    public void callRepo(Meal meal, int position) {
+
+    }
+
+    @Override
+    public void onSuccessResponse(List<WeekMeals> meals) {
+
+    }
+}
 
 

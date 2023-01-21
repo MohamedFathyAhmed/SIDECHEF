@@ -89,11 +89,8 @@ Context context;
         // child RecyclerView is nested
         // inside the parent RecyclerView,
         // we use the following method
-        layoutManager
-                .setInitialPrefetchItemCount(
-                        parentItem
-                                .getChildItemList()
-                                .size());
+        layoutManager.setInitialPrefetchItemCount(
+                        parentItem.getChildItemList().size());
 
         // Create an instance of the child
         // item view adapter and set its

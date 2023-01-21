@@ -626,7 +626,62 @@ public class Meal implements Parcelable {
     private String strCreativeCommonsConfirmed;
     private String dateModified;
 
-    public Meal() {
+    public Meal() {}
+
+    public Meal(Meal meal) {
+            this.idMeal = meal.getIdMeal();
+            this.strMeal = meal.getStrMeal();
+            this.strDrinkAlternate = meal.getStrDrinkAlternate();
+            this.strCategory = meal.getStrCategory();
+            this.strArea = meal.getStrArea();
+            this.strInstructions = meal.getStrInstructions();
+            this.strMealThumb = meal.getStrMealThumb();
+            this.strTags = meal.getStrTags();
+            this.strYoutube = meal.getStrYoutube();
+            this.strIngredient1 =meal.getStrIngredient1();
+            this.strIngredient2 =meal.getStrIngredient2();
+            this.strIngredient3 = meal.getStrIngredient3();
+            this.strIngredient4 = meal.getStrIngredient4();
+            this.strIngredient5 = meal.getStrIngredient5();
+            this.strIngredient6 = meal.getStrIngredient6();
+            this.strIngredient7 = meal.getStrIngredient7();
+            this.strIngredient8 = meal.getStrIngredient8();
+            this.strIngredient9 = meal.getStrIngredient9();
+            this.strIngredient10 = meal.getStrIngredient10();
+            this.strIngredient11 = meal.getStrIngredient11();
+            this.strIngredient12 = meal.getStrIngredient12();
+            this.strIngredient13 = meal.getStrIngredient13();
+            this.strIngredient14 = meal.getStrIngredient14();
+            this.strIngredient15 = meal.getStrIngredient15();
+            this.strIngredient16 = meal.getStrIngredient16();
+            this.strIngredient17 = meal.getStrIngredient17();
+            this.strIngredient18 = meal.getStrIngredient18();
+            this.strIngredient19 = meal.getStrIngredient19();
+            this.strIngredient20 = meal.getStrIngredient20();
+            this.strMeasure1 = meal.getStrMeasure1();
+            this.strMeasure2 = meal.getStrMeasure2();
+            this.strMeasure3 = meal.getStrMeasure3();;
+            this.strMeasure4 = meal.getStrMeasure4();;
+            this.strMeasure5 = meal.getStrMeasure5();;
+            this.strMeasure6 = meal.getStrMeasure6();;
+            this.strMeasure7 = meal.getStrMeasure7();;
+            this.strMeasure8 = meal.getStrMeasure8();;
+            this.strMeasure9 = meal.getStrMeasure9();;
+            this.strMeasure10 = meal.getStrMeasure10();;
+            this.strMeasure11 = meal.getStrMeasure11();;
+            this.strMeasure12 = meal.getStrMeasure12();;
+            this.strMeasure13 = meal.getStrMeasure13();;
+            this.strMeasure14 = meal.getStrMeasure14();;
+            this.strMeasure15 = meal.getStrMeasure15();;
+            this.strMeasure16 = meal.getStrMeasure16();;
+            this.strMeasure17 = meal.getStrMeasure17();;
+            this.strMeasure18 = meal.getStrMeasure18();;
+            this.strMeasure19 = meal.getStrMeasure19();;
+            this.strMeasure20 = meal.getStrMeasure20();;
+            this.strSource = meal.getStrSource();
+            this.strImageSource = meal.getStrImageSource();
+            this.strCreativeCommonsConfirmed = meal.getStrCreativeCommonsConfirmed();
+            this.dateModified = meal.getDateModified();
     }
 
 

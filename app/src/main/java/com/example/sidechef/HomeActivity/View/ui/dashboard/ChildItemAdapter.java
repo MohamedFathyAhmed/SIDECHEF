@@ -1,10 +1,14 @@
 package com.example.sidechef.HomeActivity.View.ui.dashboard;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,25 +18,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.sidechef.R;
+import com.example.sidechef.Utils;
+import com.example.sidechef.model.Repository;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Meal;
+import com.example.sidechef.model.models.Week;
+import com.example.sidechef.model.models.WeekMeals;
 
 import java.util.List;
 
 public class ChildItemAdapter extends RecyclerView.Adapter<MyViewHolder> {
-    private List<Meal> data;
+    private List<WeekMeals> data;
     private Context context;
     private static final String TAG = "RECYCLER_VIEW_TAG";
     AdapterConnector adapterConnector;
 
-    ChildItemAdapter(List<Meal> dataset, Context con) {
+    ChildItemAdapter(List<WeekMeals> dataset, Context con) {
         context = con;
         this.data = dataset;
+        repository = Repository.getInstance(context);
 
     }
 
 
-    ChildItemAdapter(List<Meal> dataset, Context context, AdapterConnector adapterConnector) {
+    ChildItemAdapter(List<WeekMeals> dataset, Context context, AdapterConnector adapterConnector) {
         this.context = context;
         this.data = dataset;
         this.adapterConnector = adapterConnector;
@@ -48,14 +57,19 @@ public class ChildItemAdapter extends RecyclerView.Adapter<MyViewHolder> {
         Log.i(TAG, "onCreateViewHolder");
         return myViewHolder;
     }
-
+Repository repository;
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.tvRecipeName.setText(data.get(position).getStrMeal());
         holder.tvCountry.setText(data.get(position).getStrArea());
         holder.tvCat.setText(data.get(position).getStrCategory());
-        holder.viewHolder.setOnClickListener(view -> adapterConnector.sendData(data.get(position)));
+        holder.viewHolder.setOnClickListener(
+                view -> {
+
+
+              }
+        );
         Glide.with(context).load(data.get(position).getStrMealThumb()).into(holder.ivRecipePhoto);
         // holder.mealButton.setOnClickListener(
         // view -> {adapterConnector.callRepo(data.get(position),position);}
@@ -104,103 +118,3 @@ class MyViewHolder extends RecyclerView.ViewHolder {
     }
 
 }
-
-
-/*
-package com.example.sidechef.HomeActivity.View.ui.dashboard;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.example.sidechef.R;
-import com.example.sidechef.model.models.Meal;
-
-import java.util.List;
-
-public class ChildItemAdapter
-        extends RecyclerView
-        .Adapter<ChildItemAdapter.ChildViewHolder> {
-
-    private List<Meal> ChildItemList;
-
-    // Constructor
-    ChildItemAdapter(List<Meal> childItemList)
-    {
-        this.ChildItemList = childItemList;
-    }
-
-    @NonNull
-    @Override
-    public ChildViewHolder onCreateViewHolder(
-            @NonNull ViewGroup viewGroup,
-            int i)
-    {
-
-        // Here we inflate the corresponding
-        // layout of the child item
-        View view = LayoutInflater
-                .from(viewGroup.getContext())
-                .inflate(
-                        R.layout.child_item,
-                        viewGroup, false);
-
-        return new ChildViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(
-            @NonNull ChildViewHolder childViewHolder,
-            int position)
-    {
-
-        // Create an instance of the ChildItem
-        // class for the given position
-        Meal childItem
-                = ChildItemList.get(position);
-
-        // For the created instance, set title.
-        // No need to set the image for
-        // the ImageViews because we have
-        // provided the source for the images
-        // in the layout file itself
-        childViewHolder
-                .ChildItemTitle
-                .setText(childItem.getStrMeal());
-    }
-
-    @Override
-    public int getItemCount()
-    {
-
-        // This method returns the number
-        // of items we have added
-        // in the ChildItemList
-        // i.e. the number of instances
-        // of the ChildItemList
-        // that have been created
-        return ChildItemList.size();
-    }
-
-    // This class is to initialize
-    // the Views present
-    // in the child RecyclerView
-    class ChildViewHolder
-            extends RecyclerView.ViewHolder {
-
-        TextView ChildItemTitle;
-
-        ChildViewHolder(View itemView)
-        {
-            super(itemView);
-            ChildItemTitle
-                    = itemView.findViewById(
-                    R.id.child_item_title);
-        }
-    }
-}
-
- */

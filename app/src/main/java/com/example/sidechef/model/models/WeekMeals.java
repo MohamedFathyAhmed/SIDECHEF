@@ -11,15 +11,9 @@ import com.example.sidechef.model.data.database.MealsDatabase;
 
 import java.util.ArrayList;
 
-enum Week {
-    Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-}
-enum Time {
-    Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-}
 
 @Entity(tableName = MealsDatabase.Week_TABLE_NAME)
-public class WeekMeals  {
+public class WeekMeals  extends Meal{
 
     @PrimaryKey(autoGenerate = true)
     public int id;
@@ -30,7 +24,6 @@ public class WeekMeals  {
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
