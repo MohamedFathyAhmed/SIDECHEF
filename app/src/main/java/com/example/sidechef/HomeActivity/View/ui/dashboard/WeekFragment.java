@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,9 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class WeekFragment extends Fragment implements WeekInterface {
+public class WeekFragment extends Fragment {
 Repository repository;
-
+    ParentItemAdapter
+            parentItemAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,103 +47,133 @@ Repository repository;
                 = view.findViewById(
                 R.id.parent_recyclerview);
 
-        // Initialise the Linear layout manager
+
         LinearLayoutManager
                 layoutManager
                 = new LinearLayoutManager(
                 requireContext());
 
-        // Pass the arguments
-        // to the parentItemAdapter.
-        // These arguments are passed
-        // using a method ParentItemList()
-        ParentItemAdapter
+
                 parentItemAdapter
                 = new ParentItemAdapter(
                 ParentItemList(),requireContext());
 
-        // Set the layout manager
-        // and adapter for items
-        // of the parent recyclerview
         ParentRecyclerViewItem
                 .setAdapter(parentItemAdapter);
         ParentRecyclerViewItem
                 .setLayoutManager(layoutManager);
 
+
     }
-    ///////////////////////////////////////////
 
-
-    ///////////////////////////////////////////////
     private List<ParentItem> ParentItemList()
     {
         List<ParentItem> itemList
                 = new ArrayList<>();
 
+        ChildItemList(Week.Saturday.toString()).observe(getViewLifecycleOwner(), new Observer<List<WeekMeals>>() {
+            @Override
+            public void onChanged(List<WeekMeals> weekMeals) {
 
-        ParentItem item
-                = new ParentItem(
-                "Saturday",
-                ChildItemList(Week.Sunday.toString()));
-        itemList.add(item);
-//        ParentItem item1
-//                = new ParentItem(
-//                "sunday",
-//                ChildItemList(Week.Sunday.toString()));
-//        itemList.add(item1);
-//        ParentItem item2
-//                = new ParentItem(
-//                "monday",
-//                ChildItemList(Week.Sunday.toString()));
-//        itemList.add(item2);
-//        ParentItem item3
-//                = new ParentItem(
-//                "tuesday",
-//                ChildItemList(Week.Sunday.toString()));
-//        itemList.add(item3);
-//        ParentItem item4
-//                = new ParentItem(
-//                "wednesday",
-//                ChildItemList(Week.Sunday.toString()));
-//        itemList.add(item4);
-//        ParentItem item5
-//                = new ParentItem(
-//                "thursday",
-//                ChildItemList(Week.Sunday.toString()));
-//        itemList.add(item5);
-//        ParentItem item6
-//                = new ParentItem(
-//                "friday",
-//                ChildItemList(Week.Sunday.toString()));
-//        itemList.add(item6);
+
+                ParentItem item
+                        = new ParentItem(
+                        "Saturday", weekMeals);
+                itemList.add(item);
+
+            }
+
+        });
+        ChildItemList(Week.Sunday.toString()).observe(getViewLifecycleOwner(), new Observer<List<WeekMeals>>() {
+            @Override
+            public void onChanged(List<WeekMeals> weekMeals) {
+
+
+                ParentItem item
+                        = new ParentItem(
+                        "Sunday", weekMeals);
+                itemList.add(item);
+
+            }
+
+        });
+        ChildItemList(Week.Monday.toString()).observe(getViewLifecycleOwner(), new Observer<List<WeekMeals>>() {
+            @Override
+            public void onChanged(List<WeekMeals> weekMeals) {
+
+
+                ParentItem item
+                        = new ParentItem(
+                        "Monday", weekMeals);
+                itemList.add(item);
+
+            }
+
+        });
+        ChildItemList(Week.Tuesday.toString()).observe(getViewLifecycleOwner(), new Observer<List<WeekMeals>>() {
+            @Override
+            public void onChanged(List<WeekMeals> weekMeals) {
+
+
+                ParentItem item
+                        = new ParentItem(
+                        "Tuesday", weekMeals);
+                itemList.add(item);
+
+            }
+
+        });
+        ChildItemList(Week.Wednesday.toString()).observe(getViewLifecycleOwner(), new Observer<List<WeekMeals>>() {
+            @Override
+            public void onChanged(List<WeekMeals> weekMeals) {
+
+
+                ParentItem item
+                        = new ParentItem(
+                        "Wednesday", weekMeals);
+                itemList.add(item);
+
+            }
+
+        });
+        ChildItemList(Week.Thursday.toString()).observe(getViewLifecycleOwner(), new Observer<List<WeekMeals>>() {
+            @Override
+            public void onChanged(List<WeekMeals> weekMeals) {
+
+
+                ParentItem item
+                        = new ParentItem(
+                        "Thursday", weekMeals);
+                itemList.add(item);
+
+            }
+
+        });
+        ChildItemList(Week.Friday.toString()).observe(getViewLifecycleOwner(), new Observer<List<WeekMeals>>() {
+            @Override
+            public void onChanged(List<WeekMeals> weekMeals) {
+
+
+                ParentItem item
+                        = new ParentItem(
+                        "Friday", weekMeals);
+                itemList.add(item);
+                parentItemAdapter.setItemList(itemList);
+            }
+
+        });
+
         return itemList;
     }
 
-    private List<WeekMeals> ChildItemList(String day)
+    private LiveData<List<WeekMeals>> ChildItemList(String day)
     {
-        List<WeekMeals> ChildItemList
-                = new ArrayList<>();
 
-       // ChildItemList = repository.getweek(day);
-        ChildItemList.add(new WeekMeals());
-        return ChildItemList;
-    }
+        return  repository.getweek(day);
 
-
-    @Override
-    public void sendData(Meal meal) {
 
     }
 
-    @Override
-    public void callRepo(Meal meal, int position) {
-
-    }
-
-    @Override
-    public void onSuccessResponse(List<WeekMeals> meals) {
-
-    }
 }
 
 

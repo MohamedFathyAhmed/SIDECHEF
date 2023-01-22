@@ -19,6 +19,7 @@ public class FireBaseAuth {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         mOnLoginListener.onSuccess(task.getResult().toString());
+                      //  task.getResult().getUser().getEmail();
                     }
                     else {
                         mOnLoginListener.onFailure(

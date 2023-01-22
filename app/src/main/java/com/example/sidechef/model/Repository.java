@@ -1,6 +1,9 @@
 package com.example.sidechef.model;
 
 import android.content.Context;
+import android.widget.Toast;
+
+import androidx.lifecycle.LiveData;
 
 import com.example.sidechef.model.data.api.ApiCalls;
 import com.example.sidechef.model.data.api.Network;
@@ -11,6 +14,11 @@ import com.example.sidechef.model.models.Categories;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Meals;
 import com.example.sidechef.model.models.WeekMeals;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +43,7 @@ public class Repository {
     ApiCalls api;
     MealsDAO db;
     PlaneDAO pDB;
+    FirebaseFirestore fdb = FirebaseFirestore.getInstance();
     private static Repository instance = null;
     private Repository(Context context) {
         Retrofit network = Network.getInstance(context);
@@ -50,12 +59,37 @@ public class Repository {
         return instance;
     }
 
+    private void addDataToFirestore(Meal meal) {
+
+        // creating a collection reference
+        // for our Firebase Firestore database.
+        CollectionReference dbFav= fdb.collection("FAV");
+
+        // adding our data to our courses object class.
+     //   Courses courses = new Courses(courseName, courseDescription, courseDuration);
+
+        // below method is use to add data to Firebase Firestore.
+        dbFav.add(meal).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                // after the data addition is successful
+                // we are displaying a success toast message.
+           }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // this method is called when the data addition process is failed.
+                // displaying a toast message when data addition is failed.
+          }
+        });
+    }
     public void getAllMeals(RandomMealResponseDelegate randomMealResponseDelegate) {
         ArrayList<Observable<Meals>> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             list.add(api.getMeal());
 
         }
+
         Single<List<Meals>> observable = Observable.fromIterable(list)
                 .subscribeOn(Schedulers.io())//UpStream operation
                 .flatMap(new Function<Observable<Meals>, ObservableSource<? extends Meals>>() {
@@ -131,14 +165,13 @@ public class Repository {
 
     };
 
-    public List<WeekMeals> getweek(String day){
+    public LiveData<List<WeekMeals>> getweek(String day){
         final List<WeekMeals>[] meals = new List[]{null};
-        Flowable<List<WeekMeals>> list=pDB.getForDay(day);
-        list.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(item->{
-            meals[0] = item;
-        },error->{error.getMessage();});
+        LiveData<List<WeekMeals>> list=pDB.getForDay(day);
+//        list.subscribeOnn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(item->{ dbResponse.onSuccessResponse(item);
+//        },error->{error.getMessage();});
+return list;
 
-return meals[0];
     }
 
 
@@ -146,7 +179,9 @@ return meals[0];
 
 
     public void insert(Meal meal){
-        new Thread(() -> db.insert(meal)).start();
+        this.addDataToFirestore(meal);
+        new Thread(() ->
+                db.insert(meal)).start();
     };
 
 

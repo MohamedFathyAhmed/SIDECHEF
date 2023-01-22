@@ -27,7 +27,12 @@ Context context;
             .RecycledViewPool();
     private List<ParentItem> itemList;
 
-    ParentItemAdapter(List<ParentItem> itemList,Context contex)
+    public void setItemList(List<ParentItem> itemList) {
+        this.itemList = itemList;
+        notifyDataSetChanged();
+    }
+
+    ParentItemAdapter(List<ParentItem> itemList, Context contex)
     {
         context =contex;
         this.itemList = itemList;
@@ -89,6 +94,7 @@ Context context;
         // child RecyclerView is nested
         // inside the parent RecyclerView,
         // we use the following method
+
         layoutManager.setInitialPrefetchItemCount(
                         parentItem.getChildItemList().size());
 

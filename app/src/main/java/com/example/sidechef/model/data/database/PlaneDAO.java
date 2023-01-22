@@ -1,5 +1,6 @@
 package com.example.sidechef.model.data.database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -21,8 +22,8 @@ public interface PlaneDAO {
     List<WeekMeals> getAll();
 
 
-    @Query("SELECT * FROM Week WHERE day = :selectday" )
-    Flowable<List<WeekMeals>> getForDay(String selectday);
+    @Query("SELECT * FROM Week WHERE day =:day" )
+    LiveData<List<WeekMeals>> getForDay(String day);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(WeekMeals meal);

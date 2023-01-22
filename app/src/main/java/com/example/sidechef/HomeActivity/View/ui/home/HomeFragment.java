@@ -5,12 +5,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.StackView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -38,7 +40,7 @@ public class HomeFragment extends Fragment implements NetworkInterface {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
@@ -51,11 +53,32 @@ public class HomeFragment extends Fragment implements NetworkInterface {
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         initrandommealRecView(view);
         initCategoryRecView(view);
-        stackView=(StackView)view.findViewById(R.id.stack_view);
+        stackView = (StackView) view.findViewById(R.id.stack_view);
         networkPresenter = new NetworkPresenter(requireContext(), this);
         networkPresenter.getMeals();
         networkPresenter.getCategories();
 
+       // stackView
+//       NestedScrollView nestedScrollView= ((NestedScrollView) view.findViewById(R.id.scrollView));
+//        nestedScrollView.setEnabled(false);
+//
+//       nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(@NonNull NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                if (stackView.getHeight() < scrollY) {
+//                    stackView.showNext();
+//                }
+//
+//            }
+//        });
+
+//        stackView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                stackView.showNext();
+//            }
+//
+//        });
     }
 
     void initCategoryRecView(View view) {

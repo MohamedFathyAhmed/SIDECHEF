@@ -28,11 +28,11 @@ public class Utils {
 //        this.strCategory = meal.getStrCategory();
 //        this.strArea = meal.getStrArea();
 //        this.strInstructions = meal.getStrInstructions();
-//        this.strMealThumb = meal.getStrMealThumb();
+weekMeals.setStrMealThumb(meal.getStrMealThumb());
 //        this.strTags = meal.getStrTags();
 //        this.strYoutube = meal.getStrYoutube();
-//        this.strSource = meal.getStrSource();
-//        this.strImageSource = meal.getStrImageSource();
+//        this.strSource = meal.getStrSource();wee
+ weekMeals.setStrImageSource( meal.getStrImageSource());
 //        this.strCreativeCommonsConfirmed = meal.getStrCreativeCommonsConfirmed();
 //        this.dateModified = meal.getDateModified();
         return weekMeals;

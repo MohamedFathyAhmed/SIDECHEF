@@ -1,5 +1,7 @@
 package com.example.sidechef.HomeActivity.View.ui.dashboard;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.WeekMeals;
 
@@ -9,7 +11,7 @@ public class ParentItem {
 
     // Declaration of the variables
     private String ParentItemTitle;
-    private List<WeekMeals> ChildItemList;
+    private   List<WeekMeals> ChildItemList;
 
     // Constructor of the class
     // to initialize the variables
@@ -35,13 +37,13 @@ public class ParentItem {
         ParentItemTitle = parentItemTitle;
     }
 
-    public List<WeekMeals> getChildItemList()
+    public   List<WeekMeals> getChildItemList()
     {
         return ChildItemList;
     }
 
     public void setChildItemList(
-            List<WeekMeals> childItemList)
+           List<WeekMeals> childItemList)
     {
         ChildItemList = childItemList;
     }
