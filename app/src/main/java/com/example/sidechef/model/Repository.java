@@ -1,9 +1,11 @@
 package com.example.sidechef.model;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 
 import com.example.sidechef.YourPreference;
@@ -86,42 +88,25 @@ public class Repository {
 //                });
 //
 //    }
-private void addMealToFireStore(Meal meal) {
-    fdb.document(yourPrefrence.getData("email")).collection("meals").document(meal.getStrMeal())
-            .set(meal)
-            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    Toast.makeText(context, "The Meal Added To Favorite", Toast.LENGTH_LONG).show();
-                }
-            })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(context, "The Meal  Failed Added To Favorite Try Again", Toast.LENGTH_LONG).show();
-
-                }
-            });
-}
-//    private void addMealToFireStore(Meal meal) {
-//        fdb.collection("Fav").document(yourPrefrence.getData("email")).collection("meals").document(meal.getIdMeal())
-//                .set(meal)
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        Toast.makeText(context, "The Meal Added To Favorite", Toast.LENGTH_LONG).show();
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Toast.makeText(context, "The Meal  Failed Added To Favorite Try Again", Toast.LENGTH_LONG).show();
+//private void addMealToFireStore(Meal meal) {
+//    fdb.document("Meals").collection(yourPrefrence.getData("email")).document(meal.getStrMeal())
+//            .set(meal)
+//            .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                @Override
+//                public void onSuccess(Void aVoid) {
+//                    Toast.makeText(context, "The Meal Added To Favorite", Toast.LENGTH_LONG).show();
+//                }
+//            })
+//            .addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//                    Toast.makeText(context, "The Meal  Failed Added To Favorite Try Again", Toast.LENGTH_LONG).show();
 //
-//                    }
-//                });
-//    }
-    private void addWeelMealToFireStore(WeekMeals meal) {
-        fdb.collection("Week").document(yourPrefrence.getData("email")).collection("meals").document(meal.getIdMeal()+meal.getDay())
+//                }
+//            });
+//}
+    private void addMealToFireStore(Meal meal) {
+        fdb.collection("Fav").document(yourPrefrence.getData("email")).collection("meals").document(meal.getIdMeal())
                 .set(meal)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -137,58 +122,53 @@ private void addMealToFireStore(Meal meal) {
                     }
                 });
     }
+//    private void addWeelMealToFireStore(WeekMeals meal) {
+//        fdb.collection("Week").document(yourPrefrence.getData("email")).collection("meals").document(meal.getIdMeal()+meal.getDay())
+//                .set(meal)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        Toast.makeText(context, "The Meal Added To Favorite", Toast.LENGTH_LONG).show();
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(context, "The Meal  Failed Added To Favorite Try Again", Toast.LENGTH_LONG).show();
+//
+//                    }
+//                });
+//    }
     public void getAllMealFirebase() {
-        fdb.document(yourPrefrence.getData("email")).collection("meals").get()
+        fdb.collection("Fav").document(yourPrefrence.getData("email")).collection("meals").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onSuccess(QuerySnapshot documentSnapshots) {
                         if (documentSnapshots.isEmpty()) {
                             Log.d("getAllMealFirebase", "onSuccess: LIST EMPTY");
                             return;
                         } else {
-                            // Convert the whole Query Snapshot to a list
-                            // of objects directly! No need to fetch each
-                            // document.
                             List<Meal> types = documentSnapshots.toObjects(Meal.class);
-
+                            types.forEach(i->{
+                                Log.d("getAllMealFirebase", "onSuccess: " + i.getStrMeal());
+                            });
                             // Add all to your list
                             //  mArrayList.addAll(types);
-                            Log.d("getAllMealFirebase", "onSuccess: " + types);
+
                         }
                     }
-                })
-                            .addOnFailureListener(new OnFailureListener() {
+                }).addOnFailureListener(new OnFailureListener() {
                                               @Override
                                               public void onFailure(@NonNull Exception e) {
                                                 //  Toast.makeText(getApplicationContext(), "Error getting data!!!", Toast.LENGTH_LONG).show();
+                                                  Log.d("getAllMealFirebase", "onFailure: LIST EMPTY");
+
                                               }
                                           });
-                                      }
+    }
 
-// public void getAllMealFirebase() {
-//     List<Meal> meals;
-//   DocumentReference docRef = fdb.collection("Fav").document(yourPrefrence.getData("email"));
-//      docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    DocumentSnapshot document = task.getResult();
-//                    if (document.exists()) {
-//                        Log.i("firebaseget", "onComplete: "+(ArrayList<Meal>)document.get("favMeals"));  ;
-//
-//
-//                    } else {
-//                        Toast.makeText(context, "No such document firebas", Toast.LENGTH_LONG).show();
-//
-//                    }
-//                } else {
-//                    Toast.makeText(context, "get failed with firebas", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//});
-//    // return   meals;
-//
-//    }
+
 
 
     public void getAllMeals(RandomMealResponseDelegate randomMealResponseDelegate) {
@@ -293,7 +273,7 @@ return list;
 
 
     public void insertdaily(WeekMeals meal){
-        this.addWeelMealToFireStore(meal);
+      //  this.addWeelMealToFireStore(meal);
         new Thread(() -> pDB.insert(meal)).start();
     };
 
