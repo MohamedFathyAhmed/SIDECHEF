@@ -1,10 +1,12 @@
 package com.example.sidechef.model;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.sidechef.YourPreference;
 import com.example.sidechef.model.data.api.ApiCalls;
 import com.example.sidechef.model.data.api.Network;
 import com.example.sidechef.model.data.database.MealsDatabase;
@@ -14,11 +16,14 @@ import com.example.sidechef.model.models.Categories;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Meals;
 import com.example.sidechef.model.models.WeekMeals;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +48,9 @@ public class Repository {
     ApiCalls api;
     MealsDAO db;
     PlaneDAO pDB;
+    Context context;
     FirebaseFirestore fdb = FirebaseFirestore.getInstance();
+    YourPreference yourPrefrence = YourPreference.getInstance(context);
     private static Repository instance = null;
     private Repository(Context context) {
         Retrofit network = Network.getInstance(context);
@@ -51,38 +58,139 @@ public class Repository {
         MealsDatabase productDatabase = MealsDatabase.getInstance(context);
         db = productDatabase.mealsDAO();
         pDB = productDatabase.planeDAO();
+        this.context=context;
     }
 
     public static synchronized Repository getInstance(Context context){
         if (instance == null)
             instance = new Repository(context);
         return instance;
+
     }
 
-    private void addDataToFirestore(Meal meal) {
+//
+//    void updateFireStore( ) {
+//
+//        fdb.collection("Fav")
+//                .document(yourPrefrence.getData("email"))
+//                .update("favMeals", FieldValue.arrayUnion(id.toString())).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void unused) {
+//                        Toast.makeText(context, "The Meal Added To Favorite", Toast.LENGTH_LONG).show();
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(context, "The Meal  Failed Added To Favorite Try Again", Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//
+//    }
+private void addMealToFireStore(Meal meal) {
+    fdb.document(yourPrefrence.getData("email")).collection("meals").document(meal.getStrMeal())
+            .set(meal)
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(context, "The Meal Added To Favorite", Toast.LENGTH_LONG).show();
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context, "The Meal  Failed Added To Favorite Try Again", Toast.LENGTH_LONG).show();
 
-        // creating a collection reference
-        // for our Firebase Firestore database.
-        CollectionReference dbFav= fdb.collection("FAV");
+                }
+            });
+}
+//    private void addMealToFireStore(Meal meal) {
+//        fdb.collection("Fav").document(yourPrefrence.getData("email")).collection("meals").document(meal.getIdMeal())
+//                .set(meal)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        Toast.makeText(context, "The Meal Added To Favorite", Toast.LENGTH_LONG).show();
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(context, "The Meal  Failed Added To Favorite Try Again", Toast.LENGTH_LONG).show();
+//
+//                    }
+//                });
+//    }
+    private void addWeelMealToFireStore(WeekMeals meal) {
+        fdb.collection("Week").document(yourPrefrence.getData("email")).collection("meals").document(meal.getIdMeal()+meal.getDay())
+                .set(meal)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(context, "The Meal Added To Favorite", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "The Meal  Failed Added To Favorite Try Again", Toast.LENGTH_LONG).show();
 
-        // adding our data to our courses object class.
-     //   Courses courses = new Courses(courseName, courseDescription, courseDuration);
-
-        // below method is use to add data to Firebase Firestore.
-        dbFav.add(meal).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                // after the data addition is successful
-                // we are displaying a success toast message.
-           }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                // this method is called when the data addition process is failed.
-                // displaying a toast message when data addition is failed.
-          }
-        });
+                    }
+                });
     }
+    public void getAllMealFirebase() {
+        fdb.document(yourPrefrence.getData("email")).collection("meals").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot documentSnapshots) {
+                        if (documentSnapshots.isEmpty()) {
+                            Log.d("getAllMealFirebase", "onSuccess: LIST EMPTY");
+                            return;
+                        } else {
+                            // Convert the whole Query Snapshot to a list
+                            // of objects directly! No need to fetch each
+                            // document.
+                            List<Meal> types = documentSnapshots.toObjects(Meal.class);
+
+                            // Add all to your list
+                            //  mArrayList.addAll(types);
+                            Log.d("getAllMealFirebase", "onSuccess: " + types);
+                        }
+                    }
+                })
+                            .addOnFailureListener(new OnFailureListener() {
+                                              @Override
+                                              public void onFailure(@NonNull Exception e) {
+                                                //  Toast.makeText(getApplicationContext(), "Error getting data!!!", Toast.LENGTH_LONG).show();
+                                              }
+                                          });
+                                      }
+
+// public void getAllMealFirebase() {
+//     List<Meal> meals;
+//   DocumentReference docRef = fdb.collection("Fav").document(yourPrefrence.getData("email"));
+//      docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    DocumentSnapshot document = task.getResult();
+//                    if (document.exists()) {
+//                        Log.i("firebaseget", "onComplete: "+(ArrayList<Meal>)document.get("favMeals"));  ;
+//
+//
+//                    } else {
+//                        Toast.makeText(context, "No such document firebas", Toast.LENGTH_LONG).show();
+//
+//                    }
+//                } else {
+//                    Toast.makeText(context, "get failed with firebas", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//});
+//    // return   meals;
+//
+//    }
+
+
     public void getAllMeals(RandomMealResponseDelegate randomMealResponseDelegate) {
         ArrayList<Observable<Meals>> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -168,8 +276,7 @@ public class Repository {
     public LiveData<List<WeekMeals>> getweek(String day){
         final List<WeekMeals>[] meals = new List[]{null};
         LiveData<List<WeekMeals>> list=pDB.getForDay(day);
-//        list.subscribeOnn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(item->{ dbResponse.onSuccessResponse(item);
-//        },error->{error.getMessage();});
+
 return list;
 
     }
@@ -179,13 +286,14 @@ return list;
 
 
     public void insert(Meal meal){
-        this.addDataToFirestore(meal);
+        this.addMealToFireStore(meal);
         new Thread(() ->
                 db.insert(meal)).start();
     };
 
 
     public void insertdaily(WeekMeals meal){
+        this.addWeelMealToFireStore(meal);
         new Thread(() -> pDB.insert(meal)).start();
     };
 

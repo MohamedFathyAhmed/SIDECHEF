@@ -6,6 +6,7 @@ import androidx.navigation.Navigation;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.example.sidechef.HomeActivity.View.HomeActivity;
 import com.example.sidechef.R;
 import com.example.sidechef.SignUpActivity.View.SignUp;
+import com.example.sidechef.YourPreference;
 import com.example.sidechef.presenter.LoginPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -103,8 +105,8 @@ EditText tv_name;
 
     private void checkLoginDetails() {
 
-
-        if(!TextUtils.isEmpty(tv_name.getText().toString()) &&isValidEmail(tv_name.getText().toString()) && isValidPassword(tv_pass.getText().toString()) && !TextUtils.isEmpty(tv_pass.getText().toString())){
+// && isValidEmail(tv_name.getText().toString()) && isValidPassword(tv_pass.getText().toString())
+        if(!TextUtils.isEmpty(tv_name.getText().toString())&& !TextUtils.isEmpty(tv_pass.getText().toString())){
             initLogin(tv_name.getText().toString(), tv_pass.getText().toString());
         }else{
             if(TextUtils.isEmpty(tv_name.getText().toString()) || !isValidEmail(tv_name.getText().toString()) ){
@@ -144,7 +146,10 @@ EditText tv_name;
     }
 
     @Override
-    public void onLoginSuccess(String message) {
+    public void onLoginSuccess(String message , String email) {
+        YourPreference yourPrefrence = YourPreference.getInstance(getApplicationContext());
+        yourPrefrence.saveData("email",email);
+
         mProgressDialog.dismiss();
         Log.i("hellplab", "onLoginSuccess: ");
         Toast.makeText(getApplicationContext(), "Successfully Logged in" , Toast.LENGTH_SHORT).show();

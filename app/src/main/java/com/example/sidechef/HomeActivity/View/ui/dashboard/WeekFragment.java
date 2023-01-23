@@ -42,6 +42,8 @@ Repository repository;
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         repository = Repository.getInstance(requireContext());
+        //delete
+        repository.getAllMealFirebase();
         RecyclerView
                 ParentRecyclerViewItem
                 = view.findViewById(

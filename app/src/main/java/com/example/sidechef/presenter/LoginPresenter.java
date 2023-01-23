@@ -20,8 +20,8 @@ public class LoginPresenter implements LoginPresenterInterface, LoginListener {
     }
 
     @Override
-    public void onSuccess(String message) {
-        mLoginView.onLoginSuccess(message);
+    public void onSuccess(String message,String email) {
+        mLoginView.onLoginSuccess(message,email);
 
     }
 

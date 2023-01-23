@@ -2,6 +2,7 @@ package com.example.sidechef;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.WeekMeals;
@@ -16,6 +17,7 @@ public class Utils {
         }
         return alertDialog;
     }
+
 
 
     public static WeekMeals converter (String day, String time, Meal meal) {
