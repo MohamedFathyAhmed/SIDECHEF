@@ -102,14 +102,15 @@ public class HomeFragment extends Fragment implements NetworkInterface {
         HomeFragmentDirections.ActionNavigationHomeToDetailFragment action = HomeFragmentDirections
                 .actionNavigationHomeToDetailFragment(meal);
         action.setDataMeal(meal);
-        Log.i("TAG", "onCreateView: " + meal.getStrArea());
         Navigation.findNavController(getView()).navigate(action);
     }
 
     @Override
     public void callRepo(Meal meal, int position) {
         networkPresenter.insertItem(meal);
+        Toast.makeText(requireContext(), "add to favorit" , Toast.LENGTH_SHORT).show();
         adapter.notifyDataSetChanged();
+
     }
 
     @Override

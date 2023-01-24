@@ -1,16 +1,20 @@
-package com.example.sidechef.HomeActivity.View.ui.dashboard;
+package com.example.sidechef.HomeActivity.View.ui.planWeek;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sidechef.R;
+import com.example.sidechef.model.Repository;
+import com.example.sidechef.model.models.WeekMeals;
 
 import java.util.List;
 
@@ -26,16 +30,20 @@ Context context;
             = new RecyclerView
             .RecycledViewPool();
     private List<ParentItem> itemList;
+    ChildItemAdapter.AdapterConnector adapterConnector;
 
+    ChildItemAdapter childItemAdapter;
     public void setItemList(List<ParentItem> itemList) {
         this.itemList = itemList;
         notifyDataSetChanged();
     }
 
-    ParentItemAdapter(List<ParentItem> itemList, Context contex)
+    ParentItemAdapter(List<ParentItem> itemList, Context contex, ChildItemAdapter.AdapterConnector adapterConnector)
     {
         context =contex;
         this.itemList = itemList;
+        this.adapterConnector=adapterConnector;
+
     }
 
     @NonNull
@@ -101,10 +109,10 @@ Context context;
         // Create an instance of the child
         // item view adapter and set its
         // adapter, layout manager and RecyclerViewPool
-        ChildItemAdapter childItemAdapter
+         childItemAdapter
                 = new ChildItemAdapter(
                 parentItem
-                        .getChildItemList(),context);
+                        .getChildItemList(),context,adapterConnector);
         parentViewHolder
                 .ChildRecyclerView
                 .setLayoutManager(layoutManager);
@@ -127,6 +135,28 @@ Context context;
 
         return itemList.size();
     }
+
+//    @Override
+//    public void sendData(WeekMeals meal) {
+//
+//    }
+//
+//
+//    @Override
+//    public void callRepo(WeekMeals meal, int position) {
+//       repository.deletedaily(meal);
+//        Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show();
+//        if (childItemAdapter!=null && itemList.size()!=0) {
+//            itemList.remove(position);
+//            childItemAdapter.notifyDataSetChanged();
+//            childItemAdapter.notifyItemRemoved(position);
+//        }
+//    }
+//
+//    @Override
+//    public void onSuccessResponse(List<WeekMeals> meals) {
+//
+//    }
 
     // This class is to initialize
     // the Views present in

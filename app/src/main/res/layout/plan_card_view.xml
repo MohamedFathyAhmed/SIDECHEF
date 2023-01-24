@@ -34,17 +34,16 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/btn_love_item"
+                android:id="@+id/btn_delete_item"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/ic_favorite_border"
                 android:clickable="true"
                 android:focusable="true"
                 android:minWidth="48dp"
                 android:minHeight="48dp"
-                android:src="@drawable/ic_favorite_border"
+                android:src="@drawable/ic_baseline_remove_circle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="NewApi,SpeakableTextPresentCheck" />

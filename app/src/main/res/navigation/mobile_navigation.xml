@@ -16,10 +16,14 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.sidechef.HomeActivity.View.ui.dashboard.WeekFragment"
+        android:id="@+id/navigation_planweek"
+        android:name="com.example.sidechef.HomeActivity.View.ui.planWeek.WeekFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_week" />
+        tools:layout="@layout/fragment_week" >
+        <action
+            android:id="@+id/action_navigation_planweek_to_navigation_des"
+            app:destination="@id/navigation_des" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favorite"
@@ -32,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_des"
-        android:name="com.example.sidechef.HomeActivity.View.ui.DetailFragment"
+        android:name="com.example.sidechef.HomeActivity.View.ui.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument

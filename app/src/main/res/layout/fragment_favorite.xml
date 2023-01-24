@@ -10,9 +10,9 @@
         android:id="@+id/meal_rv_fav"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey_300"
+        android:background="@color/colorWhiteDark"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
+        app:spanCount="1"
         tools:itemCount="6"
-        tools:listitem="@layout/home_card_view" />
+        tools:listitem="@layout/favorite_item" />
 </FrameLayout>

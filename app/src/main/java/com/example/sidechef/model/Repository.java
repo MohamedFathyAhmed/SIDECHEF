@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 
-import com.example.sidechef.YourPreference;
+import com.example.sidechef.Utils.YourPreference;
 import com.example.sidechef.model.data.api.ApiCalls;
 import com.example.sidechef.model.data.api.Network;
 import com.example.sidechef.model.data.database.MealsDatabase;
@@ -52,7 +52,7 @@ public class Repository {
     PlaneDAO pDB;
     Context context;
     FirebaseFirestore fdb = FirebaseFirestore.getInstance();
-    YourPreference yourPrefrence = YourPreference.getInstance(context);
+    YourPreference yourPrefrence ;
     private static Repository instance = null;
     private Repository(Context context) {
         Retrofit network = Network.getInstance(context);
@@ -61,6 +61,7 @@ public class Repository {
         db = productDatabase.mealsDAO();
         pDB = productDatabase.planeDAO();
         this.context=context;
+        yourPrefrence = YourPreference.getInstance(context);
     }
 
     public static synchronized Repository getInstance(Context context){
@@ -253,15 +254,12 @@ public class Repository {
 
     };
 
-    public LiveData<List<WeekMeals>> getweek(String day){
-        final List<WeekMeals>[] meals = new List[]{null};
-        LiveData<List<WeekMeals>> list=pDB.getForDay(day);
+    public synchronized LiveData<List<WeekMeals>> getweek(String day){
+      LiveData<List<WeekMeals>> list=pDB.getForDay(day);
 
 return list;
 
     }
-
-
 
 
 
@@ -276,8 +274,9 @@ return list;
       //  this.addWeelMealToFireStore(meal);
         new Thread(() -> pDB.insert(meal)).start();
     };
-
-
+    public void deletedaily(WeekMeals meal){
+        new Thread(() -> pDB.delete(meal)).start();
+    };
 
     public void delete(Meal meal){
         new Thread(() -> db.delete(meal)).start();

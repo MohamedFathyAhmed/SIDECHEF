@@ -1,4 +1,4 @@
-package com.example.sidechef.HomeActivity.View.ui;
+package com.example.sidechef.HomeActivity.View.ui.detail;
 
 import android.os.Bundle;
 

@@ -1,4 +1,4 @@
-package com.example.sidechef;
+package com.example.sidechef.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

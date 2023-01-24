@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,9 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.sidechef.R;
-import com.example.sidechef.Utils;
+import com.example.sidechef.Utils.Utils;
 import com.example.sidechef.model.Repository;
-import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Week;
 import com.example.sidechef.model.models.WeekMeals;
@@ -51,7 +51,7 @@ Repository repository;
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View v = layoutInflater.inflate(R.layout.home_card_view, parent, false);
+        View v = layoutInflater.inflate(R.layout.favorite_item, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(v);
         Log.i(TAG, "onCreateViewHolder");
         return myViewHolder;
@@ -64,63 +64,15 @@ Repository repository;
         holder.tvCountry.setText(data.get(position).getStrArea());
         holder.tvCat.setText(data.get(position).getStrCategory());
         holder.viewHolder.setOnClickListener(view -> {
-
-            AlertDialog.Builder builderSingle = new AlertDialog.Builder(context);
-            builderSingle.setIcon(R.drawable.ic_favorite);
-            builderSingle.setTitle("Select day:-");
-
-            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.select_dialog_singlechoice);
-            arrayAdapter.add(Week.Saturday.toString());
-            arrayAdapter.add(Week.Sunday.toString());
-            arrayAdapter.add(Week.Monday.toString());
-            arrayAdapter.add(Week.Tuesday.toString());
-            arrayAdapter.add(Week.Wednesday.toString());
-            arrayAdapter.add(Week.Thursday.toString());
-            arrayAdapter.add(Week.Friday.toString());
-            builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-
-            builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    String strName = arrayAdapter.getItem(which);
-                    AlertDialog.Builder builderInner = new AlertDialog.Builder(context);
-                    builderInner.setMessage(strName);
-                    builderInner.setTitle("Your Selected ");
-                    builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog,int which) {
-                            WeekMeals weekMeals = Utils.converter(strName,"breakfast",data.get(position));
-                            repository.insertdaily(weekMeals);
-                            dialog.dismiss();
-                        }
-                    });
-                    builderInner.show();
-                }
-            });
-            builderSingle.show();
-        }
-
-                //adapterConnector.sendData(data.get(position))
-                 );
+                    adapterConnector.sendData(data.get(position));
+        });
         Glide.with(context).load(data.get(position).getStrMealThumb()).into(holder.ivRecipePhoto);
-        // holder.mealButton.setOnClickListener(
-        // view -> {adapterConnector.callRepo(data.get(position),position);}
-        // );
-        // holder.mealButton.setOnClickListener(new View.OnClickListener() {
-        // @Override
-        // public void onClick(View view) {
-        // // Toast.makeText(context, data.get(position).description,
-        // Toast.LENGTH_SHORT);
-        //
-        // }
-        // });
-        Log.i(TAG, "onBindViewHolder 2");
-
+         holder.btndelete.setOnClickListener(
+         view -> {adapterConnector.callRepo(data.get(position),position);}
+         );
+        holder.addToPlan.setOnClickListener(
+                view -> {adapterConnector.addToPlan(data.get(position));}
+        );
     }
 
     @Override
@@ -130,28 +82,29 @@ Repository repository;
 
     public interface AdapterConnector {
         public void sendData(Meal meal);
-
         public void callRepo(Meal meal, int position);
+        public void addToPlan(Meal meal);
     }
 }
 
 class MyViewHolder extends RecyclerView.ViewHolder {
     TextView tvRecipeName;
     TextView tvCountry;
-    TextView tvRecipeYield;
+Button btndelete;
+    Button addToPlan;
     TextView tvCat;
     ImageView ivRecipePhoto;
     public LinearLayout viewHolder;
 
     public MyViewHolder(View itemView) {
         super(itemView);
-        this.tvRecipeName = itemView.findViewById(R.id.tvRecipeName);
-        this.tvCountry = itemView.findViewById(R.id.txCountry);
-        this.tvRecipeYield = itemView.findViewById(R.id.tvCategory);
-        this.tvCat = itemView.findViewById(R.id.tvCategory);
-        this.ivRecipePhoto = itemView.findViewById(R.id.ivRecipePhoto);
-        this.viewHolder = itemView.findViewById(R.id.viewHolder);
-
+        this.tvRecipeName = itemView.findViewById(R.id.tvRecipeListName);
+        this.tvCountry = itemView.findViewById(R.id.tvRecipecountry);
+        this.tvCat = itemView.findViewById(R.id.tvRecipeListCategory);
+        this.ivRecipePhoto = itemView.findViewById(R.id.ivRecipeListPhoto);
+        this.viewHolder = itemView.findViewById(R.id.viewHolderfav);
+        this.btndelete = itemView.findViewById(R.id.btnRecipeListDelete);
+        this.addToPlan = itemView.findViewById(R.id.btnRecipeListPlan);
     }
 
 }

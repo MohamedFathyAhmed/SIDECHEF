@@ -6,7 +6,6 @@ import androidx.navigation.Navigation;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -18,8 +17,7 @@ import android.widget.Toast;
 
 import com.example.sidechef.HomeActivity.View.HomeActivity;
 import com.example.sidechef.R;
-import com.example.sidechef.SignUpActivity.View.SignUp;
-import com.example.sidechef.YourPreference;
+import com.example.sidechef.Utils.YourPreference;
 import com.example.sidechef.presenter.LoginPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -68,6 +66,8 @@ EditText tv_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //delete
+
         getSupportActionBar().hide();
         //For google sign in
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -78,7 +78,8 @@ EditText tv_name;
 
        setContentView(R.layout.activity_sign_in);
         initUI();
-
+        tv_name.setText("fathy@gmail.com");
+        tv_pass.setText("123456");
     }
 
     public static boolean isValidEmail(CharSequence target) {

@@ -1,11 +1,9 @@
 package com.example.sidechef.SignUpActivity.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,7 +15,7 @@ import android.widget.Toast;
 import com.example.sidechef.HomeActivity.View.HomeActivity;
 import com.example.sidechef.R;
 import com.example.sidechef.SingInActivity.View.SignIn;
-import com.example.sidechef.YourPreference;
+import com.example.sidechef.Utils.YourPreference;
 import com.example.sidechef.presenter.RegistrationPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;

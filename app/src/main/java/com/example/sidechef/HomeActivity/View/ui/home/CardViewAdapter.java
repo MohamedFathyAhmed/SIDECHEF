@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -56,23 +57,13 @@ public class CardViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.tvRecipeName.setText(data.get(position).getmeals().get(0).getStrMeal());
         holder.tvCountry.setText(data.get(position).getmeals().get(0).getStrArea());
         holder.tvCat.setText(data.get(position).getmeals().get(0).getStrCategory());
-
         holder.tvRecipeName.setText(data.get(position).getmeals().get(0).getStrMeal());
-        // holder.tvRecipePreparationTime.setText(data.get(position).getmeals().get(0).getStrCategory());
-
         holder.viewHolder.setOnClickListener(view -> adapterConnector.sendData(data.get(position).getmeals().get(0)));
         Glide.with(context).load(data.get(position).getmeals().get(0).getStrMealThumb()).into(holder.ivRecipePhoto);
-        // holder.mealButton.setOnClickListener(
-        // view -> {adapterConnector.callRepo(data.get(position),position);}
-        // );
-        // holder.mealButton.setOnClickListener(new View.OnClickListener() {
-        // @Override
-        // public void onClick(View view) {
-        // // Toast.makeText(context, data.get(position).description,
-        // Toast.LENGTH_SHORT);
-        //
-        // }
-        // });
+         holder.btn_love_item.setOnClickListener(
+         view -> {adapterConnector.callRepo(data.get(position).getmeals().get(0),position);}
+         );
+
         Log.i(TAG, "onBindViewHolder 2");
 
     }
@@ -92,20 +83,18 @@ public class CardViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
 class MyViewHolder extends RecyclerView.ViewHolder {
     TextView tvRecipeName;
     TextView tvCountry;
-    TextView tvRecipeYield;
     TextView tvCat;
     ImageView ivRecipePhoto;
     public LinearLayout viewHolder;
-
+    ImageView btn_love_item;
     public MyViewHolder(View itemView) {
         super(itemView);
         this.tvRecipeName = itemView.findViewById(R.id.tvRecipeName);
         this.tvCountry = itemView.findViewById(R.id.txCountry);
-        this.tvRecipeYield = itemView.findViewById(R.id.tvCategory);
         this.tvCat = itemView.findViewById(R.id.tvCategory);
         this.ivRecipePhoto = itemView.findViewById(R.id.ivRecipePhoto);
         this.viewHolder = itemView.findViewById(R.id.viewHolder);
-
+        this.btn_love_item =itemView.findViewById(R.id.btn_love_item);
     }
 
 }

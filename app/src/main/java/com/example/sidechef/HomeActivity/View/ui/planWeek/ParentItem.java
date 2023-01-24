@@ -1,8 +1,5 @@
-package com.example.sidechef.HomeActivity.View.ui.dashboard;
+package com.example.sidechef.HomeActivity.View.ui.planWeek;
 
-import androidx.lifecycle.LiveData;
-
-import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.WeekMeals;
 
 import java.util.List;

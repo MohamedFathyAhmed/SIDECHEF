@@ -1,10 +1,13 @@
 package com.example.sidechef.HomeActivity.View.ui.favorit;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,7 +21,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sidechef.HomeActivity.View.ui.home.CardViewAdapter;
 import com.example.sidechef.HomeActivity.View.ui.home.HomeFragmentDirections;
 import com.example.sidechef.R;
+import com.example.sidechef.Utils.Utils;
 import com.example.sidechef.model.models.Meal;
+import com.example.sidechef.model.models.Week;
+import com.example.sidechef.model.models.WeekMeals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +51,7 @@ public class FavoritFragment extends Fragment implements FavoritInterface {
         recyclerView = view.findViewById(R.id.meal_rv_fav);
         favoritPresenter = new FavoritPresenter(requireContext(),this);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new  GridLayoutManager(requireContext(), 2));
+        recyclerView.setLayoutManager(new  GridLayoutManager(requireContext(), 1));
         favoritPresenter.fetchData();
     }
 
@@ -60,14 +66,55 @@ public class FavoritFragment extends Fragment implements FavoritInterface {
 
     @Override
     public void callRepo(Meal meal, int position) {
-//        favoritPresenter.deleteItem(meal);
-//        Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show();
-//
-//        if (adapter!=null && mealsList.size()!=0) {
-//            mealsList.remove(position);
-//            adapter.notifyDataSetChanged();
-//            adapter.notifyItemRemoved(position);
-//        }
+        favoritPresenter.deleteItem(meal);
+        Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show();
+        if (adapter!=null && mealsList.size()!=0) {
+            mealsList.remove(position);
+            adapter.notifyDataSetChanged();
+            adapter.notifyItemRemoved(position);
+        }
+    }
+
+    @Override
+    public void addToPlan(Meal meal) {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(requireContext());
+        builderSingle.setIcon(R.drawable.ic_favorite);
+        builderSingle.setTitle("Select day:-");
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(requireContext(), android.R.layout.select_dialog_singlechoice);
+        arrayAdapter.add(Week.Saturday.toString());
+        arrayAdapter.add(Week.Sunday.toString());
+        arrayAdapter.add(Week.Monday.toString());
+        arrayAdapter.add(Week.Tuesday.toString());
+        arrayAdapter.add(Week.Wednesday.toString());
+        arrayAdapter.add(Week.Thursday.toString());
+        arrayAdapter.add(Week.Friday.toString());
+        builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String strName = arrayAdapter.getItem(which);
+                AlertDialog.Builder builderInner = new AlertDialog.Builder(requireContext());
+                builderInner.setMessage(strName);
+                builderInner.setTitle("Your Selected ");
+                builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {
+                        WeekMeals weekMeals = Utils.converter(strName,"breakfast",meal);
+                        favoritPresenter.addToPlan(weekMeals);
+                        dialog.dismiss();
+                    }
+                });
+                builderInner.show();
+            }
+        });
+        builderSingle.show();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.example.sidechef;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -23,9 +24,21 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashScreen.this, SignIn.class));
+                SharedPreferences preferences = getSharedPreferences("sharedPreferences", 0);
+                String value = preferences.getString("first_time",null);
+                if (value == null) {
+                    startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                    SharedPreferences.Editor pre =   preferences.edit();
+                    pre.putString("first_time", "no");
+                    pre.apply();
+                } else {
+                   if(preferences.getString("email","guest").equals("guest")) {
+                       startActivity(new Intent(SplashScreen.this, SignUp.class));
+                   }else {
+                       startActivity(new Intent(SplashScreen.this, HomeActivity.class));
+                   }
 
-                finish();
+                }
             }
         },0);
 
