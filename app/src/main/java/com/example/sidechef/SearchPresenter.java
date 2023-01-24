@@ -16,7 +16,13 @@ public class SearchPresenter {
         this.searchView = searchView;
     }
 
-public  void  getMealByName(String mealName, Repository.OnGetMealByName onGetMealByName){
-        repository.getMealByName(mealName,onGetMealByName);
+public  void  getMealByCountry(String countryName, Repository.OnGetMealByFilter onGetMealByFilter){
+        repository.getMealByCountry(countryName, onGetMealByFilter);
 }
+    public  void  getMealByCategory(String categoryName, Repository.OnGetMealByFilter onGetMealByFilter){
+        repository.getMealByCategory(categoryName, onGetMealByFilter);
+    }
+    public  void  getMealByIngredient(String ingredientName, Repository.OnGetMealByFilter onGetMealByFilter){
+        repository.getMealByIngredient(ingredientName, onGetMealByFilter);
+    }
 }

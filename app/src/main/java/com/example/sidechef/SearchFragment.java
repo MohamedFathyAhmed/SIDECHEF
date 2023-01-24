@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -13,16 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
-
-import com.example.sidechef.HomeActivity.View.ui.home.HomeFragmentDirections;
-import com.example.sidechef.model.models.Meal;
-import com.example.sidechef.model.models.Meals;
-
-import java.util.ArrayList;
 
 
-public class SearchFragment extends Fragment implements com.example.sidechef.SearchView {
+
+public class SearchFragment extends Fragment {
    /* GridAdapter gridAdapter;
     GridView gridView;
     SearchView searchView;
@@ -88,14 +81,14 @@ public class SearchFragment extends Fragment implements com.example.sidechef.Sea
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
-    @Override
+ /*   @Override
     public void OnGetMealByNameSuccess(Meals meals) {
-       /* gridAdapter= new GridAdapter(requireContext(),meals.getmeals());
-        gridView.setAdapter(gridAdapter);*/
+       *//* gridAdapter= new GridAdapter(requireContext(),meals.getmeals());
+        gridView.setAdapter(gridAdapter);*//*
     }
 
     @Override
     public void OnGetMealByNameFailure(String errorMessage) {
 
-    }
+    }*/
 }

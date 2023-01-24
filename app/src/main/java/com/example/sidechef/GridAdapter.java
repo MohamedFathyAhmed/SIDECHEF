@@ -11,14 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
+import com.example.sidechef.model.models.FilteredMeal;
 import com.example.sidechef.model.models.Meal;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class GridAdapter extends ArrayAdapter<Meal> {
+public class GridAdapter extends ArrayAdapter<FilteredMeal> {
     Context context;
 
-    public GridAdapter(@NonNull Context context, ArrayList<Meal> mealModelArrayList) {
+    public GridAdapter(@NonNull Context context, List<FilteredMeal> mealModelArrayList) {
         super(context, 0, mealModelArrayList);
         this.context=context;
     }
@@ -33,7 +35,7 @@ public class GridAdapter extends ArrayAdapter<Meal> {
             listitemView = LayoutInflater.from(getContext()).inflate(R.layout.search_card, parent, false);
         }
 
-        Meal mealModel = getItem(position);
+        FilteredMeal mealModel = getItem(position);
         TextView mealTV = listitemView.findViewById(R.id.tvsearchRecipeName);
         ImageView mealIV = listitemView.findViewById(R.id.ivRecipesearchPhoto);
 

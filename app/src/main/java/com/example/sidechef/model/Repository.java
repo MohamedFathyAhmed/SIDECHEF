@@ -8,6 +8,7 @@ import com.example.sidechef.model.data.database.MealsDatabase;
 import com.example.sidechef.model.data.database.MealsDAO;
 import com.example.sidechef.model.models.Categories;
 import com.example.sidechef.model.models.CountryListResponse;
+import com.example.sidechef.model.models.FilterResponseModel;
 import com.example.sidechef.model.models.IngredientResponse;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Meals;
@@ -184,6 +185,66 @@ public class Repository {
         };
         countryListResponseSingle.subscribe(countryListResponseSingleObserver);
     }
+    public void getMealByCountry(String countryName,OnGetMealByFilter onGetMealByFilter){
+        Single<FilterResponseModel> filterResponseModelSingle=api.getMealByCountry(countryName).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        SingleObserver <FilterResponseModel>filterResponseModelSingleObserver=new SingleObserver<FilterResponseModel>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(@NonNull FilterResponseModel filterResponseModel) {
+                onGetMealByFilter.OnGetMealByFilterSuccess(filterResponseModel);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                onGetMealByFilter.OnGetMealByFilterFailure(e.getMessage());
+            }
+        };
+        filterResponseModelSingle.subscribe(filterResponseModelSingleObserver);
+    }
+    public void getMealByIngredient(String ingredientName,OnGetMealByFilter onGetMealByFilter){
+        Single<FilterResponseModel> filterResponseModelSingle=api.getMealByIngredient(ingredientName).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        SingleObserver <FilterResponseModel>filterResponseModelSingleObserver=new SingleObserver<FilterResponseModel>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(@NonNull FilterResponseModel filterResponseModel) {
+                onGetMealByFilter.OnGetMealByFilterSuccess(filterResponseModel);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                onGetMealByFilter.OnGetMealByFilterFailure(e.getMessage());
+            }
+        };
+        filterResponseModelSingle.subscribe(filterResponseModelSingleObserver);
+    }
+    public void getMealByCategory(String categoryName,OnGetMealByFilter onGetMealByFilter){
+        Single<FilterResponseModel> filterResponseModelSingle=api.getMealByCategory(categoryName).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        SingleObserver <FilterResponseModel>filterResponseModelSingleObserver=new SingleObserver<FilterResponseModel>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(@NonNull FilterResponseModel filterResponseModel) {
+                onGetMealByFilter.OnGetMealByFilterSuccess(filterResponseModel);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                onGetMealByFilter.OnGetMealByFilterFailure(e.getMessage());
+            }
+        };
+        filterResponseModelSingle.subscribe(filterResponseModelSingleObserver);
+    }
 
 
     public void getAll(DBResponse dbResponse){
@@ -191,12 +252,9 @@ public class Repository {
                 dbResponse.onSuccessResponse(db.getAll())
         ).start();
     };
-
     public void insert(Meal meal){
         new Thread(() -> db.insert(meal)).start();
     };
-
-
     public void delete(Meal meal){
         new Thread(() -> db.delete(meal)).start();
     };
@@ -213,6 +271,10 @@ public class Repository {
         void OnGetMealByNameSuccess(Meals meals);
         void OnGetMealByNameFailure(String errorMessage);
     }
+    public interface OnGetMealByFilter{
+        void OnGetMealByFilterSuccess(FilterResponseModel meals);
+        void OnGetMealByFilterFailure(String errorMessage);
+    }
     public interface OnGetIngredientList{
         void OnGetIngredientListSuccess(IngredientResponse ingredientResponse);
         void OnGetIngredientListFailure(String errorMessage);
@@ -221,8 +283,6 @@ public class Repository {
         void OnGetCountryListSuccess(CountryListResponse countryListResponse);
         void OnGetCountryListFailure(String errorMessage);
     }
-
-
     public interface DBResponse{
         void onSuccessResponse(List<Meal> meals);
     }

@@ -2,6 +2,7 @@ package com.example.sidechef.model.data.api;
 
 import com.example.sidechef.model.models.Categories;
 import com.example.sidechef.model.models.CountryListResponse;
+import com.example.sidechef.model.models.FilterResponseModel;
 import com.example.sidechef.model.models.IngredientResponse;
 import com.example.sidechef.model.models.Meals;
 
@@ -21,7 +22,11 @@ public interface ApiCalls {
     Single<Categories> getCategories();
 
     @GET("filter.php")
-    Observable<Meals> getMealByCategory(@Query("c")String category);
+    Single<FilterResponseModel> getMealByCategory(@Query("c")String category);
+    @GET("filter.php")
+    Single<FilterResponseModel> getMealByIngredient(@Query("i")String ingredient);
+    @GET("filter.php")
+    Single<FilterResponseModel> getMealByCountry(@Query("a")String area);
 
 
     @GET("search.php")

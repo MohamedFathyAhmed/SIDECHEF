@@ -62,7 +62,7 @@ public class onSearchByFragment extends Fragment implements OnSearchByView, Conn
         if(requiredSearch.equals("country")){
 
             onSearchByPresenter.getAllCountries();
-            mySearchView=view.findViewById(R.id.onsearchByView);
+            mySearchView=view.findViewById(R.id.search_view_id);
             mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
@@ -81,7 +81,7 @@ public class onSearchByFragment extends Fragment implements OnSearchByView, Conn
 
         }else {
             onSearchByPresenter.getAllIngredients();
-            mySearchView=view.findViewById(R.id.onsearchByView);
+            mySearchView=view.findViewById(R.id.search_view_id);
             mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
