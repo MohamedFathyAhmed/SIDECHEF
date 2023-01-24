@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".On_Search_by"
+    tools:context=".onSearchByFragment"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -17,7 +17,7 @@
         app:cardCornerRadius="4dp">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+            android:id="@+id/onsearchByView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
@@ -36,10 +36,10 @@
         android:layout_height="24dp" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/onSearchByRec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/search_by_item"
-        >
+        tools:listitem="@layout/search_by_item">
 
     </androidx.recyclerview.widget.RecyclerView>
 

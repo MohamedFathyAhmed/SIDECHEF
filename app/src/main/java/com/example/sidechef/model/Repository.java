@@ -7,6 +7,8 @@ import com.example.sidechef.model.data.api.Network;
 import com.example.sidechef.model.data.database.MealsDatabase;
 import com.example.sidechef.model.data.database.MealsDAO;
 import com.example.sidechef.model.models.Categories;
+import com.example.sidechef.model.models.CountryListResponse;
+import com.example.sidechef.model.models.IngredientResponse;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Meals;
 
@@ -136,6 +138,52 @@ public class Repository {
    };
         observable.subscribe(mealsSingleObserver);
     }
+    public  void  getAllIngredients(String ingredientName,OnGetIngredientList onGetIngredientList){
+
+      Single<IngredientResponse> observable=  api.getAllIngredients(ingredientName).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        SingleObserver<IngredientResponse> ingredientResponseSingleObserver = new SingleObserver<IngredientResponse>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(@NonNull IngredientResponse ingredientResponse) {
+                System.out.println("DDDDDDDDDDDDDDddd");
+                onGetIngredientList.OnGetIngredientListSuccess(ingredientResponse);
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                System.out.println(e.getMessage());
+                onGetIngredientList.OnGetIngredientListFailure(e.getMessage());
+            }
+        };
+        observable.subscribe(ingredientResponseSingleObserver);
+    }
+    public void getAllCountries(String countryName,OnGetCountryList onGetCountryList){
+        Single<CountryListResponse> countryListResponseSingle=api.getAllCountries().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        SingleObserver<CountryListResponse> countryListResponseSingleObserver=new SingleObserver<CountryListResponse>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(@NonNull CountryListResponse countryListResponse) {
+                onGetCountryList.OnGetCountryListSuccess(countryListResponse);
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                onGetCountryList.OnGetCountryListFailure(e.getMessage());
+            }
+        };
+        countryListResponseSingle.subscribe(countryListResponseSingleObserver);
+    }
 
 
     public void getAll(DBResponse dbResponse){
@@ -164,6 +212,14 @@ public class Repository {
     public interface OnGetMealByName{
         void OnGetMealByNameSuccess(Meals meals);
         void OnGetMealByNameFailure(String errorMessage);
+    }
+    public interface OnGetIngredientList{
+        void OnGetIngredientListSuccess(IngredientResponse ingredientResponse);
+        void OnGetIngredientListFailure(String errorMessage);
+    }
+    public interface OnGetCountryList{
+        void OnGetCountryListSuccess(CountryListResponse countryListResponse);
+        void OnGetCountryListFailure(String errorMessage);
     }
 
 

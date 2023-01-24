@@ -17,7 +17,7 @@
         app:cardCornerRadius="4dp">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+            android:id="@+id/onsearchByView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"

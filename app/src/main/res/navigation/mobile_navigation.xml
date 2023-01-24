@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/on_Search_by"
-        android:name="com.example.sidechef.On_Search_by"
+        android:name="com.example.sidechef.onSearchByFragment"
         android:label="fragment_on__search_by"
         tools:layout="@layout/fragment_on__search_by" >
         <argument
@@ -65,9 +65,12 @@
         android:id="@+id/search_view"
         android:name="com.example.sidechef.search_view"
         android:label="fragment_search_view"
-        tools:layout="@layout/fragment_search_view" >
+        tools:layout="@layout/fragment_search_view">
         <argument
             android:name="required_search"
+            app:argType="string" />
+        <argument
+            android:name="keywordToSearch"
             app:argType="string" />
     </fragment>
 </navigation>

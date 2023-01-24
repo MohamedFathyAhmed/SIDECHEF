@@ -1,6 +1,8 @@
 package com.example.sidechef.model.data.api;
 
 import com.example.sidechef.model.models.Categories;
+import com.example.sidechef.model.models.CountryListResponse;
+import com.example.sidechef.model.models.IngredientResponse;
 import com.example.sidechef.model.models.Meals;
 
 import io.reactivex.rxjava3.core.Observable;
@@ -24,5 +26,10 @@ public interface ApiCalls {
 
     @GET("search.php")
     Single<Meals> getMealByName(@Query("s")String mealName);
+    @GET("list.php")
+    Single<IngredientResponse> getAllIngredients(@Query("i") String ingredientName);
+    @GET("list.php?a=list")
+    Single<CountryListResponse> getAllCountries();
+
 
 }

@@ -15,6 +15,7 @@ android:orientation="vertical">
         android:layout_margin="7dp"
         android:backgroundTint="@color/black_transparent"
         android:padding="7dp"
+        android:id="@+id/search_by_country_id"
         app:cardCornerRadius="15dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,6 +72,7 @@ android:orientation="vertical">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="7dp"
+        android:id="@+id/search_by_ingredient_id"
         android:backgroundTint="@color/black_transparent"
         android:padding="7dp"
         app:cardCornerRadius="15dp">
