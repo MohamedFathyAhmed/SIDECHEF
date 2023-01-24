@@ -9,7 +9,7 @@ import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.WeekMeals;
 
 
-@androidx.room.Database(entities = {Meal.class , WeekMeals.class}, version = 1,exportSchema = false)
+@androidx.room.Database(entities = {Meal.class , WeekMeals.class}, version = 2,exportSchema = false)
 public abstract class MealsDatabase extends RoomDatabase{
     public static final String MEAL_TABLE_NAME = "Meals";
     public static final String Week_TABLE_NAME = "Week";

@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -76,6 +77,8 @@ Button btskup;
     }
 
     private void moveToLoginActivity() {
+        YourPreference yourPrefrence = YourPreference.getInstance(getApplicationContext());
+        yourPrefrence.saveData("email","guest");
         Intent intent = new Intent(getApplicationContext(), SignIn.class);
         startActivity(intent);
     }
@@ -91,8 +94,8 @@ Button btskup;
 
         Pattern pattern;
         Matcher matcher;
-
-        final String PASSWORD_PATTERN = "^(?=.[0-9])(?=.[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
+        final String PASSWORD_PATTERN = "^(?=.[0-9]).{4,}$";
+       // final String PASSWORD_PATTERN = "^(?=.[0-9])(?=.[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
 
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(password);
@@ -103,14 +106,14 @@ Button btskup;
 
     private void checkRegistrationDetails() {
 
-        if(!TextUtils.isEmpty(edtEmail.getText().toString()) &&isValidEmail(edtEmail.getText().toString()) && isValidPassword(edtPassword.getText().toString()) && corPassword.getText().toString()==edtPassword.getText().toString() && !TextUtils.isEmpty(edtPassword.getText().toString())){
+        if(!TextUtils.isEmpty(edtEmail.getText().toString()) &&isValidEmail(edtEmail.getText().toString()) && isValidPassword(edtPassword.getText().toString()) && corPassword.getText().toString().equals(edtPassword.getText().toString()) && !TextUtils.isEmpty(edtPassword.getText().toString())){
             initLogin(edtEmail.getText().toString(), edtPassword.getText().toString());
         }else{
             if(TextUtils.isEmpty(edtEmail.getText().toString()) || !isValidEmail(edtEmail.getText().toString()) ){
                 edtEmail.setError("Please enter a valid email");
             }if(TextUtils.isEmpty(edtPassword.getText().toString()) || !isValidPassword(edtPassword.getText().toString())){
                 edtPassword.setError("Please enter password");
-            }if(TextUtils.isEmpty(corPassword.getText().toString()) || corPassword.getText().toString()!=edtPassword.getText().toString()){
+            }if(TextUtils.isEmpty(corPassword.getText().toString())){
                 corPassword.setError("Please enter re_password correct");
             }
         }
@@ -128,9 +131,10 @@ Button btskup;
     public void onRegistrationSuccess(FirebaseUser firebaseUser) {
         YourPreference yourPrefrence = YourPreference.getInstance(getApplicationContext());
         yourPrefrence.saveData("email",firebaseUser.getEmail());
-
         mPrgressDialog.dismiss();
         Toast.makeText(getApplicationContext(), "Successfully Registered" , Toast.LENGTH_SHORT).show();
+      startActivity(new Intent(this, HomeActivity.class));
+
     }
 
     @Override

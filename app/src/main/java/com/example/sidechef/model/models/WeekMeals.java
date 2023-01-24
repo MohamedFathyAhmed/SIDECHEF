@@ -12,21 +12,18 @@ import com.example.sidechef.model.data.database.MealsDatabase;
 import java.util.ArrayList;
 
 
-@Entity(tableName = MealsDatabase.Week_TABLE_NAME)
+//@Entity(tableName = MealsDatabase.Week_TABLE_NAME)
+@Entity(primaryKeys = {"day", "idMeal"})
 public class WeekMeals  extends Meal{
 
-    @PrimaryKey(autoGenerate = true)
-    public int id;
+//    @PrimaryKey(autoGenerate = true)
+//    public int id;
+    @NonNull
     String day ;
     String Time ;
+    @NonNull
     private String idMeal;
 
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getDay() {
         return day;
