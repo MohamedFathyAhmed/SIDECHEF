@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.example.sidechef.R;
@@ -23,12 +22,11 @@ import java.util.List;
 public class GridAdapter extends ArrayAdapter<FilteredMeal> {
     Context context;
     List<FilteredMeal> data=new ArrayList<>();
-    Connector connector;
-    public GridAdapter(@NonNull Context context, List<FilteredMeal> mealModelArrayList,Connector connector) {
+
+    public GridAdapter(@NonNull Context context, List<FilteredMeal> mealModelArrayList) {
         super(context, 0, mealModelArrayList);
         this.context=context;
         this.data=mealModelArrayList;
-        this.connector=connector;
     }
     public void filterList(List<FilteredMeal> filterlist) {
 
@@ -49,17 +47,9 @@ public class GridAdapter extends ArrayAdapter<FilteredMeal> {
         FilteredMeal mealModel = getItem(position);
         TextView mealTV = listitemView.findViewById(R.id.tvsearchRecipeName);
         ImageView mealIV = listitemView.findViewById(R.id.ivRecipesearchPhoto);
-        CardView cardView=listitemView.findViewById(R.id.filtered_meal_item);
 
         mealTV.setText(mealModel.getStrMeal());
         Glide.with(context).load(mealModel.getStrMealThumb()).into(mealIV);
-
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                connector.sendData(mealModel.getIdMeal());
-            }
-        });
 
         return listitemView;
     }
