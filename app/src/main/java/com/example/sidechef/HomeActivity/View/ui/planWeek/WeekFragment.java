@@ -1,20 +1,21 @@
-package com.example.sidechef.HomeActivity.View.ui.dashboard;
+package com.example.sidechef.HomeActivity.View.ui.planWeek;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sidechef.HomeActivity.View.ui.favorit.CardViewAdapterFav;
 import com.example.sidechef.R;
 import com.example.sidechef.model.Repository;
 import com.example.sidechef.model.models.Meal;
@@ -25,11 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class WeekFragment extends Fragment {
+public class WeekFragment extends Fragment implements WeekInterface {
 Repository repository;
-    ParentItemAdapter
-            parentItemAdapter;
-    @Override
+    ParentItemAdapter parentItemAdapter;
+
+  @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -58,7 +59,7 @@ Repository repository;
 
                 parentItemAdapter
                 = new ParentItemAdapter(
-                ParentItemList(),requireContext());
+                ParentItemList(),requireContext(),this);
 
         ParentRecyclerViewItem
                 .setAdapter(parentItemAdapter);
@@ -67,11 +68,12 @@ Repository repository;
 
 
     }
+    List<ParentItem> itemList
+            = new ArrayList<>();
+
 
     private List<ParentItem> ParentItemList()
     {
-        List<ParentItem> itemList
-                = new ArrayList<>();
 
         ChildItemList(Week.Saturday.toString()).observe(getViewLifecycleOwner(), new Observer<List<WeekMeals>>() {
             @Override
@@ -168,14 +170,30 @@ Repository repository;
         return itemList;
     }
 
-    private LiveData<List<WeekMeals>> ChildItemList(String day)
+    private synchronized LiveData<List<WeekMeals>> ChildItemList(String day)
     {
-
         return  repository.getweek(day);
+    }
+
+
+    @Override
+    public void sendData(WeekMeals meal) {
+
+    }
+
+    @Override
+    public void callRepo(WeekMeals meal, int position) {
+        itemList = new ArrayList<>();
+        repository.deletedaily(meal);
+        Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show();
 
 
     }
 
+    @Override
+    public void onSuccessResponse(List<WeekMeals> meals) {
+
+    }
 }
 
 

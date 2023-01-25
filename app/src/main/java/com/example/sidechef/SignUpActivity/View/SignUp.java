@@ -1,13 +1,12 @@
 package com.example.sidechef.SignUpActivity.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,7 +16,8 @@ import android.widget.Toast;
 import com.example.sidechef.HomeActivity.View.HomeActivity;
 import com.example.sidechef.R;
 import com.example.sidechef.SingInActivity.View.SignIn;
-import com.example.sidechef.YourPreference;
+import com.example.sidechef.Utils.YourPreference;
+import com.example.sidechef.model.Repository;
 import com.example.sidechef.presenter.RegistrationPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -54,7 +54,7 @@ Button btskup;
         edtEmail = findViewById(R.id.email_register);
         edtPassword = findViewById(R.id.password_register);
         corPassword=findViewById(R.id.password_register_cor)  ;
-        mRegisterPresenter = new RegistrationPresenter(this);
+        mRegisterPresenter = new RegistrationPresenter(this,this);
         btskup = findViewById(R.id.btn_skip);
         btskup.setOnClickListener(this);
         mPrgressDialog = new ProgressDialog(this);
@@ -78,6 +78,7 @@ Button btskup;
     }
 
     private void moveToLoginActivity() {
+        YourPreference.getInstance(this).saveData("email","guest");
         Intent intent = new Intent(getApplicationContext(), SignIn.class);
         startActivity(intent);
     }
@@ -93,8 +94,8 @@ Button btskup;
 
         Pattern pattern;
         Matcher matcher;
-
-        final String PASSWORD_PATTERN = "^(?=.[0-9])(?=.[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
+        final String PASSWORD_PATTERN = "^(?=.[0-9]).{4,}$";
+       // final String PASSWORD_PATTERN = "^(?=.[0-9])(?=.[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
 
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(password);
@@ -105,14 +106,14 @@ Button btskup;
 
     private void checkRegistrationDetails() {
 
-        if(!TextUtils.isEmpty(edtEmail.getText().toString()) &&isValidEmail(edtEmail.getText().toString()) && isValidPassword(edtPassword.getText().toString()) && corPassword.getText().toString()==edtPassword.getText().toString() && !TextUtils.isEmpty(edtPassword.getText().toString())){
+        if(!TextUtils.isEmpty(edtEmail.getText().toString()) &&isValidEmail(edtEmail.getText().toString()) && isValidPassword(edtPassword.getText().toString()) && corPassword.getText().toString().equals(edtPassword.getText().toString()) && !TextUtils.isEmpty(edtPassword.getText().toString())){
             initLogin(edtEmail.getText().toString(), edtPassword.getText().toString());
         }else{
             if(TextUtils.isEmpty(edtEmail.getText().toString()) || !isValidEmail(edtEmail.getText().toString()) ){
                 edtEmail.setError("Please enter a valid email");
             }if(TextUtils.isEmpty(edtPassword.getText().toString()) || !isValidPassword(edtPassword.getText().toString())){
                 edtPassword.setError("Please enter password");
-            }if(TextUtils.isEmpty(corPassword.getText().toString()) || corPassword.getText().toString()!=edtPassword.getText().toString()){
+            }if(TextUtils.isEmpty(corPassword.getText().toString())){
                 corPassword.setError("Please enter re_password correct");
             }
         }
@@ -130,9 +131,9 @@ Button btskup;
     public void onRegistrationSuccess(FirebaseUser firebaseUser) {
         YourPreference yourPrefrence = YourPreference.getInstance(getApplicationContext());
         yourPrefrence.saveData("email",firebaseUser.getEmail());
-
         mPrgressDialog.dismiss();
         Toast.makeText(getApplicationContext(), "Successfully Registered" , Toast.LENGTH_SHORT).show();
+      startActivity(new Intent(this, HomeActivity.class));
     }
 
     @Override

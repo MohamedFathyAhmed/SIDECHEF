@@ -1,28 +1,24 @@
-package com.example.sidechef.HomeActivity.View.ui.dashboard;
+package com.example.sidechef.HomeActivity.View.ui.planWeek;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.sidechef.HomeActivity.View.ui.home.HomeFragmentDirections;
 import com.example.sidechef.R;
-import com.example.sidechef.Utils;
 import com.example.sidechef.model.Repository;
 import com.example.sidechef.model.models.Meal;
-import com.example.sidechef.model.models.Meal;
-import com.example.sidechef.model.models.Week;
 import com.example.sidechef.model.models.WeekMeals;
 
 import java.util.List;
@@ -33,31 +29,25 @@ public class ChildItemAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private static final String TAG = "RECYCLER_VIEW_TAG";
     AdapterConnector adapterConnector;
 
-    ChildItemAdapter(List<WeekMeals> dataset, Context con) {
+
+    ChildItemAdapter(List<WeekMeals> dataset, Context con,AdapterConnector adapterConnector) {
         context = con;
         this.data = dataset;
-        repository = Repository.getInstance(context);
+      this.adapterConnector = adapterConnector;
 
     }
 
-
-    ChildItemAdapter(List<WeekMeals> dataset, Context context, AdapterConnector adapterConnector) {
-        this.context = context;
-        this.data = dataset;
-        this.adapterConnector = adapterConnector;
-
-    }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View v = layoutInflater.inflate(R.layout.home_card_view, parent, false);
+        View v = layoutInflater.inflate(R.layout.plan_card_view, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(v);
         Log.i(TAG, "onCreateViewHolder");
         return myViewHolder;
     }
-Repository repository;
+
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
@@ -66,22 +56,21 @@ Repository repository;
         holder.tvCat.setText(data.get(position).getStrCategory());
         holder.viewHolder.setOnClickListener(
                 view -> {
-
-
+                    WeekFragmentDirections.ActionNavigationPlanweekToNavigationDes action =
+                            WeekFragmentDirections.actionNavigationPlanweekToNavigationDes(data.get(position));
+                    Navigation.findNavController(view).navigate(action);
               }
         );
+
+        holder.btn_delete_item.setOnClickListener(
+                view -> {
+                  adapterConnector.callRepo(data.get(position),position);
+                }
+        );
+
+
         Glide.with(context).load(data.get(position).getStrMealThumb()).into(holder.ivRecipePhoto);
-        // holder.mealButton.setOnClickListener(
-        // view -> {adapterConnector.callRepo(data.get(position),position);}
-        // );
-        // holder.mealButton.setOnClickListener(new View.OnClickListener() {
-        // @Override
-        // public void onClick(View view) {
-        // // Toast.makeText(context, data.get(position).description,
-        // Toast.LENGTH_SHORT);
-        //
-        // }
-        // });
+
         Log.i(TAG, "onBindViewHolder 2");
 
     }
@@ -92,29 +81,26 @@ Repository repository;
     }
 
     public interface AdapterConnector {
-        public void sendData(Meal meal);
-
-        public void callRepo(Meal meal, int position);
+        public void sendData(WeekMeals meal);
+        public void callRepo(WeekMeals meal, int position);
     }
 }
 
 class MyViewHolder extends RecyclerView.ViewHolder {
     TextView tvRecipeName;
     TextView tvCountry;
-    TextView tvRecipeYield;
     TextView tvCat;
     ImageView ivRecipePhoto;
     public LinearLayout viewHolder;
-
+    ImageView btn_delete_item;
     public MyViewHolder(View itemView) {
         super(itemView);
         this.tvRecipeName = itemView.findViewById(R.id.tvRecipeName);
         this.tvCountry = itemView.findViewById(R.id.txCountry);
-        this.tvRecipeYield = itemView.findViewById(R.id.tvCategory);
         this.tvCat = itemView.findViewById(R.id.tvCategory);
         this.ivRecipePhoto = itemView.findViewById(R.id.ivRecipePhoto);
         this.viewHolder = itemView.findViewById(R.id.viewHolder);
-
+        this.btn_delete_item = itemView.findViewById(R.id.btn_delete_item);
     }
 
 }

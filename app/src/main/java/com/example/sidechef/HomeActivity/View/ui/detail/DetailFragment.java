@@ -1,4 +1,4 @@
-package com.example.sidechef.HomeActivity.View.ui;
+package com.example.sidechef.HomeActivity.View.ui.detail;
 
 import android.os.Bundle;
 
@@ -16,10 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 import com.bumptech.glide.Glide;
 import com.example.sidechef.R;
+import com.example.sidechef.Utils.Utils;
+import com.example.sidechef.Utils.YourPreference;
 import com.example.sidechef.model.Repository;
 import com.example.sidechef.model.models.Meal;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -38,9 +41,8 @@ Repository repository;
     TextView instructions;
     TextView ingredients;
     TextView fav;
-//    VideoView videoView;
     Toolbar toolbar;
-
+    LinearLayout btnlinearLayout;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +63,17 @@ Repository repository;
         instructions = view.findViewById(R.id.instructions);
         ingredients = view.findViewById(R.id.ingredient);
         fav = view.findViewById(R.id.favorite);
-            videoView = view.findViewById(R.id.video);
-
-        // videoView = view.findViewById(R.id.videoView);
+        videoView = view.findViewById(R.id.video);
         toolbar = view.findViewById(R.id.toolbar);
-        setMeal(meal);
+        btnlinearLayout=view.findViewById(R.id.btnLinearLayout);
+        String email  = YourPreference.getInstance(requireContext()).getData("email");
+        if( email.equals("") || (!Utils.isNetworkAvailable(requireContext()) )){
+            btnlinearLayout.setVisibility(View.GONE);
+        }else {
+            btnlinearLayout.setVisibility(View.VISIBLE);
+        }
+
+            setMeal(meal);
 
     }
 
@@ -93,7 +101,6 @@ Repository repository;
 
         Glide.with(mealThumb.getContext()).load(meal.getStrMealThumb()).into(mealThumb);
 
-        // setvedio(meal.getStrYoutube(),getActivity());
         collapsingToolbarLayout.setTitle(meal.getStrMeal().toString());
         category.setText(meal.getStrCategory());
         country.setText(meal.getStrArea());
@@ -172,39 +179,4 @@ Repository repository;
 
     }
 
-//
-//    videoView = view.findViewById(R.id.video);
-//    getLifecycle().addObserver((LifecycleObserver) videoView);
-//    String[] split = mealsItem.getStrYoutube().split("=");
-//
-//        videoView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
-//        @Override
-//        public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-//            String videoId = split[1];
-//            youTubePlayer.loadVideo(videoId, 0);
-//        }
-//    });
-//
-    // public void setvedio(String videoUrl, Context context) {
-    // //
-    // videoView.setVideoPath(meal.getStrYoutube());
-    // videoView.start();
-    // //
-    // Uri uri = Uri.parse(videoUrl);
-    // // sets the resource from the
-    // // videoUrl to the videoView
-    // videoView.setVideoURI(uri);
-    // // creating object of
-    // // media controller class
-    // MediaController mediaController = new MediaController(context);
-    // // sets the anchor view
-    // // anchor view for the videoView
-    // mediaController.setAnchorView(videoView);
-    // // sets the media player to the videoView
-    // mediaController.setMediaPlayer(videoView);
-    // // sets the media controller to the videoView
-    // videoView.setMediaController(mediaController);
-    // // starts the video
-    // videoView.start();
-    // }
 }

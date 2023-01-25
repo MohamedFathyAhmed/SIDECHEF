@@ -1,4 +1,4 @@
-package com.example.sidechef.HomeActivity.View.ui;
+package com.example.sidechef.HomeActivity.View.ui.detail;
 
 
 import com.example.sidechef.model.models.Meal;

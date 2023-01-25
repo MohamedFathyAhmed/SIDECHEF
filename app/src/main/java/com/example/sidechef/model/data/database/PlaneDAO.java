@@ -18,11 +18,11 @@ import io.reactivex.rxjava3.core.Flowable;
 @Dao
 public interface PlaneDAO {
 
-    @Query("SELECT * FROM "+ MealsDatabase.Week_TABLE_NAME)
-    List<WeekMeals> getAll();
+//    @Query("SELECT * FROM "+ MealsDatabase.Week_TABLE_NAME)
+//    List<WeekMeals> getAll();
 
 
-    @Query("SELECT * FROM Week WHERE day =:day" )
+    @Query("SELECT * FROM WeekMeals WHERE day =:day" )
     LiveData<List<WeekMeals>> getForDay(String day);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
