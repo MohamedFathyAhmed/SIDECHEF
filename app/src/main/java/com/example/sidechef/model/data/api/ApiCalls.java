@@ -6,6 +6,8 @@ import com.example.sidechef.model.models.FilterResponseModel;
 import com.example.sidechef.model.models.IngredientResponse;
 import com.example.sidechef.model.models.Meals;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
@@ -16,6 +18,8 @@ public interface ApiCalls {
     Observable<Meals> getMeal();
 //"filter.php?i=chicken_breast"
 //random.php
+    @GET("lookup.php")
+    Maybe<Meals> getMealById(@Query("i")String id);
 
 
     @GET("categories.php")

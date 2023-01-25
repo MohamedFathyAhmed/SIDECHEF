@@ -5,30 +5,36 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.sidechef.HomeActivity.View.ui.home.HomeFragmentDirections;
 import com.example.sidechef.model.models.Country;
 import com.example.sidechef.model.models.FilterResponseModel;
 import com.example.sidechef.model.models.FilteredMeal;
+import com.example.sidechef.model.models.Meal;
+import com.example.sidechef.model.models.Meals;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class search_view extends Fragment implements  SearchView{
+public class search_view extends Fragment implements  SearchView ,Connector{
 
     String requiredSearch;
     String searchKeyword;
-     GridAdapter gridAdapter;
+    GridAdapter gridAdapter;
     GridView gridView;
     androidx.appcompat.widget.SearchView searchView;
     List<FilteredMeal> meals=new ArrayList<FilteredMeal>();
     SearchPresenter searchPresenter;
+    Meal selectedMeal;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,9 +86,28 @@ public class search_view extends Fragment implements  SearchView{
     }
 
     @Override
+    public void OnGetMealByIdSuccess(Meals meals) {
+        selectedMeal=meals.getmeals().get(0);
+        search_viewDirections.ActionSearchViewToNavigationDes action = search_viewDirections
+                .actionSearchViewToNavigationDes(selectedMeal);
+        action.setDataMeal(selectedMeal);
+        Navigation.findNavController(getView()).navigate(action);
+    }
+
+    @Override
+    public void OnGetMealByIdFailure(String errorMessage) {
+
+    }
+
+    @Override
+    public void OnGetMealByIdComplete() {
+
+    }
+
+    @Override
     public void OnGetMealByFilterSuccess(FilterResponseModel meals) {
         this.meals=meals.getMeals();
-        gridAdapter= new GridAdapter(requireContext(),this.meals);
+        gridAdapter= new GridAdapter(requireContext(),this.meals,this);
         gridView.setAdapter(gridAdapter);
     }
 
@@ -103,8 +128,13 @@ public class search_view extends Fragment implements  SearchView{
             Toast.makeText(requireContext(), "No Data Found..", Toast.LENGTH_SHORT).show();
         } else {
 
-            gridAdapter=new GridAdapter(requireContext(),filteredlist);
+            gridAdapter=new GridAdapter(requireContext(),filteredlist,this);
             gridView.setAdapter(gridAdapter);
         }
+    }
+
+    @Override
+    public void sendData(String keyword) {
+        searchPresenter.getMealById(keyword,this);
     }
 }
