@@ -1,4 +1,4 @@
-package com.example.sidechef.HomeActivity.View.ui.search;
+package com.example.sidechef;
 
 import android.os.Bundle;
 
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.example.sidechef.R;
+import com.example.sidechef.model.models.Country;
 import com.example.sidechef.model.models.FilterResponseModel;
 import com.example.sidechef.model.models.FilteredMeal;
 
@@ -102,9 +102,3 @@ public class search_view extends Fragment implements  SearchView{
 
             Toast.makeText(requireContext(), "No Data Found..", Toast.LENGTH_SHORT).show();
         } else {
-
-            gridAdapter=new GridAdapter(requireContext(),filteredlist);
-            gridView.setAdapter(gridAdapter);
-        }
-    }
-}

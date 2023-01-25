@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 
+import com.example.sidechef.SearchView;
 import com.example.sidechef.Utils.YourPreference;
 import com.example.sidechef.model.data.api.ApiCalls;
 import com.example.sidechef.model.data.api.Network;
@@ -21,23 +22,20 @@ import com.example.sidechef.model.models.IngredientResponse;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Meals;
 import com.example.sidechef.model.models.WeekMeals;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.CompletableObserver;
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Maybe;
+import io.reactivex.rxjava3.core.MaybeObserver;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.Single;
@@ -208,7 +206,31 @@ public class Repository {
                     }
                 });
     }
+    public void getMealById(String id, SearchView searchView){
+        Maybe<Meals> mealsMaybe=api.getMealById(id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        MaybeObserver<Meals> mealsMaybeObserver=new MaybeObserver<Meals>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
 
+            }
+
+            @Override
+            public void onSuccess(@NonNull Meals meals) {
+                    searchView.OnGetMealByIdSuccess(meals);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                searchView.OnGetMealByIdFailure(e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                searchView.OnGetMealByIdComplete();
+            }
+        };
+        mealsMaybe.subscribe(mealsMaybeObserver);
+    }
 
 
     public void getAllMeals(RandomMealResponseDelegate randomMealResponseDelegate) {
@@ -349,7 +371,7 @@ public class Repository {
         };
         countryListResponseSingle.subscribe(countryListResponseSingleObserver);
     }
-    public void getMealByCountry(String countryName,OnGetMealByFilter onGetMealByFilter){
+    public void getMealByCountry(String countryName,SearchView searchView){
         Single<FilterResponseModel> filterResponseModelSingle=api.getMealByCountry(countryName).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
         SingleObserver <FilterResponseModel>filterResponseModelSingleObserver=new SingleObserver<FilterResponseModel>() {
             @Override
@@ -359,17 +381,17 @@ public class Repository {
 
             @Override
             public void onSuccess(@NonNull FilterResponseModel filterResponseModel) {
-                onGetMealByFilter.OnGetMealByFilterSuccess(filterResponseModel);
+                searchView.OnGetMealByFilterSuccess(filterResponseModel);
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                onGetMealByFilter.OnGetMealByFilterFailure(e.getMessage());
+                searchView.OnGetMealByFilterFailure(e.getMessage());
             }
         };
         filterResponseModelSingle.subscribe(filterResponseModelSingleObserver);
     }
-    public void getMealByIngredient(String ingredientName,OnGetMealByFilter onGetMealByFilter){
+    public void getMealByIngredient(String ingredientName,SearchView searchView){
         Single<FilterResponseModel> filterResponseModelSingle=api.getMealByIngredient(ingredientName).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
         SingleObserver <FilterResponseModel>filterResponseModelSingleObserver=new SingleObserver<FilterResponseModel>() {
             @Override
@@ -379,17 +401,17 @@ public class Repository {
 
             @Override
             public void onSuccess(@NonNull FilterResponseModel filterResponseModel) {
-                onGetMealByFilter.OnGetMealByFilterSuccess(filterResponseModel);
+                searchView.OnGetMealByFilterSuccess(filterResponseModel);
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                onGetMealByFilter.OnGetMealByFilterFailure(e.getMessage());
+                searchView.OnGetMealByFilterFailure(e.getMessage());
             }
         };
         filterResponseModelSingle.subscribe(filterResponseModelSingleObserver);
     }
-    public void getMealByCategory(String categoryName,OnGetMealByFilter onGetMealByFilter){
+    public void getMealByCategory(String categoryName,SearchView searchView){
         Single<FilterResponseModel> filterResponseModelSingle=api.getMealByCategory(categoryName).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
         SingleObserver <FilterResponseModel>filterResponseModelSingleObserver=new SingleObserver<FilterResponseModel>() {
             @Override
@@ -399,12 +421,12 @@ public class Repository {
 
             @Override
             public void onSuccess(@NonNull FilterResponseModel filterResponseModel) {
-                onGetMealByFilter.OnGetMealByFilterSuccess(filterResponseModel);
+                searchView.OnGetMealByFilterSuccess(filterResponseModel);
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                onGetMealByFilter.OnGetMealByFilterFailure(e.getMessage());
+                searchView.OnGetMealByFilterFailure(e.getMessage());
             }
         };
         filterResponseModelSingle.subscribe(filterResponseModelSingleObserver);
@@ -474,10 +496,7 @@ return list;
         void OnGetMealByNameSuccess(Meals meals);
         void OnGetMealByNameFailure(String errorMessage);
     }
-    public interface OnGetMealByFilter{
-        void OnGetMealByFilterSuccess(FilterResponseModel meals);
-        void OnGetMealByFilterFailure(String errorMessage);
-    }
+
     public interface OnGetIngredientList{
         void OnGetIngredientListSuccess(IngredientResponse ingredientResponse);
         void OnGetIngredientListFailure(String errorMessage);
