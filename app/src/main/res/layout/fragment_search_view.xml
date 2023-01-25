@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".search_view"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:elevation="8dp"
+        app:cardCornerRadius="4dp">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:queryHint="query_hint" >
+
+        </androidx.appcompat.widget.SearchView>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <GridView
+        android:id="@+id/searchgrid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="2"
+        android:gravity="center"
+        tools:itemCount="8"
+        tools:listitem="@layout/search_card" />
+
+</LinearLayout>

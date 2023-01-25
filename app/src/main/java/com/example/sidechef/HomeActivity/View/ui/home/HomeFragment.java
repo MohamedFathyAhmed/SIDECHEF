@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sidechef.Connector;
 import com.example.sidechef.R;
 
 import com.example.sidechef.model.models.Categories;
@@ -28,7 +29,7 @@ import com.example.sidechef.model.models.Meals;
 
 import java.util.List;
 
-public class HomeFragment extends Fragment implements NetworkInterface {
+public class HomeFragment extends Fragment implements NetworkInterface , Connector {
     RecyclerView categoryrecyclerView;
     RecyclerView randomrecyclerView;
     CardViewAdapter adapter;
@@ -98,7 +99,7 @@ public class HomeFragment extends Fragment implements NetworkInterface {
     }
 
     @Override
-    public void sendData(Meal meal) {
+    public void navigate(Meal meal) {
         HomeFragmentDirections.ActionNavigationHomeToDetailFragment action = HomeFragmentDirections
                 .actionNavigationHomeToDetailFragment(meal);
         action.setDataMeal(meal);
@@ -123,12 +124,21 @@ public class HomeFragment extends Fragment implements NetworkInterface {
 
     @Override
     public void onGetCategoriesSuccessResponse(Categories categories) {
-        mAdapter = new Categoriesadapter(categories.getCategories(), requireContext());
+        mAdapter = new Categoriesadapter(categories.getCategories(), requireContext(),this);
         categoryrecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void onErrorResponse(String errorMessage) {
         Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void sendData(String keyword) {
+        HomeFragmentDirections.ActionNavigationHomeToSearchView action=HomeFragmentDirections.actionNavigationHomeToSearchView("category",keyword);
+        action.setRequiredSearch("category");
+        action.setKeywordToSearch(keyword);
+        //Log.i("TAG", "onCreateView: " + meal.getStrArea());
+        Navigation.findNavController(getView()).navigate(action);
     }
 }

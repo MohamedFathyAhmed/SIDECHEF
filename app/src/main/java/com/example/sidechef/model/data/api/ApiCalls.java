@@ -1,6 +1,9 @@
 package com.example.sidechef.model.data.api;
 
 import com.example.sidechef.model.models.Categories;
+import com.example.sidechef.model.models.CountryListResponse;
+import com.example.sidechef.model.models.FilterResponseModel;
+import com.example.sidechef.model.models.IngredientResponse;
 import com.example.sidechef.model.models.Meals;
 
 import io.reactivex.rxjava3.core.Observable;
@@ -19,10 +22,19 @@ public interface ApiCalls {
     Single<Categories> getCategories();
 
     @GET("filter.php")
-    Observable<Meals> getMealByCategory(@Query("c")String category);
+    Single<FilterResponseModel> getMealByCategory(@Query("c")String category);
+    @GET("filter.php")
+    Single<FilterResponseModel> getMealByIngredient(@Query("i")String ingredient);
+    @GET("filter.php")
+    Single<FilterResponseModel> getMealByCountry(@Query("a")String area);
 
 
     @GET("search.php")
-    Observable<Meals> getMealByName(@Query("s")String mealName);
+    Single<Meals> getMealByName(@Query("s")String mealName);
+    @GET("list.php")
+    Single<IngredientResponse> getAllIngredients(@Query("i") String ingredientName);
+    @GET("list.php?a=list")
+    Single<CountryListResponse> getAllCountries();
+
 
 }
