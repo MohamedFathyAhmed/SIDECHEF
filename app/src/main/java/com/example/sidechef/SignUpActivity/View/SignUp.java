@@ -17,6 +17,7 @@ import com.example.sidechef.HomeActivity.View.HomeActivity;
 import com.example.sidechef.R;
 import com.example.sidechef.SingInActivity.View.SignIn;
 import com.example.sidechef.Utils.YourPreference;
+import com.example.sidechef.model.Repository;
 import com.example.sidechef.presenter.RegistrationPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -53,7 +54,7 @@ Button btskup;
         edtEmail = findViewById(R.id.email_register);
         edtPassword = findViewById(R.id.password_register);
         corPassword=findViewById(R.id.password_register_cor)  ;
-        mRegisterPresenter = new RegistrationPresenter(this);
+        mRegisterPresenter = new RegistrationPresenter(this,this);
         btskup = findViewById(R.id.btn_skip);
         btskup.setOnClickListener(this);
         mPrgressDialog = new ProgressDialog(this);
@@ -77,8 +78,7 @@ Button btskup;
     }
 
     private void moveToLoginActivity() {
-        YourPreference yourPrefrence = YourPreference.getInstance(getApplicationContext());
-        yourPrefrence.saveData("email","guest");
+        YourPreference.getInstance(this).saveData("email","guest");
         Intent intent = new Intent(getApplicationContext(), SignIn.class);
         startActivity(intent);
     }
@@ -134,7 +134,6 @@ Button btskup;
         mPrgressDialog.dismiss();
         Toast.makeText(getApplicationContext(), "Successfully Registered" , Toast.LENGTH_SHORT).show();
       startActivity(new Intent(this, HomeActivity.class));
-
     }
 
     @Override

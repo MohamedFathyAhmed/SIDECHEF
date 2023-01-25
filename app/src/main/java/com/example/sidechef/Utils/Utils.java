@@ -1,8 +1,12 @@
 package com.example.sidechef.Utils;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.WeekMeals;
@@ -18,6 +22,21 @@ public class Utils {
         return alertDialog;
     }
 
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivity =(ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivity == null) {
+            return false;
+        } else {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            for (NetworkInfo networkInfo : info) {
+                if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 
     public static WeekMeals converter (String day, String time, Meal meal) {
@@ -87,48 +106,6 @@ weekMeals.setStrIngredient1(meal.getStrIngredient1());
 
 
 /*
-           //adapterConnector.sendData(data.get(position))
-                    AlertDialog.Builder builderSingle = new AlertDialog.Builder(context);
-                    builderSingle.setIcon(R.drawable.ic_favorite);
-                    builderSingle.setTitle("Select day:-");
-
-                    final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.select_dialog_singlechoice);
-                    arrayAdapter.add(Week.Saturday.toString());
-                    arrayAdapter.add(Week.Sunday.toString());
-                    arrayAdapter.add(Week.Monday.toString());
-                    arrayAdapter.add(Week.Tuesday.toString());
-                    arrayAdapter.add(Week.Wednesday.toString());
-                    arrayAdapter.add(Week.Thursday.toString());
-                    arrayAdapter.add(Week.Friday.toString());
-                    builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-
-                    builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            String strName = arrayAdapter.getItem(which);
-                            AlertDialog.Builder builderInner = new AlertDialog.Builder(context);
-                            builderInner.setMessage(strName);
-                            builderInner.setTitle("Your Selected ");
-                            builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog,int which) {
-                                  WeekMeals weekMeals = Utils.converter(strName,"breakfast",data.get(position));
-                                    repository.insertdaily(weekMeals);
-                                    dialog.dismiss();
-                                }
-                            });
-                            builderInner.show();
-                        }
-                    });
-                    builderSingle.show();
-                }
- */
-/*
 //alert yes no
         AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
                     builder1.setMessage("Write your message here.");
@@ -175,4 +152,14 @@ public  String day ;
 
     }
 }
+ */
+
+/*
+    String email  = YourPreference.getInstance(requireContext()).getData("email");
+        if( email.equals("")){
+            btnlinearLayout.setVisibility(View.GONE);
+        }else {
+            btnlinearLayout.setVisibility(View.VISIBLE);
+        }
+
  */

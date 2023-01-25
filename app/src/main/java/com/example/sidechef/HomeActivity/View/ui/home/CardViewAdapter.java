@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.sidechef.R;
+import com.example.sidechef.Utils.Utils;
+import com.example.sidechef.Utils.YourPreference;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Meals;
 
@@ -65,7 +67,12 @@ public class CardViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
          );
 
         Log.i(TAG, "onBindViewHolder 2");
-
+        String email  = YourPreference.getInstance(context).getData("email");
+        if( email.equals("") && Utils.isNetworkAvailable(context)){
+            holder.btn_love_item.setVisibility(View.GONE);
+        }else {
+            holder.btn_love_item.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

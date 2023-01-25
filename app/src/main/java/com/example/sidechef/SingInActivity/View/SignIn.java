@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.sidechef.HomeActivity.View.HomeActivity;
 import com.example.sidechef.R;
 import com.example.sidechef.Utils.YourPreference;
+import com.example.sidechef.model.Repository;
 import com.example.sidechef.presenter.LoginPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -41,7 +42,6 @@ EditText tv_name;
     EditText tv_pass;
     LoginPresenter mLoginPresenter;
     ProgressDialog mProgressDialog;
-
      SignInButton googeSignIn;
      GoogleSignInOptions gso;
      GoogleSignInClient gsc;
@@ -56,7 +56,7 @@ EditText tv_name;
         tv_name = findViewById(R.id.email_register);
         tv_pass = findViewById(R.id.password_register);
         googeSignIn = findViewById(R.id.btn_signInWithGoogle);
-        mLoginPresenter = new LoginPresenter(this);
+        mLoginPresenter = new LoginPresenter(this,this);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Please wait, Logging in..");
         btn_login.setOnClickListener(this);
@@ -66,8 +66,6 @@ EditText tv_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //delete
-
         getSupportActionBar().hide();
         //For google sign in
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -150,10 +148,10 @@ EditText tv_name;
     public void onLoginSuccess(String message , String email) {
         YourPreference yourPrefrence = YourPreference.getInstance(getApplicationContext());
         yourPrefrence.saveData("email",email);
-
         mProgressDialog.dismiss();
         Log.i("hellplab", "onLoginSuccess: ");
         Toast.makeText(getApplicationContext(), "Successfully Logged in" , Toast.LENGTH_SHORT).show();
+
         startActivity(new Intent(this, HomeActivity.class));
     }
 
@@ -183,7 +181,7 @@ EditText tv_name;
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Toast.makeText(getApplicationContext(), "Sign in was successful", Toast.LENGTH_SHORT).show();
-                   //     Navigation.findNavController(v).navigate(R.id.action_navSignIn_to_nav_home);
+
                         startActivity(new Intent(getBaseContext(), HomeActivity.class));
                     } else {
                         Toast.makeText(getApplicationContext(), "Sign in failed", Toast.LENGTH_SHORT).show();

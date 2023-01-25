@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.sidechef.R;
 import com.example.sidechef.Utils.Utils;
+import com.example.sidechef.Utils.YourPreference;
 import com.example.sidechef.model.Repository;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Week;
@@ -73,6 +74,9 @@ Repository repository;
         holder.addToPlan.setOnClickListener(
                 view -> {adapterConnector.addToPlan(data.get(position));}
         );
+
+
+
     }
 
     @Override

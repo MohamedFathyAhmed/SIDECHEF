@@ -22,7 +22,9 @@ import com.example.sidechef.HomeActivity.View.ui.home.CardViewAdapter;
 import com.example.sidechef.HomeActivity.View.ui.home.HomeFragmentDirections;
 import com.example.sidechef.R;
 import com.example.sidechef.Utils.Utils;
+import com.example.sidechef.model.Repository;
 import com.example.sidechef.model.models.Meal;
+import com.example.sidechef.model.models.Time;
 import com.example.sidechef.model.models.Week;
 import com.example.sidechef.model.models.WeekMeals;
 
@@ -53,6 +55,7 @@ public class FavoritFragment extends Fragment implements FavoritInterface {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new  GridLayoutManager(requireContext(), 1));
         favoritPresenter.fetchData();
+
     }
 
 
@@ -78,7 +81,7 @@ public class FavoritFragment extends Fragment implements FavoritInterface {
     @Override
     public void addToPlan(Meal meal) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(requireContext());
-        builderSingle.setIcon(R.drawable.ic_favorite);
+        builderSingle.setIcon(R.drawable.ic_dashboard_black_24dp);
         builderSingle.setTitle("Select day:-");
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(requireContext(), android.R.layout.select_dialog_singlechoice);
@@ -99,23 +102,41 @@ public class FavoritFragment extends Fragment implements FavoritInterface {
         builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String strName = arrayAdapter.getItem(which);
-                AlertDialog.Builder builderInner = new AlertDialog.Builder(requireContext());
-                builderInner.setMessage(strName);
-                builderInner.setTitle("Your Selected ");
-                builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builderInnertime = new AlertDialog.Builder(requireContext());
+                builderInnertime.setTitle("Select time:-");
+                builderInnertime.setIcon(R.drawable.baseline_timer_24);
+
+                final ArrayAdapter<String> arrayAdapterday = new ArrayAdapter<String>(requireContext(), android.R.layout.select_dialog_singlechoice);
+                arrayAdapterday.add(Time.Saturday.toString());
+                arrayAdapterday.add(Time.Sunday.toString());
+                arrayAdapterday.add(Time.Monday.toString());
+
+                builderInnertime.setAdapter(arrayAdapterday, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog,int which) {
-                        WeekMeals weekMeals = Utils.converter(strName,"breakfast",meal);
-                        favoritPresenter.addToPlan(weekMeals);
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialog, int which) {
+                        String strName = arrayAdapter.getItem(which);
+                        String strNameDay = arrayAdapterday.getItem(which);
+                        AlertDialog.Builder builderInner = new AlertDialog.Builder(requireContext());
+                        builderInner.setMessage(strName + " at " + strNameDay + " to your plan");
+                        builderInner.setTitle("Your add " + meal.getStrMeal() );
+                        builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,int which) {
+                                WeekMeals weekMeals = Utils.converter(strName,"breakfast",meal);
+                                favoritPresenter.addToPlan(weekMeals);
+                                dialog.dismiss();
+                            }
+                        });
+                        builderInner.show();
+
                     }
                 });
-                builderInner.show();
+                builderInnertime.show();
             }
         });
         builderSingle.show();
     }
+
 
     @Override
     public void onSuccessResponse(List<Meal> meal) {
