@@ -39,18 +39,15 @@ public class MainActivity extends FancyWalkthroughActivity {
 
 
 
-
         List<FancyWalkthroughCard> pages = new ArrayList<>();
         pages.add(fancywalkthroughCard1);
         pages.add(fancywalkthroughCard2);
         pages.add(fancywalkthroughCard3);
         setFinishButtonTitle("Get Started");
         showNavigationControls(true);
-
         setColorBackground(R.color.black);
         setInactiveIndicatorColor(com.shashank.sony.fancywalkthroughlib.R.color.grey_300);
         setActiveIndicatorColor(com.shashank.sony.fancywalkthroughlib.R.color.grey_600);
-
         setImageBackground(R.drawable.fathul_abrar_unsplash);
         setOnboardPages(pages);
     }

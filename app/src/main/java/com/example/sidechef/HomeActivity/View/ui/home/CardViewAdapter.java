@@ -60,17 +60,24 @@ public class CardViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.tvCountry.setText(data.get(position).getmeals().get(0).getStrArea());
         holder.tvCat.setText(data.get(position).getmeals().get(0).getStrCategory());
         holder.tvRecipeName.setText(data.get(position).getmeals().get(0).getStrMeal());
+
         holder.viewHolder.setOnClickListener(view -> adapterConnector.sendData(data.get(position).getmeals().get(0)));
+        // holder.tvRecipePreparationTime.setText(data.get(position).getmeals().get(0).getStrCategory());
+
+        // holder.viewHolder.setOnClickListener(view ->
+        // adapterConnector.navigate(data.get(position).getmeals().get(0)));
+
         Glide.with(context).load(data.get(position).getmeals().get(0).getStrMealThumb()).into(holder.ivRecipePhoto);
-         holder.btn_love_item.setOnClickListener(
-         view -> {adapterConnector.callRepo(data.get(position).getmeals().get(0),position);}
-         );
+        holder.btn_love_item.setOnClickListener(
+                view -> {
+                    adapterConnector.callRepo(data.get(position).getmeals().get(0), position);
+                });
 
         Log.i(TAG, "onBindViewHolder 2");
-        String email  = YourPreference.getInstance(context).getData("email");
-        if( email.equals("") && Utils.isNetworkAvailable(context)){
+        String email = YourPreference.getInstance(context).getData("email");
+        if (email.equals("") && Utils.isNetworkAvailable(context)) {
             holder.btn_love_item.setVisibility(View.GONE);
-        }else {
+        } else {
             holder.btn_love_item.setVisibility(View.VISIBLE);
         }
     }
@@ -81,7 +88,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
     }
 
     public interface AdapterConnector {
-        public void sendData(Meal meal);
+        public void navigate(Meal meal);
 
         public void callRepo(Meal meal, int position);
     }
@@ -94,6 +101,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
     ImageView ivRecipePhoto;
     public LinearLayout viewHolder;
     ImageView btn_love_item;
+
     public MyViewHolder(View itemView) {
         super(itemView);
         this.tvRecipeName = itemView.findViewById(R.id.tvRecipeName);
@@ -101,7 +109,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         this.tvCat = itemView.findViewById(R.id.tvCategory);
         this.ivRecipePhoto = itemView.findViewById(R.id.ivRecipePhoto);
         this.viewHolder = itemView.findViewById(R.id.viewHolder);
-        this.btn_love_item =itemView.findViewById(R.id.btn_love_item);
+        this.btn_love_item = itemView.findViewById(R.id.btn_love_item);
     }
 
 }

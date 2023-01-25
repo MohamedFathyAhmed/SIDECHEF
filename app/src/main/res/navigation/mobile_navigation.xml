@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_detailFragment"
             app:destination="@id/navigation_des" />
+        <action
+            android:id="@+id/action_navigation_home_to_search_view"
+            app:destination="@id/search_view" />
     </fragment>
 
     <fragment
@@ -43,5 +46,38 @@
             android:name="dataMeal"
             app:argType="com.example.sidechef.model.models.Meal"
             app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.sidechef.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_navigation_search_to_on_Search_by"
+            app:destination="@id/on_Search_by" />
+    </fragment>
+    <fragment
+        android:id="@+id/on_Search_by"
+        android:name="com.example.sidechef.onSearchByFragment"
+        android:label="fragment_on__search_by"
+        tools:layout="@layout/fragment_on__search_by" >
+        <argument
+            android:name="required_search_by"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_on_Search_by_to_search_view"
+            app:destination="@id/search_view" />
+    </fragment>
+    <fragment
+        android:id="@+id/search_view"
+        android:name="com.example.sidechef.search_view"
+        android:label="fragment_search_view"
+        tools:layout="@layout/fragment_search_view">
+        <argument
+            android:name="required_search"
+            app:argType="string" />
+        <argument
+            android:name="keywordToSearch"
+            app:argType="string" />
     </fragment>
 </navigation>

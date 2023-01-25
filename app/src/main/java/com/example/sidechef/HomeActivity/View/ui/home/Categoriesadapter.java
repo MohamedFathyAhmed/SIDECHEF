@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.sidechef.Connector;
 import com.example.sidechef.R;
 import com.example.sidechef.model.models.Category;
 
@@ -21,11 +22,13 @@ import java.util.List;
 public class Categoriesadapter  extends RecyclerView.Adapter<CategoriesViewHolder> {
     private List<Category> data;
     private final Context context;
+    private  Connector connector;
     private static final String TAG = "RECYCLER_VIEW_TAG";
 
-    Categoriesadapter(List<Category> dataset, Context con) {
+    Categoriesadapter(List<Category> dataset, Context con,Connector connector) {
         context = con;
         this.data = dataset;
+        this.connector=connector;
 
     }
 
@@ -47,6 +50,9 @@ public class Categoriesadapter  extends RecyclerView.Adapter<CategoriesViewHolde
             @Override
             public void onClick(View view) {
                 // Toast.makeText(context, data.get(position).description, Toast.LENGTH_SHORT);
+                connector.sendData(data.get(position).getStrCategory());
+
+
 
             }
         });
@@ -70,5 +76,6 @@ class CategoriesViewHolder extends RecyclerView.ViewHolder {
         this.categoryTextView =  view.findViewById(R.id.category_text);
         this.categoryCardView=(CardView) view.findViewById(R.id.category_card);
     }
+
 }
 
