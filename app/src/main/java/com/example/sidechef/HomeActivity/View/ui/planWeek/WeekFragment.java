@@ -44,7 +44,6 @@ Repository repository;
         super.onViewCreated(view, savedInstanceState);
         repository = Repository.getInstance(requireContext());
         //delete
-        repository.getAllMealFirebase();
         RecyclerView
                 ParentRecyclerViewItem
                 = view.findViewById(
@@ -186,8 +185,6 @@ Repository repository;
         itemList = new ArrayList<>();
         repository.deletedaily(meal);
         Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show();
-
-
     }
 
     @Override

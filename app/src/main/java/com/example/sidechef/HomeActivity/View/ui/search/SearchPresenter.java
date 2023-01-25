@@ -1,10 +1,8 @@
-package com.example.sidechef;
+package com.example.sidechef.HomeActivity.View.ui.search;
 
 import android.content.Context;
 
-import com.example.sidechef.SearchView;
 import com.example.sidechef.model.Repository;
-import com.example.sidechef.model.models.Meal;
 
 
 public class SearchPresenter {

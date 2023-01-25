@@ -1,4 +1,4 @@
-package com.example.sidechef;
+package com.example.sidechef.HomeActivity.View.ui.search;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,26 +13,26 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.sidechef.R;
 import com.example.sidechef.model.models.Country;
-import com.example.sidechef.model.models.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OnSearchByIngredientRecViewAdapter extends RecyclerView.Adapter<OnSearchByViewHolder> {
-    private List<Ingredient> data;
+public class OnSearchByCountryRecViewAdapter extends RecyclerView.Adapter<OnSearchByViewHolder> {
+    private List<Country> data;
     private Context context;
     Connector adapterConnector;
 
     private static final String TAG = "RECYCLER_VIEW_TAG";
 
-    OnSearchByIngredientRecViewAdapter(List<Ingredient> dataset, Context con, Connector adapterConnector) {
+    OnSearchByCountryRecViewAdapter(List<Country> dataset, Context con, Connector adapterConnector) {
         this.context = con;
         this.data = dataset;
         this.adapterConnector=adapterConnector;
 
     }
-    public void filterList(ArrayList<Ingredient> filterlist) {
+    public void filterList(ArrayList<Country> filterlist) {
 
         data = filterlist;
 
@@ -54,8 +54,8 @@ public class OnSearchByIngredientRecViewAdapter extends RecyclerView.Adapter<OnS
     @Override
     public void onBindViewHolder(@NonNull OnSearchByViewHolder holder, int position) {
 
-        holder.myCardView.setOnClickListener(view -> adapterConnector.sendData(data.get(position).getStrIngredient()));
-        holder.myTextView.setText(data.get(position).getStrIngredient());
+        holder.myCardView.setOnClickListener(view -> adapterConnector.sendData(data.get(position).getStrArea()));
+        holder.myTextView.setText(data.get(position).getStrArea());
 
     }
 
@@ -67,11 +67,11 @@ public class OnSearchByIngredientRecViewAdapter extends RecyclerView.Adapter<OnS
 
 }
 
-class OnSearchByIngredientViewHolder extends RecyclerView.ViewHolder {
+class OnSearchByViewHolder extends RecyclerView.ViewHolder {
     CardView myCardView;
     TextView myTextView;
 
-    public OnSearchByIngredientViewHolder(View itemView) {
+    public OnSearchByViewHolder(View itemView) {
         super(itemView);
         myCardView=itemView.findViewById(R.id.search_by_card);
         myTextView=itemView.findViewById(R.id.search_by_text);

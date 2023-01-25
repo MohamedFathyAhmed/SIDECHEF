@@ -1,4 +1,4 @@
-package com.example.sidechef;
+package com.example.sidechef.HomeActivity.View.ui.search;
 
 import com.example.sidechef.model.Repository;
 

@@ -22,7 +22,6 @@ import java.util.Objects;
 public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
-    View fav ,plan,home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +37,9 @@ public class HomeActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration;
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_planweek, R.id.navigation_favorite)
+                R.id.navigation_home, R.id.navigation_planweek, R.id.navigation_favorite,R.layout.fragment_search)
                 .build();
+        View fav ,plan,home;
         fav = findViewById(R.id.navigation_favorite);
         plan = findViewById(R.id.navigation_planweek);
         home = findViewById(R.id.navigation_home);

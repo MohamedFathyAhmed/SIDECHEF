@@ -1,4 +1,4 @@
-package com.example.sidechef;
+package com.example.sidechef.HomeActivity.View.ui.search;
 
 import android.os.Bundle;
 
@@ -13,14 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.sidechef.R;
+import com.example.sidechef.Utils.Utils;
+import com.example.sidechef.Utils.YourPreference;
 
 
 public class SearchFragment extends Fragment {
-   /* GridAdapter gridAdapter;
-    GridView gridView;
-    SearchView searchView;
-    ArrayList<Meal> meals;
-    SearchPresenter searchPresenter;*/
     CardView countryCardView;
     CardView ingredientCardView;
 
@@ -28,6 +26,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         countryCardView=view.findViewById(R.id.search_by_country_id);
         ingredientCardView=view.findViewById(R.id.search_by_ingredient_id);
         countryCardView.setOnClickListener(new View.OnClickListener() {
@@ -50,22 +49,8 @@ public class SearchFragment extends Fragment {
                 Navigation.findNavController(getView()).navigate(action);
             }
         });
-        /*searchView=view.findViewById(R.id.searchView);
-        gridView=view.findViewById(R.id.searchgrid);
-        searchPresenter=new SearchPresenter(requireContext(),this);
-        searchPresenter.getMealByName("Arrabiata",this);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });*/
     }
 
     @Override

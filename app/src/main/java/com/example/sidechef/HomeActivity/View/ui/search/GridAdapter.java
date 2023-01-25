@@ -1,4 +1,4 @@
-package com.example.sidechef;
+package com.example.sidechef.HomeActivity.View.ui.search;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
+import com.example.sidechef.R;
 import com.example.sidechef.model.models.FilteredMeal;
 import com.example.sidechef.model.models.Ingredient;
 import com.example.sidechef.model.models.Meal;

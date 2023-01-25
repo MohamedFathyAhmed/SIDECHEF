@@ -13,7 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.sidechef.Connector;
+import com.example.sidechef.HomeActivity.View.ui.search.Connector;
 import com.example.sidechef.R;
 import com.example.sidechef.model.models.Category;
 

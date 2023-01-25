@@ -1,4 +1,4 @@
-package com.example.sidechef;
+package com.example.sidechef.HomeActivity.View.ui.search;
 
 import android.os.Bundle;
 
@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.sidechef.R;
 import com.example.sidechef.model.models.Country;
 import com.example.sidechef.model.models.CountryListResponse;
 import com.example.sidechef.model.models.Ingredient;

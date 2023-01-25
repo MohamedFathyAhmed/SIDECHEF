@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.example.sidechef.SearchFragment"
+        android:name="com.example.sidechef.HomeActivity.View.ui.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/on_Search_by"
-        android:name="com.example.sidechef.onSearchByFragment"
+        android:name="com.example.sidechef.HomeActivity.View.ui.search.onSearchByFragment"
         android:label="fragment_on__search_by"
         tools:layout="@layout/fragment_on__search_by" >
         <argument
@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/search_view"
-        android:name="com.example.sidechef.search_view"
+        android:name="com.example.sidechef.HomeActivity.View.ui.search.search_view"
         android:label="fragment_search_view"
         tools:layout="@layout/fragment_search_view">
         <argument
