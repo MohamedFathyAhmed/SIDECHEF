@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.example.sidechef.model.models.FilteredMeal;
+import com.example.sidechef.model.models.Ingredient;
 import com.example.sidechef.model.models.Meal;
 
 import java.util.ArrayList;
@@ -19,12 +20,19 @@ import java.util.List;
 
 public class GridAdapter extends ArrayAdapter<FilteredMeal> {
     Context context;
+    List<FilteredMeal> data=new ArrayList<>();
 
     public GridAdapter(@NonNull Context context, List<FilteredMeal> mealModelArrayList) {
         super(context, 0, mealModelArrayList);
         this.context=context;
+        this.data=mealModelArrayList;
     }
+    public void filterList(List<FilteredMeal> filterlist) {
 
+        data = filterlist;
+
+        this.notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

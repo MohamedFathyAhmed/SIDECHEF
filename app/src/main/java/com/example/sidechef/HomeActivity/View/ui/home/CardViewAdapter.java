@@ -60,7 +60,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.tvRecipeName.setText(data.get(position).getmeals().get(0).getStrMeal());
         // holder.tvRecipePreparationTime.setText(data.get(position).getmeals().get(0).getStrCategory());
 
-        holder.viewHolder.setOnClickListener(view -> adapterConnector.sendData(data.get(position).getmeals().get(0)));
+        holder.viewHolder.setOnClickListener(view -> adapterConnector.navigate(data.get(position).getmeals().get(0)));
         Glide.with(context).load(data.get(position).getmeals().get(0).getStrMealThumb()).into(holder.ivRecipePhoto);
         // holder.mealButton.setOnClickListener(
         // view -> {adapterConnector.callRepo(data.get(position),position);}
@@ -83,7 +83,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
     }
 
     public interface AdapterConnector {
-        public void sendData(Meal meal);
+        public void navigate(Meal meal);
 
         public void callRepo(Meal meal, int position);
     }
