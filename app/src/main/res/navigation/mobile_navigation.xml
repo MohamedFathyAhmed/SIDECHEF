@@ -79,5 +79,8 @@
         <argument
             android:name="keywordToSearch"
             app:argType="string" />
+        <action
+            android:id="@+id/action_search_view_to_navigation_des"
+            app:destination="@id/navigation_des" />
     </fragment>
 </navigation>

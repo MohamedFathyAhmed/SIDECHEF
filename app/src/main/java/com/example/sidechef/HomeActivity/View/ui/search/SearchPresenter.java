@@ -3,6 +3,7 @@ package com.example.sidechef.HomeActivity.View.ui.search;
 import android.content.Context;
 
 import com.example.sidechef.model.Repository;
+import com.example.sidechef.model.models.Meal;
 
 
 public class SearchPresenter {
@@ -14,13 +15,16 @@ public class SearchPresenter {
         this.searchView = searchView;
     }
 
-public  void  getMealByCountry(String countryName, Repository.OnGetMealByFilter onGetMealByFilter){
-        repository.getMealByCountry(countryName, onGetMealByFilter);
+public  void  getMealByCountry(String countryName, SearchView searchView){
+        repository.getMealByCountry(countryName, searchView);
 }
-    public  void  getMealByCategory(String categoryName, Repository.OnGetMealByFilter onGetMealByFilter){
-        repository.getMealByCategory(categoryName, onGetMealByFilter);
+    public  void  getMealById(String id, SearchView searchView){
+        repository.getMealById(id, searchView);
     }
-    public  void  getMealByIngredient(String ingredientName, Repository.OnGetMealByFilter onGetMealByFilter){
-        repository.getMealByIngredient(ingredientName, onGetMealByFilter);
+    public  void  getMealByCategory(String categoryName, SearchView searchView){
+        repository.getMealByCategory(categoryName, searchView);
+    }
+    public  void  getMealByIngredient(String ingredientName, SearchView searchView){
+        repository.getMealByIngredient(ingredientName, searchView);
     }
 }

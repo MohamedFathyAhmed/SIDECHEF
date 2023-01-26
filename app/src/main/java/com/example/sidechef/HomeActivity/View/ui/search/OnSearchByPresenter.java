@@ -2,7 +2,10 @@ package com.example.sidechef.HomeActivity.View.ui.search;
 
 import android.content.Context;
 
+import com.example.sidechef.HomeActivity.View.ui.home.NetworkInterface;
+
 import com.example.sidechef.model.Repository;
+import com.example.sidechef.model.models.Meal;
 
 public class OnSearchByPresenter {
 

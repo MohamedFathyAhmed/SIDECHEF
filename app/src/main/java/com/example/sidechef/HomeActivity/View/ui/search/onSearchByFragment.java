@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+
 import com.example.sidechef.R;
 import com.example.sidechef.model.models.Country;
 import com.example.sidechef.model.models.CountryListResponse;
@@ -34,7 +35,7 @@ public class onSearchByFragment extends Fragment implements OnSearchByView, Conn
     OnSearchByIngredientRecViewAdapter onSearchByIngredientRecViewAdapter;
     List<Country> countryList=new ArrayList<Country>();
     List<Ingredient>ingredientList=new ArrayList<Ingredient>();
-    androidx.appcompat.widget.SearchView mySearchView;
+    SearchView mySearchView;
 
 
     @Override

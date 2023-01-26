@@ -22,7 +22,7 @@ import java.util.List;
 public class Categoriesadapter  extends RecyclerView.Adapter<CategoriesViewHolder> {
     private List<Category> data;
     private final Context context;
-    private  Connector connector;
+    private Connector connector;
     private static final String TAG = "RECYCLER_VIEW_TAG";
 
     Categoriesadapter(List<Category> dataset, Context con,Connector connector) {

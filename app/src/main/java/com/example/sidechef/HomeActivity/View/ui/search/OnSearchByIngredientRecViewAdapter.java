@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.sidechef.R;
+import com.example.sidechef.model.models.Country;
 import com.example.sidechef.model.models.Ingredient;
 
 import java.util.ArrayList;
