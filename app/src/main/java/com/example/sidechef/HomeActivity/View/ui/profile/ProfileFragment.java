@@ -1,4 +1,4 @@
-package com.example.sidechef;
+package com.example.sidechef.HomeActivity.View.ui.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.example.sidechef.R;
 import com.example.sidechef.SignUpActivity.View.SignUp;
 import com.example.sidechef.Utils.YourPreference;
 
