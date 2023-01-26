@@ -61,11 +61,11 @@ public class CardViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.tvCat.setText(data.get(position).getmeals().get(0).getStrCategory());
         holder.tvRecipeName.setText(data.get(position).getmeals().get(0).getStrMeal());
 
-        holder.viewHolder.setOnClickListener(view -> adapterConnector.sendData(data.get(position).getmeals().get(0)));
+       // holder.viewHolder.setOnClickListener(view -> adapterConnector.sendData(data.get(position).getmeals().get(0)));
         // holder.tvRecipePreparationTime.setText(data.get(position).getmeals().get(0).getStrCategory());
 
-        // holder.viewHolder.setOnClickListener(view ->
-        // adapterConnector.navigate(data.get(position).getmeals().get(0)));
+         holder.viewHolder.setOnClickListener(view ->
+         adapterConnector.navigate(data.get(position).getmeals().get(0)));
 
         Glide.with(context).load(data.get(position).getmeals().get(0).getStrMealThumb()).into(holder.ivRecipePhoto);
         holder.btn_love_item.setOnClickListener(
