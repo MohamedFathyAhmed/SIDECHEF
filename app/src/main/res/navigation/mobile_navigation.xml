@@ -83,4 +83,9 @@
             android:id="@+id/action_search_view_to_navigation_des"
             app:destination="@id/navigation_des" />
     </fragment>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.sidechef.HomeActivity.View.ui.user.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
 </navigation>

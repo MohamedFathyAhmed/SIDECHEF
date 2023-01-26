@@ -1,5 +1,7 @@
 package com.example.sidechef.HomeActivity.View.ui.detail;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import androidx.lifecycle.LifecycleObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,7 +28,11 @@ import com.example.sidechef.Utils.Utils;
 import com.example.sidechef.Utils.YourPreference;
 import com.example.sidechef.model.Repository;
 import com.example.sidechef.model.models.Meal;
+import com.example.sidechef.model.models.Time;
+import com.example.sidechef.model.models.Week;
+import com.example.sidechef.model.models.WeekMeals;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -42,7 +49,9 @@ Repository repository;
     TextView ingredients;
     TextView fav;
     Toolbar toolbar;
+    TextView BtnAddToPlan;
     LinearLayout btnlinearLayout;
+    BottomNavigationView navBar;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +59,17 @@ Repository repository;
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        navBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //hideen bar
+         navBar = getActivity().findViewById(R.id.nav_view);
+        navBar.setVisibility(View.GONE);
         // get data from frag
         meal = DetailFragmentArgs.fromBundle(getArguments()).getDataMeal();
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
@@ -63,9 +81,11 @@ Repository repository;
         instructions = view.findViewById(R.id.instructions);
         ingredients = view.findViewById(R.id.ingredient);
         fav = view.findViewById(R.id.favorite);
+        BtnAddToPlan = view.findViewById(R.id.BtnAddToPlan);
         videoView = view.findViewById(R.id.video);
         toolbar = view.findViewById(R.id.toolbar);
         btnlinearLayout=view.findViewById(R.id.btnLinearLayout);
+
         String email  = YourPreference.getInstance(requireContext()).getData("email");
         if( email.equals("") || (!Utils.isNetworkAvailable(requireContext()) )){
             btnlinearLayout.setVisibility(View.GONE);
@@ -91,6 +111,67 @@ Repository repository;
         fav.setOnClickListener(v->{
 
             repository.insert(meal);
+
+        });
+
+        BtnAddToPlan.setOnClickListener(v->{
+
+
+            AlertDialog.Builder builderSingle = new AlertDialog.Builder(requireContext());
+            builderSingle.setIcon(R.drawable.ic_dashboard_black_24dp);
+            builderSingle.setTitle("Select day:-");
+
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(requireContext(), android.R.layout.select_dialog_singlechoice);
+            arrayAdapter.add(Week.Saturday.toString());
+            arrayAdapter.add(Week.Sunday.toString());
+            arrayAdapter.add(Week.Monday.toString());
+            arrayAdapter.add(Week.Tuesday.toString());
+            arrayAdapter.add(Week.Wednesday.toString());
+            arrayAdapter.add(Week.Thursday.toString());
+            arrayAdapter.add(Week.Friday.toString());
+            builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    AlertDialog.Builder builderInnertime = new AlertDialog.Builder(requireContext());
+                    builderInnertime.setTitle("Select time:-");
+                    builderInnertime.setIcon(R.drawable.baseline_timer_24);
+
+                    final ArrayAdapter<String> arrayAdapterday = new ArrayAdapter<String>(requireContext(), android.R.layout.select_dialog_singlechoice);
+                    arrayAdapterday.add(Time.Breakfast.toString());
+                    arrayAdapterday.add(Time.Dinner.toString());
+                    arrayAdapterday.add(Time.Lunch.toString());
+
+                    builderInnertime.setAdapter(arrayAdapterday, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String strName = arrayAdapter.getItem(which);
+                            String strNameDay = arrayAdapterday.getItem(which);
+                            AlertDialog.Builder builderInner = new AlertDialog.Builder(requireContext());
+                            builderInner.setMessage(strName + " at " + strNameDay + " to your plan");
+                            builderInner.setTitle("Your add " + meal.getStrMeal() );
+                            builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,int which) {
+                                    WeekMeals weekMeals = Utils.converter(strName,strNameDay,meal);
+                                    repository.insertdaily(weekMeals);
+                                    dialog.dismiss();
+                                }
+                            });
+                            builderInner.show();
+
+                        }
+                    });
+                    builderInnertime.show();
+                }
+            });
+            builderSingle.show();
 
         });
 

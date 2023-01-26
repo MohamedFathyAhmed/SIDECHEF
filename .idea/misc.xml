@@ -8,16 +8,24 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.25407608695652173" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3805389404296875" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.23052536231884058" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/layout/categories_card_view.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/layout/favorite_item.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.3473282442748092" />
         <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25407608695652173" />
+        <entry key="app/src/main/res/layout/fragment_on__search_by.xml" value="0.23052536231884058" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.23052536231884058" />
+        <entry key="app/src/main/res/layout/fragment_search_view.xml" value="0.23052536231884058" />
+        <entry key="app/src/main/res/layout/fragment_user.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/layout/fragment_week.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/layout/home_card_view.xml" value="0.25407608695652173" />
         <entry key="app/src/main/res/layout/parent_item.xml" value="0.23052536231884058" />
-        <entry key="app/src/main/res/layout/plan_card_view.xml" value="0.22282608695652173" />
+        <entry key="app/src/main/res/layout/plan_card_view.xml" value="0.5634517766497462" />
+        <entry key="app/src/main/res/layout/search_by_item.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/layout/slide_iteam.xml" value="0.25407608695652173" />
+        <entry key="app/src/main/res/layout/slide_item_container.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.3296875" />
       </map>
     </option>

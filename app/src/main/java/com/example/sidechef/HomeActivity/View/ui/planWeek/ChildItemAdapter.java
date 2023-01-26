@@ -15,10 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.sidechef.HomeActivity.View.ui.home.HomeFragmentDirections;
 import com.example.sidechef.R;
-import com.example.sidechef.model.Repository;
-import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.WeekMeals;
 
 import java.util.List;
@@ -54,6 +51,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.tvRecipeName.setText(data.get(position).getStrMeal());
         holder.tvCountry.setText(data.get(position).getStrArea());
         holder.tvCat.setText(data.get(position).getStrCategory());
+        holder.tvRecipetime.setText(data.get(position).getTime());
         holder.viewHolder.setOnClickListener(
                 view -> {
                     WeekFragmentDirections.ActionNavigationPlanweekToNavigationDes action =
@@ -93,6 +91,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
     ImageView ivRecipePhoto;
     public LinearLayout viewHolder;
     ImageView btn_delete_item;
+    TextView tvRecipetime;
     public MyViewHolder(View itemView) {
         super(itemView);
         this.tvRecipeName = itemView.findViewById(R.id.tvRecipeName);
@@ -101,6 +100,8 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         this.ivRecipePhoto = itemView.findViewById(R.id.ivRecipePhoto);
         this.viewHolder = itemView.findViewById(R.id.viewHolder);
         this.btn_delete_item = itemView.findViewById(R.id.btn_delete_item);
+        this.tvRecipetime = itemView.findViewById(R.id.tvRecipetime);
+
     }
 
 }

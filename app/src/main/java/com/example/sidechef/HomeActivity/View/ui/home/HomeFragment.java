@@ -11,7 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,11 +26,15 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.sidechef.HomeActivity.View.ui.search.Connector;
 import com.example.sidechef.R;
 
+import com.example.sidechef.Utils.Utils;
+import com.example.sidechef.Utils.YourPreference;
 import com.example.sidechef.model.models.Categories;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Meals;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
+import java.util.Objects;
 
 public class HomeFragment extends Fragment implements NetworkInterface , Connector {
     RecyclerView categoryrecyclerView;
@@ -44,7 +51,7 @@ public class HomeFragment extends Fragment implements NetworkInterface , Connect
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+          hidenbarguest();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -53,6 +60,7 @@ public class HomeFragment extends Fragment implements NetworkInterface , Connect
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         initrandommealRecView(view);
         initCategoryRecView(view);
@@ -88,27 +96,6 @@ public class HomeFragment extends Fragment implements NetworkInterface , Connect
         networkPresenter.getMeals();
         networkPresenter.getCategories();
 
-       // stackView
-//       NestedScrollView nestedScrollView= ((NestedScrollView) view.findViewById(R.id.scrollView));
-//        nestedScrollView.setEnabled(false);
-//
-//       nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-//            @Override
-//            public void onScrollChange(@NonNull NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-//                if (stackView.getHeight() < scrollY) {
-//                    stackView.showNext();
-//                }
-//
-//            }
-//        });
-
-//        stackView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                stackView.showNext();
-//            }
-//
-//        });
     }
 
     void initCategoryRecView(View view) {
@@ -188,5 +175,34 @@ public class HomeFragment extends Fragment implements NetworkInterface , Connect
         action.setKeywordToSearch(keyword);
         //Log.i("TAG", "onCreateView: " + meal.getStrArea());
         Navigation.findNavController(getView()).navigate(action);
+    }
+
+    public void hidenbarguest() {
+        View fav ,plan,home;
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).hide();
+
+        BottomNavigationView navView = getActivity().findViewById(R.id.nav_view);
+        AppBarConfiguration appBarConfiguration;
+        appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_planweek, R.id.navigation_favorite,R.layout.fragment_search)
+                .build();
+
+        fav = getActivity().findViewById(R.id.navigation_favorite);
+        plan = getActivity().findViewById(R.id.navigation_planweek);
+        home =getActivity().findViewById(R.id.navigation_home);
+        String email  = YourPreference.getInstance(requireActivity()).getData("email");
+        if( email.equals("") || (!Utils.isNetworkAvailable(requireActivity()) )){
+            fav.setVisibility(View.GONE);
+            plan.setVisibility(View.GONE);
+        }else {
+            fav.setVisibility(View.VISIBLE);
+            plan.setVisibility(View.VISIBLE);
+        }
+
+
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_home);
+        NavigationUI.setupActionBarWithNavController((AppCompatActivity) requireActivity(), navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
+
     }
 }

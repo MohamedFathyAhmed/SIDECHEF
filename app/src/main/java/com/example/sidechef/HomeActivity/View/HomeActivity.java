@@ -7,6 +7,7 @@ import android.view.View;
 import com.example.sidechef.R;
 import com.example.sidechef.Utils.Utils;
 import com.example.sidechef.Utils.YourPreference;
+
 import com.example.sidechef.databinding.ActivityHomeBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -33,29 +34,14 @@ public class HomeActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration;
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_planweek, R.id.navigation_favorite,R.layout.fragment_search)
+                R.id.navigation_home, R.id.navigation_planweek, R.id.navigation_favorite,R.layout.fragment_search,R.layout.fragment_user)
                 .build();
-        View fav ,plan,home;
-        fav = findViewById(R.id.navigation_favorite);
-        plan = findViewById(R.id.navigation_planweek);
-        home = findViewById(R.id.navigation_home);
-        String email  = YourPreference.getInstance(this).getData("email");
-        if( email.equals("") || (!Utils.isNetworkAvailable(this) )){
-            fav.setVisibility(View.GONE);
-            plan.setVisibility(View.GONE);
-        }else {
-            fav.setVisibility(View.VISIBLE);
-            plan.setVisibility(View.VISIBLE);
-        }
 
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+//        NavigationUI.setupWithNavController(navView, navController);
 
 
 

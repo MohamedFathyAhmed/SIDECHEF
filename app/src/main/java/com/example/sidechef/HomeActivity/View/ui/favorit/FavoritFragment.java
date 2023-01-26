@@ -107,9 +107,9 @@ public class FavoritFragment extends Fragment implements FavoritInterface {
                 builderInnertime.setIcon(R.drawable.baseline_timer_24);
 
                 final ArrayAdapter<String> arrayAdapterday = new ArrayAdapter<String>(requireContext(), android.R.layout.select_dialog_singlechoice);
-                arrayAdapterday.add(Time.Saturday.toString());
-                arrayAdapterday.add(Time.Sunday.toString());
-                arrayAdapterday.add(Time.Monday.toString());
+                arrayAdapterday.add(Time.Breakfast.toString());
+                arrayAdapterday.add(Time.Dinner.toString());
+                arrayAdapterday.add(Time.Lunch.toString());
 
                 builderInnertime.setAdapter(arrayAdapterday, new DialogInterface.OnClickListener() {
                     @Override
@@ -122,7 +122,7 @@ public class FavoritFragment extends Fragment implements FavoritInterface {
                         builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog,int which) {
-                                WeekMeals weekMeals = Utils.converter(strName,"breakfast",meal);
+                                WeekMeals weekMeals = Utils.converter(strName,strNameDay,meal);
                                 favoritPresenter.addToPlan(weekMeals);
                                 dialog.dismiss();
                             }

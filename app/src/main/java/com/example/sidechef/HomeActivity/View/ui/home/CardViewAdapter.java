@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,7 +20,6 @@ import com.example.sidechef.Utils.YourPreference;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Meals;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CardViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
@@ -104,7 +102,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
 
     public MyViewHolder(View itemView) {
         super(itemView);
-        this.tvRecipeName = itemView.findViewById(R.id.tvRecipeName);
+        this.tvRecipeName = itemView.findViewById(R.id.tvRecipetime);
         this.tvCountry = itemView.findViewById(R.id.txCountry);
         this.tvCat = itemView.findViewById(R.id.tvCategory);
         this.ivRecipePhoto = itemView.findViewById(R.id.ivRecipePhoto);
