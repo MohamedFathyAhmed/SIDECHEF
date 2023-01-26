@@ -28,6 +28,8 @@ public interface MealsDAO {
 
     @Delete
     void delete(Meal meal);
+    @Query("DELETE FROM "+ MealsDatabase.MEAL_TABLE_NAME)
+    void deleteTableRoom();
 
 
 }

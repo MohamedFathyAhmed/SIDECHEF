@@ -482,6 +482,9 @@ public class Repository {
         deleteWeelMealToFireStore(meal);
         new Thread(() -> pDB.delete(meal)).start();
     };
+    public void deleteTableRoom(){
+        db.deleteTableRoom();
+    }
 
     public void delete(Meal meal) {
         deleteMealToFireStore(meal);

@@ -83,4 +83,9 @@
             android:id="@+id/action_search_view_to_navigation_des"
             app:destination="@id/navigation_des" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.sidechef.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

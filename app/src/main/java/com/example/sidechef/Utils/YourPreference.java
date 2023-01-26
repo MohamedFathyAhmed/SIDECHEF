@@ -20,7 +20,7 @@ public class YourPreference {
 
     public void saveData(String key,String value) {
         SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
-        prefsEditor .putString(key, value);
+        prefsEditor.putString(key, value);
         prefsEditor.commit();
     }
 
@@ -30,6 +30,12 @@ public class YourPreference {
         }
         return "";
     }
+    public void removeData(String key) {
+        SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
+        prefsEditor.remove(key);
+        prefsEditor.commit();
+    }
+
 
 
 }

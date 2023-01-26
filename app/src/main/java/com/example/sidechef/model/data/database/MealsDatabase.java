@@ -21,7 +21,7 @@ public abstract class MealsDatabase extends RoomDatabase{
     public static synchronized MealsDatabase getInstance(Context context){
         if (instance == null)
        //     instance = Room.databaseBuilder(context.getApplicationContext(), MealsDatabase.class,"MealDB")
-        instance = Room.databaseBuilder(context.getApplicationContext(), MealsDatabase.class,"foodDB")
+            instance = Room.databaseBuilder(context.getApplicationContext(), MealsDatabase.class,"foodDB")
                     .fallbackToDestructiveMigration()
                     .build();
         return instance;

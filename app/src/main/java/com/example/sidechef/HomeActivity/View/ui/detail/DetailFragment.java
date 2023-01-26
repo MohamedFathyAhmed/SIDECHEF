@@ -116,6 +116,7 @@ Repository repository;
                 youTubePlayer.loadVideo(videoId, 0);
             }
         });
+
         if (!meal.getStrIngredient1().isEmpty()) {
             ingredients.append("\n " + meal.getStrIngredient1() + " : " + meal.getStrMeasure1());
         }
