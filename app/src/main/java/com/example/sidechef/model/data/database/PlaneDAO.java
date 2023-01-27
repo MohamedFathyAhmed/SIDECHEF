@@ -33,6 +33,8 @@ public interface PlaneDAO {
 
     @Delete
     void delete(WeekMeals meal);
+    @Query("DELETE FROM WeekMeals")
+    void deleteWeekRoom();
 
 
 }

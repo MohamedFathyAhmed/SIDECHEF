@@ -23,6 +23,11 @@ public class YourPreference {
         prefsEditor .putString(key, value);
         prefsEditor.commit();
     }
+    public void removeData(String key) {
+        SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
+        prefsEditor.remove(key);
+        prefsEditor.commit();
+    }
 
     public String getData(String key) {
         if (sharedPreferences!= null) {
