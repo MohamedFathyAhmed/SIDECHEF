@@ -1,5 +1,6 @@
 package com.example.sidechef.SignUpActivity.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -19,7 +20,17 @@ import com.example.sidechef.R;
 import com.example.sidechef.SingInActivity.View.SignIn;
 import com.example.sidechef.Utils.YourPreference;
 import com.example.sidechef.presenter.RegistrationPresenter;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,15 +38,30 @@ import java.util.regex.Pattern;
 public class SignUp extends AppCompatActivity implements View.OnClickListener, RegisterViewInterface{
     TextView tvLogin;
     Button btnRegistration;
+
     EditText edtEmail, edtPassword ;
+
+    SignInButton signUpBtn;
+    //EditText edtEmail, edtPassword , corPassword;
+
     RegistrationPresenter mRegisterPresenter;
     ProgressDialog mPrgressDialog;
-Button btskup;
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
+    Button btskup;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_sign_up);
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        gsc = GoogleSignIn.getClient(getApplicationContext(), gso);
         initViews();
     }
 
@@ -51,6 +77,8 @@ Button btskup;
         mRegisterPresenter = new RegistrationPresenter(this,this);
         btskup = findViewById(R.id.btn_skip);
         btskup.setOnClickListener(this);
+        signUpBtn = findViewById(R.id.btn_sign_up_withGoogle);
+        signUpBtn.setOnClickListener(this);
         mPrgressDialog = new ProgressDialog(this);
         mPrgressDialog.setMessage("Please wait, Adding profile to database.");
     }
@@ -65,7 +93,11 @@ Button btskup;
                 moveToLoginActivity();
                 break;
         case R.id.btn_skip:
+
             skipBtn();
+            startActivity(  new Intent(getApplicationContext(), HomeActivity.class));
+            case R.id.btn_sign_up_withGoogle:
+                signInGoogle();
         break;
     }
 
@@ -153,6 +185,33 @@ Button btskup;
     public void onRegistrationFailure(String message) {
         mPrgressDialog.dismiss();
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+    void signInGoogle() {
+        Intent signInIntent = gsc.getSignInIntent();
+        startActivityForResult(signInIntent, 1000);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+
+            firebaseAuth.signInWithCredential(GoogleAuthProvider.getCredential(task.getResult().getIdToken(), null)).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        //YourPreference yourPrefrence = YourPreference.getInstance(getApplicationContext());
+                        //yourPrefrence.saveData("email",  task.getResult().getUser().getEmail());
+                        Toast.makeText(getApplicationContext(), "Sign Up was successful", Toast.LENGTH_SHORT).show();
+                        //mLoginPresenter.setDataFromFirebase();
+                        //startActivity(new Intent(getBaseContext(), HomeActivity.class));
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Sign Up failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }
     }
 
 

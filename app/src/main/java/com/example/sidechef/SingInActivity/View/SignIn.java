@@ -36,8 +36,8 @@ import java.util.regex.Pattern;
 
 
 public class SignIn extends AppCompatActivity implements View.OnClickListener, LoginViewinterface {
-Button btn_login;
-EditText tv_name;
+    Button btn_login;
+    EditText tv_name;
     EditText tv_pass;
     LoginPresenter mLoginPresenter;
     ProgressDialog mProgressDialog;
