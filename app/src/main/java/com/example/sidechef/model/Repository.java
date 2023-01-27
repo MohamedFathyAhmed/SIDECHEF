@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 
 import com.example.sidechef.HomeActivity.View.ui.search.SearchView;
+import com.example.sidechef.SearchByNameView;
 import com.example.sidechef.Utils.Utils;
 import com.example.sidechef.Utils.YourPreference;
 
@@ -313,7 +314,7 @@ public class Repository {
         observable.cache().subscribe(categorysSingleObserver);
     }
 
-    public void getMealByName(String mealName, OnGetMealByName onGetMealByName) {
+    public void getMealByName(String mealName, SearchByNameView searchByNameView) {
         Single<Meals> observable = api.getMealByName(mealName).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         SingleObserver<Meals> mealsSingleObserver = new SingleObserver<Meals>() {
@@ -324,12 +325,12 @@ public class Repository {
 
             @Override
             public void onSuccess(@NonNull Meals meals) {
-                onGetMealByName.OnGetMealByNameSuccess(meals);
+                searchByNameView.OnGetMealByNameSuccess(meals);
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                onGetMealByName.OnGetMealByNameFailure(e.getMessage());
+                searchByNameView.OnGetMealByNameFailure(e.getMessage());
             }
         };
         observable.subscribe(mealsSingleObserver);
@@ -537,11 +538,7 @@ if(Utils.isNetworkAvailable(context)){
         void onErrorResponse(String errorMessage);
     }
 
-    public interface OnGetMealByName {
-        void OnGetMealByNameSuccess(Meals meals);
 
-        void OnGetMealByNameFailure(String errorMessage);
-    }
 
     public interface OnGetIngredientList {
         void OnGetIngredientListSuccess(IngredientResponse ingredientResponse);

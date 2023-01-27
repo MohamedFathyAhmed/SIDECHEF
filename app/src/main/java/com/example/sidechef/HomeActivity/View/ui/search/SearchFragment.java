@@ -33,6 +33,7 @@ public class SearchFragment extends Fragment {
     SearchPresenter searchPresenter;*/
     CardView countryCardView;
     CardView ingredientCardView;
+    CardView nameCardView;
 
 
     @Override
@@ -42,6 +43,14 @@ public class SearchFragment extends Fragment {
         hidenbarguest();
         countryCardView=view.findViewById(R.id.search_by_country_id);
         ingredientCardView=view.findViewById(R.id.search_by_ingredient_id);
+        nameCardView=view.findViewById(R.id.search_by_name_id);
+        nameCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Navigation.findNavController(getView()).navigate(SearchFragmentDirections.actionNavigationSearchToSearchByName());
+            }
+        });
         countryCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
