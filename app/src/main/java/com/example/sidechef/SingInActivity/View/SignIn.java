@@ -160,7 +160,7 @@ EditText tv_name;
         mProgressDialog.dismiss();
         Log.i("hellplab", "onLoginSuccess: ");
         Toast.makeText(getApplicationContext(), "Successfully Logged in" , Toast.LENGTH_SHORT).show();
-
+  finish();
         startActivity(new Intent(this, HomeActivity.class));
     }
 
@@ -189,8 +189,10 @@ EditText tv_name;
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+                        YourPreference yourPrefrence = YourPreference.getInstance(getApplicationContext());
+                        yourPrefrence.saveData("email",  task.getResult().getUser().getEmail());
                         Toast.makeText(getApplicationContext(), "Sign in was successful", Toast.LENGTH_SHORT).show();
-
+                        mLoginPresenter.setDataFromFirebase();
                         startActivity(new Intent(getBaseContext(), HomeActivity.class));
                     } else {
                         Toast.makeText(getApplicationContext(), "Sign in failed", Toast.LENGTH_SHORT).show();

@@ -25,6 +25,12 @@ public class LoginPresenter implements LoginPresenterInterface, LoginListener {
     }
 
     @Override
+    public void setDataFromFirebase() {
+        repository.getAllMealFirebase();
+        repository.getAllMealPlanFirebase();
+    }
+
+    @Override
     public void onSuccess(String message,String email) {
         mLoginView.onLoginSuccess(message,email);
         repository.getAllMealFirebase();

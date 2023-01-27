@@ -110,8 +110,6 @@ Button btskup;
             }
         }
 
-
-
     }
 
     private void initLogin(String email, String password) {
@@ -125,6 +123,7 @@ Button btskup;
         yourPrefrence.saveData("email",firebaseUser.getEmail());
         mPrgressDialog.dismiss();
         Toast.makeText(getApplicationContext(), "Successfully Registered" , Toast.LENGTH_SHORT).show();
+        finish();
       startActivity(new Intent(this, HomeActivity.class));
     }
 

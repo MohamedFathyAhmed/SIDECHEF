@@ -24,14 +24,17 @@ public class SplashScreen extends AppCompatActivity {
                 SharedPreferences preferences = getSharedPreferences("sharedPreferences", 0);
                 String value = preferences.getString("first_time", null);
                 if (value == null) {
+                    finish();
                     startActivity(new Intent(SplashScreen.this, MainActivity.class));
                     SharedPreferences.Editor pre = preferences.edit();
                     pre.putString("first_time", "no");
                     pre.apply();
                 } else {
                     if (preferences.getString("email", "guest").equals("guest")) {
+                        finish();
                         startActivity(new Intent(SplashScreen.this, SignUp.class));
                     } else {
+                        finish();
                         startActivity(new Intent(SplashScreen.this, HomeActivity.class));
                     }
 
