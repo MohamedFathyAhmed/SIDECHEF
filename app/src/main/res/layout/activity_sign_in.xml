@@ -35,7 +35,7 @@
 
 
     <TextView
-        android:id="@+id/Signup"
+        android:id="@+id/forgetpasswordid"
         android:layout_width="match_parent"
         android:layout_height="62dp"
         android:background="@android:color/transparent"
@@ -59,7 +59,7 @@
 
       <!-- INPUT -->
       <EditText
-          android:id="@+id/email_register"
+          android:id="@+id/email_forget_password"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_toRightOf="@+id/username_icon"
@@ -125,7 +125,7 @@
 
 
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/btn_forget_password"
         android:layout_width="match_parent"
         android:layout_height="53dp"
         android:layout_gravity="center"

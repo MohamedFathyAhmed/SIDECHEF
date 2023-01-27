@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,15 +16,8 @@ import com.example.sidechef.HomeActivity.View.HomeActivity;
 import com.example.sidechef.R;
 import com.example.sidechef.SingInActivity.View.SignIn;
 import com.example.sidechef.Utils.YourPreference;
-import com.example.sidechef.model.Repository;
 import com.example.sidechef.presenter.RegistrationPresenter;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,11 +39,11 @@ Button btskup;
 
 
     private void initViews() {
-        btnRegistration = findViewById(R.id.btn_register);
+        btnRegistration = findViewById(R.id.btn_forget_password);
         btnRegistration.setOnClickListener(this);
         tvLogin = findViewById(R.id.tv_login);
         tvLogin.setOnClickListener(this);
-        edtEmail = findViewById(R.id.email_register);
+        edtEmail = findViewById(R.id.email_forget_password);
         edtPassword = findViewById(R.id.password_register);
         corPassword=findViewById(R.id.password_register_cor)  ;
         mRegisterPresenter = new RegistrationPresenter(this,this);
@@ -64,7 +56,7 @@ Button btskup;
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btn_register:
+            case R.id.btn_forget_password:
                 checkRegistrationDetails();
                 break;
             case R.id.tv_login:

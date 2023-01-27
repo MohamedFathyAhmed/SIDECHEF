@@ -2,7 +2,6 @@ package com.example.sidechef.SingInActivity.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.Navigation;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,12 +12,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sidechef.ForgetPassword;
 import com.example.sidechef.HomeActivity.View.HomeActivity;
 import com.example.sidechef.R;
 import com.example.sidechef.Utils.YourPreference;
-import com.example.sidechef.model.Repository;
 import com.example.sidechef.presenter.LoginPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -27,7 +27,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -45,22 +44,32 @@ EditText tv_name;
      SignInButton googeSignIn;
      GoogleSignInOptions gso;
      GoogleSignInClient gsc;
+     TextView forgetPassword;
 
      FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
 
 
 
+
     private void initUI() {
-        btn_login = findViewById(R.id.btn_register);
-        tv_name = findViewById(R.id.email_register);
+        btn_login = findViewById(R.id.btn_forget_password);
+        tv_name = findViewById(R.id.email_forget_password);
         tv_pass = findViewById(R.id.password_register);
         googeSignIn = findViewById(R.id.btn_signInWithGoogle);
+        forgetPassword=findViewById(R.id.forgetPassword);
         mLoginPresenter = new LoginPresenter(this,this);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Please wait, Logging in..");
         btn_login.setOnClickListener(this);
         googeSignIn.setOnClickListener(this);
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ForgetPassword.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -123,7 +132,7 @@ EditText tv_name;
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btn_register:
+            case R.id.btn_forget_password:
                 Log.i("hellplab", "btn_login: ");
                checkLoginDetails();
                 break;
