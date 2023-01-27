@@ -77,7 +77,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, R
         mRegisterPresenter = new RegistrationPresenter(this,this);
         btskup = findViewById(R.id.btn_skip);
         btskup.setOnClickListener(this);
-        signUpBtn = findViewById(R.id.btn_sign_up_withGoogle);
+        signUpBtn = findViewById(R.id.btn_signUpWithGoogle);
         signUpBtn.setOnClickListener(this);
         mPrgressDialog = new ProgressDialog(this);
         mPrgressDialog.setMessage("Please wait, Adding profile to database.");
@@ -96,7 +96,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, R
 
             skipBtn();
             startActivity(  new Intent(getApplicationContext(), HomeActivity.class));
-            case R.id.btn_sign_up_withGoogle:
+            case R.id.btn_signUpWithGoogle:
                 signInGoogle();
         break;
     }
