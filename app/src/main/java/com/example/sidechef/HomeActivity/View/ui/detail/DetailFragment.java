@@ -2,6 +2,7 @@ package com.example.sidechef.HomeActivity.View.ui.detail;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import java.util.Calendar;
+
 public class DetailFragment extends Fragment {
     Meal meal;
 Repository repository;
@@ -52,6 +55,7 @@ Repository repository;
     TextView BtnAddToPlan;
     LinearLayout btnlinearLayout;
     BottomNavigationView navBar;
+    TextView BtnAddToCal;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +89,7 @@ Repository repository;
         videoView = view.findViewById(R.id.video);
         nameMeal = view.findViewById(R.id.nameMeal);
         btnlinearLayout=view.findViewById(R.id.btnLinearLayout);
-
+        BtnAddToCal =view.findViewById(R.id.BtnAddToCal);
         String email  = YourPreference.getInstance(requireContext()).getData("email");
         if( email.equals("") ){
             btnlinearLayout.setVisibility(View.GONE);
@@ -111,6 +115,20 @@ Repository repository;
         fav.setOnClickListener(v->{
 
             repository.insert(meal);
+
+        });
+
+        BtnAddToCal.setOnClickListener(v->{
+
+            Calendar calendarEvent = Calendar.getInstance();
+            Intent i = new Intent(Intent.ACTION_EDIT);
+            i.setType("vnd.android.cursor.item/event");
+            i.putExtra("beginTime", calendarEvent.getTimeInMillis());
+            i.putExtra("allDay", false);
+            i.putExtra("rule", "FREQ=YEARLY");
+            i.putExtra("endTime", calendarEvent.getTimeInMillis() + 60 * 60 * 1000);
+            i.putExtra("title", meal.getStrMeal());
+            requireContext().startActivity(i);
 
         });
 
