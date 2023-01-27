@@ -22,10 +22,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_margin="15dp"
             android:gravity="center_vertical"
-
             android:text="desert"
-            android:textSize="34sp" />
+            android:textSize="30dp" />
 
 
     </androidx.cardview.widget.CardView>
