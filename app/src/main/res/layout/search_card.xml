@@ -35,16 +35,17 @@
 
             <TextView
                 android:id="@+id/tvsearchRecipeName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/calibri"
                 android:gravity="center"
-                android:maxLines="1"
+                android:maxLines="2"
 
                 android:text="Recipe name"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

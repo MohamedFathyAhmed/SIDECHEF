@@ -87,7 +87,8 @@ Repository repository;
         btnlinearLayout=view.findViewById(R.id.btnLinearLayout);
 
         String email  = YourPreference.getInstance(requireContext()).getData("email");
-        if( email.equals("") || (!Utils.isNetworkAvailable(requireContext()) )){
+       //|| (!Utils.isNetworkAvailable(requireContext()) )
+        if( email.equals("") ){
             btnlinearLayout.setVisibility(View.GONE);
         }else {
             btnlinearLayout.setVisibility(View.VISIBLE);

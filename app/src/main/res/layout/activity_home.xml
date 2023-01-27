@@ -40,9 +40,23 @@
         android:text="no internet"
         android:textColor="#DE0F0F"
         android:textSize="20dp"
+        android:visibility="invisible"
         app:drawableTint="#DE0F0F"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationerror"
+        android:layout_width="404dp"
+        android:layout_height="681dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_internet"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/error" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -120,9 +120,10 @@
                             app:tint="@color/black" />
 
                         <TextView
+                            android:maxLines="1"
                             android:id="@+id/txCountry"
                             android:layout_width="wrap_content"
-                            android:layout_height="36dp"
+                            android:layout_height="wrap_content"
                             android:text=" country"
                             android:textAlignment="center"
                             android:textAllCaps="true"
@@ -131,8 +132,8 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="99dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="10dp">
@@ -146,9 +147,10 @@
                             app:tint="@color/black" />
 
                         <TextView
+                            android:maxLines="1"
                             android:id="@+id/tvCategory"
                             android:layout_width="wrap_content"
-                            android:layout_height="36dp"
+                            android:layout_height="wrap_content"
                             android:text=" Category"
                             android:textAlignment="center"
                             android:textAllCaps="true"

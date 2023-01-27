@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 
 import com.example.sidechef.HomeActivity.View.ui.search.SearchView;
+import com.example.sidechef.Utils.Utils;
 import com.example.sidechef.Utils.YourPreference;
 
 import com.example.sidechef.model.data.api.ApiCalls;
@@ -309,7 +310,7 @@ public class Repository {
                 System.out.println(e.getMessage());
             }
         };
-        observable.subscribe(categorysSingleObserver);
+        observable.cache().subscribe(categorysSingleObserver);
     }
 
     public void getMealByName(String mealName, OnGetMealByName onGetMealByName) {
@@ -474,24 +475,48 @@ public class Repository {
     };
 
     public void insert(Meal meal) {
+if(Utils.isNetworkAvailable(context)){
+    this.addMealToFireStore(meal);
+    new Thread(() -> db.insert(meal)).start();
+}else {
+    Toast.makeText(context, "no internet", Toast.LENGTH_SHORT).show();
+}
 
-        this.addMealToFireStore(meal);
-        new Thread(() -> db.insert(meal)).start();
     };
 
     public void insertdaily(WeekMeals meal) {
-        addWeelMealToFireStore(meal);
-        new Thread(() -> pDB.insert(meal)).start();
+        if(Utils.isNetworkAvailable(context)){
+
+            addWeelMealToFireStore(meal);
+            new Thread(() -> pDB.insert(meal)).start();
+        }else {
+            Toast.makeText(context, "no internet", Toast.LENGTH_SHORT).show();
+        }
+
     };
 
+
     public void deletedaily(WeekMeals meal) {
-        deleteWeelMealToFireStore(meal);
-        new Thread(() -> pDB.delete(meal)).start();
+        if(Utils.isNetworkAvailable(context)){
+
+            deleteWeelMealToFireStore(meal);
+            new Thread(() -> pDB.delete(meal)).start();
+            Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "no internet", Toast.LENGTH_SHORT).show();
+        }
     };
 
     public void delete(Meal meal) {
-        deleteMealToFireStore(meal);
-        new Thread(() -> db.delete(meal)).start();
+        if(Utils.isNetworkAvailable(context)){
+
+            deleteMealToFireStore(meal);
+            new Thread(() -> db.delete(meal)).start();
+            Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "no internet", Toast.LENGTH_SHORT).show();
+        }
+
     };
 
     public interface RandomMealResponseDelegate {

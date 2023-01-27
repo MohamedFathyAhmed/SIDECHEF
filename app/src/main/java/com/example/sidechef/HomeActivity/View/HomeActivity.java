@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.sidechef.MainActivity;
 import com.example.sidechef.R;
 import com.example.sidechef.Utils.Utils;
@@ -29,19 +30,23 @@ public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
     BottomNavigationView navBar;
 TextView tv_internetConnection;
+    LottieAnimationView animationerror;
+    Boolean flag = false;
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onDestroy() {
+        super.onDestroy();
         finish();
     }
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-
+        String email  = YourPreference.getInstance(getBaseContext()).getData("email");
         binding =  ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Objects.requireNonNull(getSupportActionBar()).hide();
@@ -49,6 +54,7 @@ TextView tv_internetConnection;
         Timer t = new Timer( );
         tv_internetConnection = findViewById(R.id.tx_internet);
         navBar = findViewById(R.id.nav_view);
+        animationerror= findViewById(R.id.animationerror);
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -60,9 +66,14 @@ TextView tv_internetConnection;
                             tv_internetConnection.setText("No Internet Connection");
                             tv_internetConnection.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                             timerInternetIsConnected = 5001;
+                            flag = true;
+                            if( email.equals("")){
+                                animationerror.setVisibility(View.VISIBLE);
+                                navBar.setVisibility(View.GONE);
+                            }else {
 
+                            }
 
-                            navBar.setVisibility(View.GONE);
                         }
                     });
 
@@ -76,7 +87,18 @@ TextView tv_internetConnection;
                                 tv_internetConnection.setText("Internet is back!");
                             } else{
                                 tv_internetConnection.setVisibility(View.GONE);
-                                navBar.setVisibility(View.VISIBLE);
+                                if( email.equals("")){
+                                    animationerror.setVisibility(View.GONE);
+                                    navBar.setVisibility(View.VISIBLE);
+                                    if (flag == true) {
+                                        flag=false;
+                                        finish();
+                                        startActivity(getIntent());
+                                    }
+                                }else {
+
+                                }
+
                             }
                         }
                     });

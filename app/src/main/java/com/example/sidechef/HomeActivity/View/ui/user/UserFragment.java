@@ -70,9 +70,8 @@ public class UserFragment extends Fragment implements  UserViewInterface{
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user, container, false);
     }
-
     public void hidenbarguest() {
-        View fav ,plan,home;
+        View fav ,plan,home,search;
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).hide();
 
         BottomNavigationView navView = getActivity().findViewById(R.id.nav_view);
@@ -84,13 +83,19 @@ public class UserFragment extends Fragment implements  UserViewInterface{
         fav = getActivity().findViewById(R.id.navigation_favorite);
         plan = getActivity().findViewById(R.id.navigation_planweek);
         home =getActivity().findViewById(R.id.navigation_home);
+        search=getActivity().findViewById(R.id.navigation_search);
         String email  = YourPreference.getInstance(requireActivity()).getData("email");
-        if( email.equals("") || (!Utils.isNetworkAvailable(requireActivity()) )){
+        if( email.equals("")){
             fav.setVisibility(View.GONE);
             plan.setVisibility(View.GONE);
         }else {
             fav.setVisibility(View.VISIBLE);
             plan.setVisibility(View.VISIBLE);
+        }
+        if(!Utils.isNetworkAvailable(getContext())){
+            search.setVisibility(View.GONE);
+        }else {
+            search.setVisibility(View.VISIBLE);
         }
 
 

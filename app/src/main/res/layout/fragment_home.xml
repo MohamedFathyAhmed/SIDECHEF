@@ -10,22 +10,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey_300"
         tools:context=".OnBoarding.Home_Fragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
-            tools:itemCount="6"
-            tools:listitem="@layout/home_card_view"
             android:id="@+id/meal_rv_fav"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/grey_300"
+            android:layout_marginTop="32dp"
+
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="@+id/ct_rv"
-            app:layout_constraintStart_toStartOf="@+id/inspiration_tv4"
-            app:layout_constraintTop_toBottomOf="@+id/inspiration_tv4" />
+            app:layout_constraintTop_toBottomOf="@+id/inspiration_tv4"
+            app:spanCount="2"
+            tools:itemCount="6"
+            tools:listitem="@layout/home_card_view" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ct_rv"
@@ -33,7 +31,7 @@
             android:layout_height="54dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:background="@color/grey_300"
+
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/category_tv"
@@ -46,15 +44,15 @@
             android:id="@+id/inspiration_tv4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
             android:layout_marginTop="24dp"
 
-            android:text="random meals"
+            android:text="Random Meals"
             android:textColor="@color/black"
 
             android:textSize="23sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/ct_rv"
+            app:layout_constraintEnd_toEndOf="@+id/category_tv"
+            app:layout_constraintStart_toStartOf="@+id/category_tv"
             app:layout_constraintTop_toBottomOf="@+id/ct_rv" />
 
         <TextView
@@ -64,7 +62,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
 
-            android:text="category_Meals"
+            android:text="category Meals"
             android:textColor="@color/black"
             android:textSize="23sp"
             android:textStyle="bold"

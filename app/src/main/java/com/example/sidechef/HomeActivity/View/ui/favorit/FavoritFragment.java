@@ -12,8 +12,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,14 +26,17 @@ import com.example.sidechef.HomeActivity.View.ui.home.CardViewAdapter;
 import com.example.sidechef.HomeActivity.View.ui.home.HomeFragmentDirections;
 import com.example.sidechef.R;
 import com.example.sidechef.Utils.Utils;
+import com.example.sidechef.Utils.YourPreference;
 import com.example.sidechef.model.Repository;
 import com.example.sidechef.model.models.Meal;
 import com.example.sidechef.model.models.Time;
 import com.example.sidechef.model.models.Week;
 import com.example.sidechef.model.models.WeekMeals;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class FavoritFragment extends Fragment implements FavoritInterface {
@@ -50,6 +57,7 @@ public class FavoritFragment extends Fragment implements FavoritInterface {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        hidenbarguest();
         recyclerView = view.findViewById(R.id.meal_rv_fav);
         favoritPresenter = new FavoritPresenter(requireContext(),this);
         recyclerView.setHasFixedSize(true);
@@ -62,15 +70,13 @@ public class FavoritFragment extends Fragment implements FavoritInterface {
     @Override
     public void sendData(Meal meal) {
  FavoritFragmentDirections.ActionNavigationFavoriteToNavigationDes action = FavoritFragmentDirections.actionNavigationFavoriteToNavigationDes(meal);
-        Log.i("TAG", "onCreateView: " + meal.getStrArea());
-        Navigation.findNavController(getView()).navigate(action);
+      Navigation.findNavController(getView()).navigate(action);
 
     }
 
     @Override
     public void callRepo(Meal meal, int position) {
         favoritPresenter.deleteItem(meal);
-        Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show();
         if (adapter!=null && mealsList.size()!=0) {
             mealsList.remove(position);
             adapter.notifyDataSetChanged();
@@ -142,7 +148,40 @@ public class FavoritFragment extends Fragment implements FavoritInterface {
     public void onSuccessResponse(List<Meal> meal) {
       adapter = new CardViewAdapterFav(meal,requireContext() ,this);
         recyclerView.setAdapter(adapter);
-        Log.i("TAGfav", "onSuccessResponse: "+meal.get(0).getStrArea());
+
+    }
+    public void hidenbarguest() {
+        View fav ,plan,home,search;
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).hide();
+
+        BottomNavigationView navView = getActivity().findViewById(R.id.nav_view);
+        AppBarConfiguration appBarConfiguration;
+        appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_planweek, R.id.navigation_favorite,R.layout.fragment_search)
+                .build();
+
+        fav = getActivity().findViewById(R.id.navigation_favorite);
+        plan = getActivity().findViewById(R.id.navigation_planweek);
+        home =getActivity().findViewById(R.id.navigation_home);
+        search=getActivity().findViewById(R.id.navigation_search);
+        String email  = YourPreference.getInstance(requireActivity()).getData("email");
+        if( email.equals("")){
+            fav.setVisibility(View.GONE);
+            plan.setVisibility(View.GONE);
+        }else {
+            fav.setVisibility(View.VISIBLE);
+            plan.setVisibility(View.VISIBLE);
+        }
+        if(!Utils.isNetworkAvailable(getContext())){
+            search.setVisibility(View.GONE);
+        }else {
+            search.setVisibility(View.VISIBLE);
+        }
+
+
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_home);
+        NavigationUI.setupActionBarWithNavController((AppCompatActivity) requireActivity(), navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
 
     }
 
