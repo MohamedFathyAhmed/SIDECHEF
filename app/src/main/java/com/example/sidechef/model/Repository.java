@@ -132,6 +132,12 @@ public class Repository {
                     }
                 });
     }
+    public void deleteTableRoom(){
+        db.deleteTableRoom();
+    }
+    public void deleteweekRoom(){
+        pDB.deleteWeekRoom();
+    }
 
     private void addWeelMealToFireStore(WeekMeals meal) {
         fdb.collection("Week").document(yourPrefrence.getData("email")).collection("meals")

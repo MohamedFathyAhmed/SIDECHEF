@@ -1,5 +1,6 @@
 package com.example.sidechef.HomeActivity.View.ui.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,8 +15,10 @@ import androidx.navigation.ui.NavigationUI;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.sidechef.R;
+import com.example.sidechef.SignUpActivity.View.SignUp;
 import com.example.sidechef.Utils.Utils;
 import com.example.sidechef.Utils.YourPreference;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -23,18 +26,34 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Objects;
 
 
-public class UserFragment extends Fragment {
+public class UserFragment extends Fragment implements  UserViewInterface{
 
 
-    public UserFragment() {
-        // Required empty public constructor
-    }
+    LinearLayout linearLayout ;
+    UserPresenter userPresenter;
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         hidenbarguest();
+        linearLayout=view.findViewById(R.id.logout_id);
+        userPresenter=new UserPresenter(requireContext(),this);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userPresenter.deleteTableRoom();
+                userPresenter.deleteWeekRoom();
+                userPresenter.onDelete();
+
+            }
+        });
+    }
+    @Override
+    public void onDelete() {
+        YourPreference.getInstance(requireContext()).removeData("email");
+        Intent intent =new Intent(requireContext(), SignUp.class);
+        startActivity(intent);
     }
 
 
@@ -80,6 +99,7 @@ public class UserFragment extends Fragment {
         NavigationUI.setupWithNavController(navView, navController);
 
     }
+
 }
 
 
