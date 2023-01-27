@@ -34,4 +34,8 @@ Repository repository;
         mRegisterView.onRegistrationFailure(message);
 
     }
+    public void setDataFromFirebase() {
+        repository.getAllMealFirebase();
+        repository.getAllMealPlanFirebase();
+    }
 }

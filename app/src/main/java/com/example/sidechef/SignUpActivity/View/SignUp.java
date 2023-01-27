@@ -95,7 +95,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, R
         case R.id.btn_skip:
 
             skipBtn();
-            startActivity(  new Intent(getApplicationContext(), HomeActivity.class));
+            break;
             case R.id.btn_signUpWithGoogle:
                 signInGoogle();
         break;
@@ -200,11 +200,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, R
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        //YourPreference yourPrefrence = YourPreference.getInstance(getApplicationContext());
-                        //yourPrefrence.saveData("email",  task.getResult().getUser().getEmail());
+                        YourPreference yourPrefrence = YourPreference.getInstance(getApplicationContext());
+                        yourPrefrence.saveData("email",  task.getResult().getUser().getEmail());
                         Toast.makeText(getApplicationContext(), "Sign Up was successful", Toast.LENGTH_SHORT).show();
-                        //mLoginPresenter.setDataFromFirebase();
-                        //startActivity(new Intent(getBaseContext(), HomeActivity.class));
+                        mRegisterPresenter.setDataFromFirebase();
+                        startActivity(new Intent(getBaseContext(), HomeActivity.class));
                     } else {
                         Toast.makeText(getApplicationContext(), "Sign Up failed", Toast.LENGTH_SHORT).show();
                     }
