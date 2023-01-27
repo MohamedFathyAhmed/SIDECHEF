@@ -40,7 +40,7 @@ public class SplashScreen extends AppCompatActivity {
 
                 }
             }
-        }, 0);
+        }, 3000);
     }
 
     @Override

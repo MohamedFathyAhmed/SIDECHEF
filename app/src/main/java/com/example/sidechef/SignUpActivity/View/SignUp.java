@@ -2,7 +2,9 @@ package com.example.sidechef.SignUpActivity.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,7 +27,7 @@ import java.util.regex.Pattern;
 public class SignUp extends AppCompatActivity implements View.OnClickListener, RegisterViewInterface{
     TextView tvLogin;
     Button btnRegistration;
-    EditText edtEmail, edtPassword , corPassword;
+    EditText edtEmail, edtPassword ;
     RegistrationPresenter mRegisterPresenter;
     ProgressDialog mPrgressDialog;
 Button btskup;
@@ -45,7 +47,7 @@ Button btskup;
         tvLogin.setOnClickListener(this);
         edtEmail = findViewById(R.id.email_forget_password);
         edtPassword = findViewById(R.id.password_register);
-        corPassword=findViewById(R.id.password_register_cor)  ;
+
         mRegisterPresenter = new RegistrationPresenter(this,this);
         btskup = findViewById(R.id.btn_skip);
         btskup.setOnClickListener(this);
@@ -63,11 +65,33 @@ Button btskup;
                 moveToLoginActivity();
                 break;
         case R.id.btn_skip:
-            startActivity(  new Intent(getApplicationContext(), HomeActivity.class));
+            skipBtn();
         break;
     }
 
     }
+
+
+    private void skipBtn() {
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("if you skip you can't use some feature !")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        startActivity(  new Intent(getApplicationContext(), HomeActivity.class));
+                    }
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+         builder.create().show();
+    }
+
+
+
 
     private void moveToLoginActivity() {
         YourPreference.getInstance(this).saveData("email","guest");
@@ -98,15 +122,13 @@ Button btskup;
 
     private void checkRegistrationDetails() {
 
-        if(!TextUtils.isEmpty(edtEmail.getText().toString()) &&isValidEmail(edtEmail.getText().toString()) && isValidPassword(edtPassword.getText().toString()) && corPassword.getText().toString().equals(edtPassword.getText().toString()) && !TextUtils.isEmpty(edtPassword.getText().toString())){
+        if(!TextUtils.isEmpty(edtEmail.getText().toString()) &&isValidEmail(edtEmail.getText().toString()) && isValidPassword(edtPassword.getText().toString())  && !TextUtils.isEmpty(edtPassword.getText().toString())){
             initLogin(edtEmail.getText().toString(), edtPassword.getText().toString());
         }else{
             if(TextUtils.isEmpty(edtEmail.getText().toString()) || !isValidEmail(edtEmail.getText().toString()) ){
                 edtEmail.setError("Please enter a valid email");
             }if(TextUtils.isEmpty(edtPassword.getText().toString()) || !isValidPassword(edtPassword.getText().toString())){
                 edtPassword.setError("Please enter password");
-            }if(TextUtils.isEmpty(corPassword.getText().toString())){
-                corPassword.setError("Please enter re_password correct");
             }
         }
 

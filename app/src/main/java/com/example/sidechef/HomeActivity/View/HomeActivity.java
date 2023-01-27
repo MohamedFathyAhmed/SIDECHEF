@@ -1,6 +1,7 @@
 package com.example.sidechef.HomeActivity.View;
 
 import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -40,7 +41,11 @@ TextView tv_internetConnection;
     }
 
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

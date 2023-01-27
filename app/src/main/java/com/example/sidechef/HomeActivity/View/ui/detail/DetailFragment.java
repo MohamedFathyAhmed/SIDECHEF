@@ -48,7 +48,7 @@ Repository repository;
     TextView instructions;
     TextView ingredients;
     TextView fav;
-    Toolbar toolbar;
+    TextView nameMeal;
     TextView BtnAddToPlan;
     LinearLayout btnlinearLayout;
     BottomNavigationView navBar;
@@ -83,11 +83,10 @@ Repository repository;
         fav = view.findViewById(R.id.favorite);
         BtnAddToPlan = view.findViewById(R.id.BtnAddToPlan);
         videoView = view.findViewById(R.id.video);
-        toolbar = view.findViewById(R.id.toolbar);
+        nameMeal = view.findViewById(R.id.nameMeal);
         btnlinearLayout=view.findViewById(R.id.btnLinearLayout);
 
         String email  = YourPreference.getInstance(requireContext()).getData("email");
-       //|| (!Utils.isNetworkAvailable(requireContext()) )
         if( email.equals("") ){
             btnlinearLayout.setVisibility(View.GONE);
         }else {
@@ -187,7 +186,7 @@ Repository repository;
         category.setText(meal.getStrCategory());
         country.setText(meal.getStrArea());
         instructions.setText(meal.getStrInstructions());
-
+        nameMeal.setText(meal.getStrMeal());
         getLifecycle().addObserver((LifecycleObserver) videoView);
         String[] split = meal.getStrYoutube().split("=");
 
