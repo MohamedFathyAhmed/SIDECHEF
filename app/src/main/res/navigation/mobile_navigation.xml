@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_navigation_search_to_on_Search_by"
             app:destination="@id/on_Search_by" />
+        <action
+            android:id="@+id/action_navigation_search_to_searchByName"
+            app:destination="@id/searchByName" />
     </fragment>
     <fragment
         android:id="@+id/on_Search_by"
@@ -88,4 +91,13 @@
         android:name="com.example.sidechef.HomeActivity.View.ui.user.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/searchByName"
+        android:name="com.example.sidechef.searchByName"
+        android:label="fragment_search_by_name"
+        tools:layout="@layout/fragment_search_by_name" >
+        <action
+            android:id="@+id/action_searchByName_to_navigation_des"
+            app:destination="@id/navigation_des" />
+    </fragment>
 </navigation>
