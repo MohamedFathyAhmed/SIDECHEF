@@ -95,5 +95,9 @@
         android:id="@+id/searchByName"
         android:name="com.example.sidechef.searchByName"
         android:label="fragment_search_by_name"
-        tools:layout="@layout/fragment_search_by_name" />
+        tools:layout="@layout/fragment_search_by_name" >
+        <action
+            android:id="@+id/action_searchByName_to_navigation_des"
+            app:destination="@id/navigation_des" />
+    </fragment>
 </navigation>

@@ -5,12 +5,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import com.example.sidechef.HomeActivity.View.ui.home.HomeFragmentDirections;
 import com.example.sidechef.HomeActivity.View.ui.search.Connector;
 import com.example.sidechef.HomeActivity.View.ui.search.GridAdapter;
 import com.example.sidechef.HomeActivity.View.ui.search.SearchPresenter;
@@ -21,7 +23,7 @@ import com.example.sidechef.model.models.Meals;
 import java.util.ArrayList;
 import java.util.List;
 
-public class searchByName extends Fragment implements SearchByNameView, Connector {
+public class searchByName extends Fragment implements SearchByNameView, GridViewAdapter.AdapterConnector {
 
     GridViewAdapter gridAdapter;
     GridView gridView;
@@ -58,7 +60,14 @@ public class searchByName extends Fragment implements SearchByNameView, Connecto
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                searchByNamePresenter.getMealByName(newText);
+                meals=new ArrayList<>();
+                if(!newText.equals("")){
+                    searchByNamePresenter.getMealByName(newText);
+                }else {
+                    gridAdapter= new GridViewAdapter(requireContext(),searchByName.this.meals,searchByName.this);
+                    gridView.setAdapter(gridAdapter);
+                }
+
 
                 return false;
             }
@@ -79,7 +88,10 @@ public class searchByName extends Fragment implements SearchByNameView, Connecto
     }
 
     @Override
-    public void sendData(String keyword) {
-
+    public void navigate(Meal meal) {
+        searchByNameDirections.ActionSearchByNameToNavigationDes action = searchByNameDirections
+                .actionSearchByNameToNavigationDes(meal);
+        action.setDataMeal(meal);
+        Navigation.findNavController(getView()).navigate(action);
     }
 }

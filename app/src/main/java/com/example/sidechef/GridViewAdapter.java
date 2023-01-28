@@ -24,8 +24,8 @@ import java.util.List;
 public class GridViewAdapter extends ArrayAdapter<Meal> {
     Context context;
     List<Meal> data=new ArrayList<>();
-    Connector connector;
-    public GridViewAdapter(@NonNull Context context, List<Meal> mealModelArrayList,Connector connector) {
+    AdapterConnector connector;
+    public GridViewAdapter(@NonNull Context context, List<Meal> mealModelArrayList,AdapterConnector connector) {
         super(context, 0, mealModelArrayList);
         this.context=context;
         this.data=mealModelArrayList;
@@ -34,7 +34,16 @@ public class GridViewAdapter extends ArrayAdapter<Meal> {
 
     @Override
     public int getCount() {
-        return data.size();
+        if(data!=null){
+            return data.size();
+        }else {
+            return 0;
+        }
+
+    }
+    public interface AdapterConnector {
+        public void navigate(Meal meal);
+
     }
 
     @NonNull
@@ -58,7 +67,7 @@ public class GridViewAdapter extends ArrayAdapter<Meal> {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                connector.sendData(mealModel.getIdMeal());
+                connector.navigate(mealModel);
             }
         });
 
