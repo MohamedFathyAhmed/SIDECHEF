@@ -9,14 +9,24 @@ public class ParentItem {
     // Declaration of the variables
     private String ParentItemTitle;
     private   List<WeekMeals> ChildItemList;
+String sort;
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
 
     // Constructor of the class
     // to initialize the variables
     public ParentItem(
+            String sort,
             String ParentItemTitle,
             List<WeekMeals> ChildItemList)
     {
-
+this.sort = sort;
         this.ParentItemTitle = ParentItemTitle;
         this.ChildItemList = ChildItemList;
     }
@@ -44,4 +54,6 @@ public class ParentItem {
     {
         ChildItemList = childItemList;
     }
+
+
 }

@@ -108,6 +108,7 @@ public class FavoritFragment extends Fragment implements FavoritInterface {
         builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                String strName = arrayAdapter.getItem(which);
                 AlertDialog.Builder builderInnertime = new AlertDialog.Builder(requireContext());
                 builderInnertime.setTitle("Select time:-");
                 builderInnertime.setIcon(R.drawable.baseline_timer_24);
@@ -120,7 +121,6 @@ public class FavoritFragment extends Fragment implements FavoritInterface {
                 builderInnertime.setAdapter(arrayAdapterday, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String strName = arrayAdapter.getItem(which);
                         String strNameDay = arrayAdapterday.getItem(which);
                         AlertDialog.Builder builderInner = new AlertDialog.Builder(requireContext());
                         builderInner.setMessage(strName + " at " + strNameDay + " to your plan");

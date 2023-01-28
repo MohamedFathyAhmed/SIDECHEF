@@ -31,6 +31,9 @@ import com.example.sidechef.model.models.WeekMeals;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,7 +42,13 @@ public class WeekFragment extends Fragment implements WeekInterface {
 Repository repository;
     ParentItemAdapter parentItemAdapter;
 
-  @Override
+    @Override
+    public void onStart() {
+        super.onStart();
+        getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -90,7 +99,7 @@ Repository repository;
 
 
                 ParentItem item
-                        = new ParentItem(
+                        = new ParentItem("1",
                         "Saturday", weekMeals);
                 itemList.add(item);
 
@@ -103,7 +112,7 @@ Repository repository;
 
 
                 ParentItem item
-                        = new ParentItem(
+                        = new ParentItem("2",
                         "Sunday", weekMeals);
                 itemList.add(item);
 
@@ -116,7 +125,7 @@ Repository repository;
 
 
                 ParentItem item
-                        = new ParentItem(
+                        = new ParentItem("3",
                         "Monday", weekMeals);
                 itemList.add(item);
 
@@ -129,7 +138,7 @@ Repository repository;
 
 
                 ParentItem item
-                        = new ParentItem(
+                        = new ParentItem("4",
                         "Tuesday", weekMeals);
                 itemList.add(item);
 
@@ -142,7 +151,7 @@ Repository repository;
 
 
                 ParentItem item
-                        = new ParentItem(
+                        = new ParentItem("5",
                         "Wednesday", weekMeals);
                 itemList.add(item);
 
@@ -155,7 +164,7 @@ Repository repository;
 
 
                 ParentItem item
-                        = new ParentItem(
+                        = new ParentItem("6",
                         "Thursday", weekMeals);
                 itemList.add(item);
 
@@ -168,13 +177,24 @@ Repository repository;
 
 
                 ParentItem item
-                        = new ParentItem(
+                        = new ParentItem("7",
                         "Friday", weekMeals);
                 itemList.add(item);
-                parentItemAdapter.setItemList(itemList);
-            }
 
+                Collections.sort(itemList, new Comparator<ParentItem>() {
+                    @Override
+                    public int compare(ParentItem o1, ParentItem o2) {
+                        ParentItem p1 = (ParentItem) o1;
+                        ParentItem p2 = (ParentItem) o2;
+                        return p1.getSort().compareToIgnoreCase(p2.getSort());
+                    }
+                });
+
+
+                parentItemAdapter.setItemList(itemList);
+           }
         });
+
 
         return itemList;
     }

@@ -36,16 +36,11 @@ TextView tv_internetConnection;
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        finish();
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
         finishAffinity();
+        super.onDestroy();
+
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
