@@ -104,8 +104,10 @@ Repository repository;
         String email  = YourPreference.getInstance(requireContext()).getData("email");
         if( email.equals("") ){
             btnlinearLayout.setVisibility(View.GONE);
+            BtnAddToCal.setVisibility(View.GONE);
         }else {
             btnlinearLayout.setVisibility(View.VISIBLE);
+            BtnAddToCal.setVisibility(View.VISIBLE);
         }
 
             setMeal(meal);
@@ -217,72 +219,75 @@ Repository repository;
         instructions.setText(meal.getStrInstructions());
         nameMeal.setText(meal.getStrMeal());
         getLifecycle().addObserver((LifecycleObserver) videoView);
-        String[] split = meal.getStrYoutube().split("=");
-        videoView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
-            @Override
-            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-                String videoId = split[1];
-                youTubePlayer.loadVideo(videoId, 0);
-            }
-        });
-        if (!meal.getStrIngredient1().isEmpty()) {
+
+        if( !meal.getStrYoutube().isEmpty()) {
+            String[] split = meal.getStrYoutube().split("=");
+            videoView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                @Override
+                public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                    String videoId = split[1];
+                    youTubePlayer.loadVideo(videoId, 0);
+                }
+            });
+        }
+        if (!meal.getStrIngredient1().isEmpty()&& !meal.getStrMeasure1().isEmpty()) {
             ingredients.add(meal.getStrIngredient1() + " : " + meal.getStrMeasure1());
         }
-        if (!meal.getStrIngredient2().isEmpty()) {
+        if (!meal.getStrIngredient2().isEmpty()&& !meal.getStrMeasure2().isEmpty()) {
             ingredients.add(meal.getStrIngredient2() + " : " + meal.getStrMeasure2());
         }
-        if (!meal.getStrIngredient3().isEmpty()) {
+        if (!meal.getStrIngredient3().isEmpty()&& !meal.getStrMeasure3().isEmpty()) {
             ingredients.add( meal.getStrIngredient3() + " : " + meal.getStrMeasure3());
         }
-        if (!meal.getStrIngredient4().isEmpty()) {
+        if (!meal.getStrIngredient4().isEmpty()&& !meal.getStrMeasure4().isEmpty()) {
             ingredients.add( meal.getStrIngredient4() + " : " + meal.getStrMeasure4());
         }
-        if (!meal.getStrIngredient5().isEmpty()) {
+        if (!meal.getStrIngredient5().isEmpty()&& !meal.getStrMeasure5().isEmpty()) {
             ingredients.add(meal.getStrIngredient5() + " : " + meal.getStrMeasure5());
         }
-        if (!meal.getStrIngredient6().isEmpty()) {
+        if (!meal.getStrIngredient6().isEmpty()&& !meal.getStrMeasure6().isEmpty()) {
             ingredients.add(meal.getStrIngredient6() + " : " + meal.getStrMeasure6());
         }
-        if (!meal.getStrIngredient7().isEmpty()) {
+        if (!meal.getStrIngredient7().isEmpty()&& !meal.getStrMeasure7().isEmpty()) {
             ingredients.add(meal.getStrIngredient7() + " : " + meal.getStrMeasure7());
         }
-        if (!meal.getStrIngredient8().isEmpty()) {
+        if (!meal.getStrIngredient8().isEmpty()&& !meal.getStrMeasure8().isEmpty()) {
             ingredients.add(meal.getStrIngredient8() + " : " + meal.getStrMeasure8());
         }
-        if (!meal.getStrIngredient9().isEmpty()) {
+        if (!meal.getStrIngredient9().isEmpty()&& !meal.getStrMeasure9().isEmpty()) {
             ingredients.add(meal.getStrIngredient9() + " : " + meal.getStrMeasure9());
         }
-        if (!meal.getStrIngredient10().isEmpty()) {
+        if (!meal.getStrIngredient10().isEmpty()&& !meal.getStrMeasure10().isEmpty()) {
             ingredients.add(meal.getStrIngredient10() + " : " + meal.getStrMeasure10());
         }
-        if (!meal.getStrIngredient11().isEmpty()) {
+        if (!meal.getStrIngredient11().isEmpty()&& !meal.getStrMeasure11().isEmpty()) {
             ingredients.add(meal.getStrIngredient11() + " : " + meal.getStrMeasure11());
         }
-        if (!meal.getStrIngredient12().isEmpty()) {
+        if (!meal.getStrIngredient12().isEmpty()&& !meal.getStrMeasure12().isEmpty()) {
             ingredients.add( meal.getStrIngredient12() + " : " + meal.getStrMeasure12());
         }
-        if (!meal.getStrIngredient13().isEmpty()) {
+        if (!meal.getStrIngredient13().isEmpty()&& !meal.getStrMeasure13().isEmpty()) {
             ingredients.add(meal.getStrIngredient13() + " : " + meal.getStrMeasure13());
         }
-        if (!meal.getStrIngredient14().isEmpty()) {
+        if (!meal.getStrIngredient14().isEmpty()&& !meal.getStrMeasure14().isEmpty()) {
             ingredients.add(meal.getStrIngredient14() + " : " + meal.getStrMeasure14());
         }
-        if (!meal.getStrIngredient15().isEmpty()) {
+        if (!meal.getStrIngredient15().isEmpty()&& !meal.getStrMeasure15().isEmpty()) {
             ingredients.add(meal.getStrIngredient15() + " : " + meal.getStrMeasure15());
         }
-        if (!meal.getStrIngredient16().isEmpty()) {
+        if (!meal.getStrIngredient16().isEmpty()&& !meal.getStrMeasure16().isEmpty()) {
             ingredients.add( meal.getStrIngredient16() + " : " + meal.getStrMeasure16());
         }
-        if (!meal.getStrIngredient17().isEmpty()) {
+        if (!meal.getStrIngredient17().isEmpty()&& !meal.getStrMeasure17().isEmpty()) {
             ingredients.add(meal.getStrIngredient17() + " : " + meal.getStrMeasure17());
         }
-        if (!meal.getStrIngredient18().isEmpty()) {
+        if (!meal.getStrIngredient18().isEmpty()&& !meal.getStrMeasure18().isEmpty()) {
             ingredients.add(meal.getStrIngredient18() + " : " + meal.getStrMeasure18());
         }
-        if (!meal.getStrIngredient19().isEmpty()) {
+        if (!meal.getStrIngredient19().isEmpty()&& !meal.getStrMeasure19().isEmpty()) {
             ingredients.add(meal.getStrIngredient19() + " : " + meal.getStrMeasure19());
         }
-        if (!meal.getStrIngredient20().isEmpty()) {
+        if (!meal.getStrIngredient20().isEmpty()&& !meal.getStrMeasure20().isEmpty()) {
             ingredients.add(meal.getStrIngredient20() + " : " + meal.getStrMeasure20());
         }
 

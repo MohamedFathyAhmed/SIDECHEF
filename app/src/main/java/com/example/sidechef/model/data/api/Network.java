@@ -1,8 +1,18 @@
 package com.example.sidechef.model.data.api;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+import com.google.gson.Gson;
+
+import java.io.IOException;
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
+import okhttp3.Cache;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -18,7 +28,51 @@ public class  Network{
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .build();
+
+        Interceptor onlineInterceptor = new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+                okhttp3.Response response = chain.proceed(chain.request());
+                int maxAge = 60;
+                return response.newBuilder()
+                        .header("Cache-Control", "public, max-age=" + maxAge)
+                        .removeHeader("Pragma")
+                        .build();
+            }
+        };
+        Interceptor offlineInterceptor= new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+                Request request = chain.request();
+                if (!isInternetAvailable(context)) {
+                    int maxStale = 60 * 60 * 24 * 30; // Offline cache available for 30 days
+                    request = request.newBuilder()
+                            .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                            .removeHeader("Pragma")
+                            .build();
+                }
+                return chain.proceed(request);
+            }
+        };
+
+        long cashSize = 10 * 1024 * 1024;  // 10 MB
+        Cache cache = new Cache(context.getCacheDir(),cashSize);
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cache(cache)
+                .addInterceptor(offlineInterceptor)
+                .addNetworkInterceptor(onlineInterceptor)
+                .build();
         return instance;
     }
+    public static boolean isInternetAvailable(Context context) {
+        boolean isConnected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        if (activeNetwork != null && activeNetwork.isConnected())
+            isConnected = true;
+        return isConnected;
+    }
+
 
 }

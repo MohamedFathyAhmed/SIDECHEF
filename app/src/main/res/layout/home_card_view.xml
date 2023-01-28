@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/viewHolder"
-    android:layout_width="200dp"
+    android:layout_width="match_parent"
     android:layout_height="350dp"
     android:gravity="center"
     android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="7dp"
         android:backgroundTint="@color/black_transparent"
@@ -18,13 +18,13 @@
         app:cardCornerRadius="15dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="20dp">
 
             <ImageView
                 android:id="@+id/ivRecipePhoto"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="175dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/brooke_lark_1rm9glhv0ua_unsplash"
@@ -77,8 +77,9 @@
 
                 <LinearLayout
                     android:id="@+id/grav"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:weightSum="2"
                     android:gravity="center"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -86,6 +87,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
+                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -103,6 +105,8 @@
                         <TextView
                             android:id="@+id/txCountry"
                             android:layout_width="wrap_content"
+                            android:textSize="10sp"
+                            android:maxLines="1"
                             android:layout_height="36dp"
                             android:text=" country"
                             android:textAlignment="center"
@@ -112,6 +116,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:layout_weight="1"
                         android:layout_width="99dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -127,6 +132,8 @@
                             app:tint="@color/black" />
 
                         <TextView
+                            android:maxLines="1"
+                            android:textSize="10dp"
                             android:id="@+id/tvCategory"
                             android:layout_width="wrap_content"
                             android:layout_height="36dp"

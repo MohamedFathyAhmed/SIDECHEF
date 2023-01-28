@@ -4,7 +4,7 @@
 
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="60dp"
     app:layout_editor_absoluteX="200dp"
     app:layout_editor_absoluteY="800dp">
 
@@ -37,10 +37,11 @@
                 android:id="@+id/category_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="desert"
-                android:textSize="30dp" />
+
+                android:textSize="20dp" />
 
         </LinearLayout>
 

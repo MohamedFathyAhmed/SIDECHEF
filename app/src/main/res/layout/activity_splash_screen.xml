@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/brooke_lark_1rm9glhv0ua_unsplash"
+    android:scaleType="centerCrop"
     tools:context=".SplashScreen">
 
     <com.airbnb.lottie.LottieAnimationView
