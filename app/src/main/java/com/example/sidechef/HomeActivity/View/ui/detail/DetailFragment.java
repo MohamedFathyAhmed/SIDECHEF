@@ -14,6 +14,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +40,9 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class DetailFragment extends Fragment {
     Meal meal;
@@ -49,16 +53,19 @@ Repository repository;
     YouTubePlayerView videoView;
     TextView country;
     TextView instructions;
-    TextView ingredients;
+    RecyclerView ingredientsRV;
     TextView fav;
     TextView nameMeal;
     TextView BtnAddToPlan;
     LinearLayout btnlinearLayout;
     BottomNavigationView navBar;
     TextView BtnAddToCal;
+    List<String>ingredients;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ingredients=new ArrayList<>();
 
     }
 
@@ -83,7 +90,11 @@ Repository repository;
         category = view.findViewById(R.id.category);
         country = view.findViewById(R.id.country);
         instructions = view.findViewById(R.id.instructions);
-        ingredients = view.findViewById(R.id.ingredient);
+        ingredientsRV = view.findViewById(R.id.rv_ingrediant);
+        ingredientsRV.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        ingredientsRV.setLayoutManager(layoutManager);
         fav = view.findViewById(R.id.favorite);
         BtnAddToPlan = view.findViewById(R.id.BtnAddToPlan);
         videoView = view.findViewById(R.id.video);
@@ -207,7 +218,6 @@ Repository repository;
         nameMeal.setText(meal.getStrMeal());
         getLifecycle().addObserver((LifecycleObserver) videoView);
         String[] split = meal.getStrYoutube().split("=");
-
         videoView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
@@ -216,65 +226,68 @@ Repository repository;
             }
         });
         if (!meal.getStrIngredient1().isEmpty()) {
-            ingredients.append("\n " + meal.getStrIngredient1() + " : " + meal.getStrMeasure1());
+            ingredients.add(meal.getStrIngredient1() + " : " + meal.getStrMeasure1());
         }
         if (!meal.getStrIngredient2().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient2() + " : " + meal.getStrMeasure2());
+            ingredients.add(meal.getStrIngredient2() + " : " + meal.getStrMeasure2());
         }
         if (!meal.getStrIngredient3().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient3() + " : " + meal.getStrMeasure3());
+            ingredients.add( meal.getStrIngredient3() + " : " + meal.getStrMeasure3());
         }
         if (!meal.getStrIngredient4().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient4() + " : " + meal.getStrMeasure4());
+            ingredients.add( meal.getStrIngredient4() + " : " + meal.getStrMeasure4());
         }
         if (!meal.getStrIngredient5().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient5() + " : " + meal.getStrMeasure5());
+            ingredients.add(meal.getStrIngredient5() + " : " + meal.getStrMeasure5());
         }
         if (!meal.getStrIngredient6().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient6() + " : " + meal.getStrMeasure6());
+            ingredients.add(meal.getStrIngredient6() + " : " + meal.getStrMeasure6());
         }
         if (!meal.getStrIngredient7().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient7() + " : " + meal.getStrMeasure7());
+            ingredients.add(meal.getStrIngredient7() + " : " + meal.getStrMeasure7());
         }
         if (!meal.getStrIngredient8().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient8() + " : " + meal.getStrMeasure8());
+            ingredients.add(meal.getStrIngredient8() + " : " + meal.getStrMeasure8());
         }
         if (!meal.getStrIngredient9().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient9() + " : " + meal.getStrMeasure9());
+            ingredients.add(meal.getStrIngredient9() + " : " + meal.getStrMeasure9());
         }
         if (!meal.getStrIngredient10().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient10() + " : " + meal.getStrMeasure10());
+            ingredients.add(meal.getStrIngredient10() + " : " + meal.getStrMeasure10());
         }
         if (!meal.getStrIngredient11().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient11() + " : " + meal.getStrMeasure11());
+            ingredients.add(meal.getStrIngredient11() + " : " + meal.getStrMeasure11());
         }
         if (!meal.getStrIngredient12().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient12() + " : " + meal.getStrMeasure12());
+            ingredients.add( meal.getStrIngredient12() + " : " + meal.getStrMeasure12());
         }
         if (!meal.getStrIngredient13().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient13() + " : " + meal.getStrMeasure13());
+            ingredients.add(meal.getStrIngredient13() + " : " + meal.getStrMeasure13());
         }
         if (!meal.getStrIngredient14().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient14() + " : " + meal.getStrMeasure14());
+            ingredients.add(meal.getStrIngredient14() + " : " + meal.getStrMeasure14());
         }
         if (!meal.getStrIngredient15().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient15() + " : " + meal.getStrMeasure15());
+            ingredients.add(meal.getStrIngredient15() + " : " + meal.getStrMeasure15());
         }
         if (!meal.getStrIngredient16().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient16() + " : " + meal.getStrMeasure16());
+            ingredients.add( meal.getStrIngredient16() + " : " + meal.getStrMeasure16());
         }
         if (!meal.getStrIngredient17().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient17() + " : " + meal.getStrMeasure17());
+            ingredients.add(meal.getStrIngredient17() + " : " + meal.getStrMeasure17());
         }
         if (!meal.getStrIngredient18().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient18() + " : " + meal.getStrMeasure18());
+            ingredients.add(meal.getStrIngredient18() + " : " + meal.getStrMeasure18());
         }
         if (!meal.getStrIngredient19().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient19() + " : " + meal.getStrMeasure19());
+            ingredients.add(meal.getStrIngredient19() + " : " + meal.getStrMeasure19());
         }
         if (!meal.getStrIngredient20().isEmpty()) {
-            ingredients.append("\n \u2022 " + meal.getStrIngredient20() + " : " + meal.getStrMeasure20());
+            ingredients.add(meal.getStrIngredient20() + " : " + meal.getStrMeasure20());
         }
+
+        IngredientsAdapter ingredientsAdapter =new IngredientsAdapter(requireContext(),ingredients);
+        ingredientsRV.setAdapter(ingredientsAdapter);
 
     }
 

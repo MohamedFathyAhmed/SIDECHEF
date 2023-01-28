@@ -12,7 +12,7 @@
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/layout/categories_card_view.xml" value="0.23712173683055932" />
         <entry key="app/src/main/res/layout/favorite_item.xml" value="0.23052536231884058" />
-        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.18651543793320732" />
         <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25407608695652173" />
         <entry key="app/src/main/res/layout/fragment_on__search_by.xml" value="0.23052536231884058" />
@@ -21,6 +21,7 @@
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/layout/fragment_week.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/layout/home_card_view.xml" value="0.25407608695652173" />
+        <entry key="app/src/main/res/layout/ingredients_row.xml" value="0.6127563476562501" />
         <entry key="app/src/main/res/layout/parent_item.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/layout/plan_card_view.xml" value="0.5634517766497462" />
         <entry key="app/src/main/res/layout/search_by_item.xml" value="0.3036935704514364" />
