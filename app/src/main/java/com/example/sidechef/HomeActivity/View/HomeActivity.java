@@ -16,6 +16,7 @@ import com.example.sidechef.databinding.ActivityHomeBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -32,6 +33,7 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView navBar;
 TextView tv_internetConnection;
     LottieAnimationView animationerror;
+    FragmentContainerView nav_host_fragment_activity_home;
     Boolean flag = false;
 
     @Override
@@ -55,6 +57,7 @@ TextView tv_internetConnection;
         tv_internetConnection = findViewById(R.id.tx_internet);
         navBar = findViewById(R.id.nav_view);
         animationerror= findViewById(R.id.animationerror);
+        nav_host_fragment_activity_home= findViewById(R.id.nav_host_fragment_activity_home);
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -63,13 +66,14 @@ TextView tv_internetConnection;
                         @Override
                         public void run() {
                             tv_internetConnection.setVisibility(View.VISIBLE);
-                            tv_internetConnection.setText("No Internet Connection");
-                            tv_internetConnection.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                            tv_internetConnection.setText("need Internet Connection");
+                            tv_internetConnection.setBackgroundColor(getResources().getColor(com.shashank.sony.fancywalkthroughlib.R.color.red));
                             timerInternetIsConnected = 5001;
                             flag = true;
                             if( email.equals("")){
                                 animationerror.setVisibility(View.VISIBLE);
                                 navBar.setVisibility(View.GONE);
+                                nav_host_fragment_activity_home.setVisibility(View.GONE);
                             }else {
 
                             }
@@ -90,6 +94,7 @@ TextView tv_internetConnection;
                                 if( email.equals("")){
                                     animationerror.setVisibility(View.GONE);
                                     navBar.setVisibility(View.VISIBLE);
+                                    nav_host_fragment_activity_home.setVisibility(View.VISIBLE);
                                     if (flag == true) {
                                         flag=false;
                                         finish();

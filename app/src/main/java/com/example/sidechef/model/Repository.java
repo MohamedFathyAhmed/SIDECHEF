@@ -83,7 +83,7 @@ public class Repository {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "The Meal Added To Favorite", Toast.LENGTH_LONG).show();
+                  //      Toast.makeText(context, "The Meal Added To Favorite", Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -102,7 +102,7 @@ public class Repository {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "The Meal delete To Favorite", Toast.LENGTH_LONG).show();
+                   //     Toast.makeText(context, "The Meal delete To Favorite", Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -122,7 +122,7 @@ public class Repository {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "The Meal delete To Favorite", Toast.LENGTH_LONG).show();
+                     //   Toast.makeText(context, "The Meal delete To Favorite", Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -148,13 +148,13 @@ public class Repository {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "The Meal Added To Favorite", Toast.LENGTH_LONG).show();
+                //        Toast.makeText(context, "The Meal Added To plan", Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "The Meal  Failed Added To Favorite Try Again", Toast.LENGTH_LONG)
+                        Toast.makeText(context, "The Meal  Failed Added To plan Try Again", Toast.LENGTH_LONG)
                                 .show();
 
                     }
@@ -176,14 +176,14 @@ public class Repository {
                             ArrayList<Meal> listOfStrings = new ArrayList<>(types.size());
                             listOfStrings.addAll(types);
                             insertlist(listOfStrings);
-                            Toast.makeText(context, "Success recovery!!!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Success recovery meal !!!", Toast.LENGTH_LONG).show();
 
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "Error getting data!!!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Error getting data !!!", Toast.LENGTH_LONG).show();
 
                     }
                 });
@@ -203,7 +203,7 @@ public class Repository {
                             ArrayList<WeekMeals> listOfStrings = new ArrayList<>(types.size());
                             listOfStrings.addAll(types);
                             insertlistPlan(listOfStrings);
-                            Toast.makeText(context, "Success recovery!!!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Success recovery plan !!!", Toast.LENGTH_LONG).show();
 
                         }
                     }
@@ -301,7 +301,6 @@ public class Repository {
 
             @Override
             public void onSuccess(@NonNull Categories categorys) {
-                System.out.println("DDDDDDDDDDDDDDddd");
                 getCategoriesResponse.onGetCategoriesSuccessResponse(categorys);
 
             }
@@ -348,7 +347,6 @@ public class Repository {
 
             @Override
             public void onSuccess(@NonNull IngredientResponse ingredientResponse) {
-                System.out.println("DDDDDDDDDDDDDDddd");
                 onGetIngredientList.OnGetIngredientListSuccess(ingredientResponse);
 
             }
@@ -491,7 +489,7 @@ if(Utils.isNetworkAvailable(context)){
             addWeelMealToFireStore(meal);
             new Thread(() -> pDB.insert(meal)).start();
         }else {
-            Toast.makeText(context, "no internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "need internet", Toast.LENGTH_SHORT).show();
         }
 
     };
@@ -504,7 +502,7 @@ if(Utils.isNetworkAvailable(context)){
             new Thread(() -> pDB.delete(meal)).start();
             Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(context, "no internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "need internet", Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -515,7 +513,7 @@ if(Utils.isNetworkAvailable(context)){
             new Thread(() -> db.delete(meal)).start();
             Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(context, "no internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "need internet", Toast.LENGTH_SHORT).show();
         }
 
     };

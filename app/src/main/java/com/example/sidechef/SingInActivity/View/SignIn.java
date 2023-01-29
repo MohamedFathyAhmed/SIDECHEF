@@ -146,8 +146,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener, L
 
 
 
-
-
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
@@ -158,8 +156,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener, L
         YourPreference yourPrefrence = YourPreference.getInstance(getApplicationContext());
         yourPrefrence.saveData("email",email);
         mProgressDialog.dismiss();
-        Log.i("hellplab", "onLoginSuccess: ");
-        Toast.makeText(getApplicationContext(), "Successfully Logged in" , Toast.LENGTH_SHORT).show();
+      Toast.makeText(getApplicationContext(), "Successfully Logged in" , Toast.LENGTH_SHORT).show();
   finish();
         startActivity(new Intent(this, HomeActivity.class));
     }
@@ -167,7 +164,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener, L
     @Override
     public void onLoginFailure(String message) {
         mProgressDialog.dismiss();
-        Log.i("hellplab", "onLoginFailure: ");
         Toast.makeText(getApplicationContext(),message , Toast.LENGTH_SHORT).show();
     }
 

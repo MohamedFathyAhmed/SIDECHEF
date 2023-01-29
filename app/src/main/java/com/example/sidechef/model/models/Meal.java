@@ -310,7 +310,7 @@ public class Meal implements Parcelable {
     private String strInstructions;
     private String strMealThumb;
     private String strTags;
-    private String strYoutube;
+    private String strYoutube="";
     private String strIngredient1 ="";
     private String strIngredient2="";
     private String strIngredient3="";

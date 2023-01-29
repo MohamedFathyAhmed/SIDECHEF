@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity.View.SignUp"
 
-    android:background="@drawable/newsignin"
+    android:background="@drawable/signnew"
     >
 
     <RelativeLayout

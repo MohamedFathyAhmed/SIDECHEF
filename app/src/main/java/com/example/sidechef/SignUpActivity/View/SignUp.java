@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.sidechef.HomeActivity.View.HomeActivity;
 import com.example.sidechef.R;
 import com.example.sidechef.SingInActivity.View.SignIn;
+import com.example.sidechef.Utils.Utils;
 import com.example.sidechef.Utils.YourPreference;
 import com.example.sidechef.presenter.RegistrationPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -111,6 +112,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, R
         builder.setMessage("if you skip you can't use some feature !")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        YourPreference.getInstance(getBaseContext()).saveData("email","");
                         startActivity(  new Intent(getApplicationContext(), HomeActivity.class));
                     }
                 })

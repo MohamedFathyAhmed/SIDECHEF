@@ -13,8 +13,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.sidechef"
-        minSdk 30
-        targetSdk 36
+        minSdk 28
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -34,6 +34,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    buildToolsVersion '33.0.0'
 }
 
 dependencies {

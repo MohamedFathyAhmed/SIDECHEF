@@ -42,7 +42,6 @@ public class HomeFragment extends Fragment implements NetworkInterface , Connect
     CardViewAdapter adapter;
     NetworkPresenter networkPresenter;
     Categoriesadapter mAdapter;
-    //StackView stackView;
     private ViewPager2 viewPager2;
     private Handler sliderHandler = new Handler();
 
@@ -64,7 +63,6 @@ public class HomeFragment extends Fragment implements NetworkInterface , Connect
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         initrandommealRecView(view);
         initCategoryRecView(view);
-        //stackView = (StackView) view.findViewById(R.id.stack_view);
         viewPager2 = view.findViewById(R.id.viewPagerImageSlider);
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);
@@ -124,6 +122,7 @@ public class HomeFragment extends Fragment implements NetworkInterface , Connect
 
     @Override
     public void callRepo(Meal meal, int position) {
+
         networkPresenter.insertItem(meal);
         Toast.makeText(requireContext(), "add to favorit" , Toast.LENGTH_SHORT).show();
         adapter.notifyDataSetChanged();

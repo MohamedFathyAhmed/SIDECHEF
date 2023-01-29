@@ -68,6 +68,8 @@ public class CardViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
         Glide.with(context).load(data.get(position).getmeals().get(0).getStrMealThumb()).into(holder.ivRecipePhoto);
         holder.btn_love_item.setOnClickListener(
                 view -> {
+
+                    holder.btn_love_item.setBackgroundResource(R.drawable.ic_favorite);
                     adapterConnector.callRepo(data.get(position).getmeals().get(0), position);
                 });
 

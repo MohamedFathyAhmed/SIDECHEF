@@ -69,8 +69,6 @@ public class ChildItemAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         Glide.with(context).load(data.get(position).getStrMealThumb()).into(holder.ivRecipePhoto);
 
-        Log.i(TAG, "onBindViewHolder 2");
-
     }
 
     @Override
