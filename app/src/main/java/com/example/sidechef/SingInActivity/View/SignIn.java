@@ -85,8 +85,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener, L
 
        setContentView(R.layout.activity_sign_in);
         initUI();
-        tv_name.setText("fathy@gmail.com");
-        tv_pass.setText("123456");
+//        tv_name.setText("fathy@gmail.com");
+//        tv_pass.setText("123456");
     }
 
     public static boolean isValidEmail(CharSequence target) {

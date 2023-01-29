@@ -101,6 +101,11 @@ TextView tv_internetConnection;
                                         startActivity(getIntent());
                                     }
                                 }else {
+                                    if (flag == true) {
+                                        flag=false;
+                                        finish();
+                                        startActivity(getIntent());
+                                    }
 
                                 }
 
