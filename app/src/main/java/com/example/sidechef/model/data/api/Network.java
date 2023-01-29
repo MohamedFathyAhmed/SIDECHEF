@@ -20,15 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class  Network{
 
     private volatile static Retrofit instance = null;
-
-    public static synchronized Retrofit getInstance(Context context){
-        if (instance == null)
-            instance = new Retrofit.Builder()
-                    .baseUrl("https://www.themealdb.com/api/json/v1/1/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                    .build();
-
+    public static synchronized Retrofit getInstance(Context context) {
         Interceptor onlineInterceptor = new Interceptor() {
             @Override
             public okhttp3.Response intercept(Chain chain) throws IOException {
@@ -40,12 +32,12 @@ public class  Network{
                         .build();
             }
         };
-        Interceptor offlineInterceptor= new Interceptor() {
+        Interceptor offlineInterceptor = new Interceptor() {
             @Override
             public okhttp3.Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
                 if (!isInternetAvailable(context)) {
-                    int maxStale = 60 * 60 * 24 * 30; // Offline cache available for 30 days
+                    int maxStale = 60 * 60 * 24 * 1; // Offline cache available for 1 days
                     request = request.newBuilder()
                             .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
                             .removeHeader("Pragma")
@@ -56,14 +48,21 @@ public class  Network{
         };
 
         long cashSize = 10 * 1024 * 1024;  // 10 MB
-        Cache cache = new Cache(context.getCacheDir(),cashSize);
+        Cache cache = new Cache(context.getCacheDir(), cashSize);
 
-        OkHttpClient client = new OkHttpClient.Builder()
+        OkHttpClient  client = new OkHttpClient.Builder()
                 .cache(cache)
                 .addInterceptor(offlineInterceptor)
-                .addNetworkInterceptor(onlineInterceptor)
+                //.addNetworkInterceptor(onlineInterceptor)
                 .build();
-        return instance;
+        if (instance == null)
+            instance = new Retrofit.Builder()
+                    .baseUrl("https://www.themealdb.com/api/json/v1/1/")
+                //  .client(client)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                    .build();
+            return instance;
     }
     public static boolean isInternetAvailable(Context context) {
         boolean isConnected = false;
